@@ -1918,19 +1918,7 @@
   <group>
     <name>INC</name>
     <file>
-      <name>$PROJ_DIR$\Inc\adc_channel.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Inc\adv7186_control.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Inc\at_command.h</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\Inc\battery_info.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Inc\dac_channel.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Inc\debug_port.h</name>
@@ -1957,9 +1945,6 @@
       <name>$PROJ_DIR$\Inc\main.h</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\Inc\odometer_control.h</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\Inc\platform_config.h</name>
     </file>
     <file>
@@ -1967,12 +1952,6 @@
     </file>
     <file>
       <name>$PROJ_DIR$\Inc\protocol.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Inc\pwm_control.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Inc\rtc_control.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Inc\stm32_it.h</name>
@@ -2062,19 +2041,7 @@
   <group>
     <name>SRC</name>
     <file>
-      <name>$PROJ_DIR$\Src\adc_channel.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Src\adv7186_control.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Src\at_command.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\Src\battery_info.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Src\dac_channel.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Src\debug_port.c</name>
@@ -2101,16 +2068,7 @@
       <name>$PROJ_DIR$\Src\main.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\Src\odometer_control.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\Src\protocol.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Src\pwm_control.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Src\rtc_control.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Src\stm32_it.c</name>

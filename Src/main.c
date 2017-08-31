@@ -37,16 +37,10 @@
 #include "i2c_master.h"
 #include <stdio.h>        				            // for printf
 #include <stdarg.h>
-#include "adc_channel.h"                            // for ADC
-//temp0816 #include "dac_channel.h"                 // for DAC
-#include "rtc_control.h"
 #include "eeprom_control.h"
 #include "stm32f30x_dbgmcu.h"
 #include "debug_port.h"
-//temp0816#include "gps_port.h"
-#include "adv7186_control.h"
-#include "odometer_control.h"
-#include "pwm_control.h"
+
 //-----------------------------------------------------------------------------
 
 // Event Related Variable
@@ -69,15 +63,6 @@ volatile int VAR_TIMETICK_DELAY = 0;
 
 volatile int VAR_TRACE_VPM_STATE = 1;
 
-// GPS ¥ÎªºÅÜ¼Æ
-volatile int VAR_GPS_PACKET_READY = 0;
-volatile int VAR_GPS_CMD_LENGTH = 0;
-unsigned char GPS_Cmd[GPS_CmdSize];
-u8 GPS_TxBuffer[TxBufferSize];
-u8 GPS_RxBuffer[RxBufferSize];
-u16 GPS_TxS=0, GPS_TxE=0; // Tx Start, End Ptr
-u16 GPS_RxS=0, GPS_RxE=0; // Rx Start, End Ptr
-
 // DEBUG ¥ÎªºÅÜ¼Æ
 volatile int VAR_DEBUG_PACKET_READY = 0;
 volatile int VAR_DEBUG_CMD_LENGTH = 0;
@@ -97,24 +82,6 @@ volatile unsigned char VAR_SYSTEM_POWER_STATUS = 0; // ¨ÑÀ³µ¹I2C 0x09¥Î
                   // ------------------------------
                   // = 0, not exist
                   // = 1, exist
-
-// ¥Ø«e©Ò°»´ú¨ì¤§CAR Power Value
-unsigned int VAR_CURRENT_V_CB_VALUE = 0;
-
-// ¥Ø«e©Ò°»´ú¨ì¤§PCB Temperture Value
-volatile unsigned int VAR_PCB_TEMP_VALUE = 0;
-
-// ¥Ø«e©Ò°»´ú¨ì¤§GPS REF Value
-volatile unsigned int VAR_GPS_REF_VALUE = 0;
-
-// ¥Ø«e©Ò°»´ú¨ì¤§GPS RF Value
-volatile unsigned int VAR_GPS_RF_VALUE = 0;
-
-// Odometer counter
-volatile unsigned int VAR_ODOMETER_VALUE = 0;
-
-// Multi-protocol Transceiver Status
-volatile unsigned int VAR_TRANSCEIVER_STATUS = 0;
 
 // ¹q¦À¬O§_¹L·ÅªºÅÜ¼Æ
 // = 0, ¨S¦³¹L·Å
@@ -163,81 +130,13 @@ unsigned int BAT_INFO_StateOfCharge = 0;            // 0x2C, 0x2D
 unsigned char VAR_SYSI2C_SYS_INFO = 0;  // EEPROM $0025
 unsigned int VAR_SYSI2C_SYS_INFO_CHANGE = 0;
 
-/*RTC Time Informaiton - include STM32 internal RTC and external S35390A RTC----------*/
-RTC_TIME VAR_RTC_TIME_S35390A;
-ALARM_TIME VAR_ALARM_TIME;
-//temp0816 long STM32RTC_CounterValue; // STM32 RTC Counter Value
-
 // WATCHDOG TIMER
 volatile int VAR_WATCHDOG_STATUS                            = 0;    // Watchdog¶}±Ò©ÎÃö³¬
 volatile int VAR_WATCHDOG_COUNTER                           = 0;    // Watchdog­Ë¼Æ­p®É¾¹
 volatile int VAR_WATCHDOG_RESET_VALUE                       = 10;   // Watchdog­Ë¼Æ­p®É­«¸m­È
 
-//I2C
-volatile int I2C_USER_SET_RTC_TIME_EVENT                    = 0;    // User³z¹LI2C³]©wRTC
-unsigned char VAR_USER_CHANGE_RTC_VALUE                     = 0;    // User³z¹LI2C³]©w¤§RTC¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_ALARM_TIME_EVENT                  = 0;    // User³z¹LI2C³]©wALARM
-unsigned char VAR_USER_CHANGE_ALARM_VALUE                   = 0;    // User³z¹LI2C³]©w¤§ALARM¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT         = 0;    // User³z¹LI2C³]©wWDG_COUNTDOWN_TIMER
-unsigned int VAR_USER_CHANGE_WDG_COUNTDOWN_TIMER_VALUE      = 0;    // User³z¹LI2C³]©w¤§WDG_COUNTDOWN_TIMER¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_LOAD_EEPROM_DEFAULT_EVENT             = 0;    // User³z¹LI2C Load EEPROM
-
-volatile int I2C_USER_SET_REAR_VIEW_EVENT                   = 0;    // User³z¹LI2C³]©wRear View Status
-volatile int VAR_REAR_VIEW_STATUS                           = 0;    // Rear View Status
-
-volatile int I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT       = 0;    // User³z¹LI2C³]©wVPM_POWER_LOW_EVT_DLY
-unsigned int VAR_USER_CHANGE_VPM_POWER_LOW_EVT_DLY_VALUE    = 0;    // User³z¹LI2C³]©w¤§VPM_POWER_LOW_EVT_DLY¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT      = 0;    // User³z¹LI2C³]©wVPM_POWER_LOW_HARD_DLY
-unsigned int VAR_USER_CHANGE_VPM_POWER_LOW_HARD_DLY_VALUE   = 0;    // User³z¹LI2C³]©w¤§VPM_POWER_LOW_HARD_DLY¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_VPM_PWR_ON_DLY_EVENT              = 0;    // User³z¹LI2C³]©wVPM_PWR_ON_DLY
-unsigned int VAR_USER_CHANGE_VPM_PWR_ON_DLY_VALUE           = 0;    // User³z¹LI2C³]©w¤§VPM_PWR_ON_DLY¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT         = 0;    // User³z¹LI2C³]©wVPM_PWR_OFF_EVT_DLY
-unsigned int VAR_USER_CHANGE_VPM_PWR_OFF_EVT_DLY_VALUE      = 0;    // User³z¹LI2C³]©w¤§VPM_PWR_OFF_EVT_DLY¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT        = 0;    // User³z¹LI2C³]©wVPM_PWR_OFF_HARD_DLY
-unsigned int VAR_USER_CHANGE_VPM_PWR_OFF_HARD_DLY_VALUE     = 0;    // User³z¹LI2C³]©w¤§VPM_PWR_OFF_HARD_DLY¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT        = 0;    // User³z¹LI2C³]©wVPM_POST_PWR_CHK_DLY
-unsigned int VAR_USER_CHANGE_VPM_POST_PWR_CHK_DLY_VALUE     = 0;    // User³z¹LI2C³]©w¤§VPM_POST_PWR_CHK_DLY¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT            = 0;    // User³z¹LI2C³]©wPRE_PWR_CHK_VOLT
-unsigned int VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE         = 0;    // User³z¹LI2C³]©w¤§PRE_PWR_CHK_VOLT¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT           = 0;    // User³z¹LI2C³]©wPOST_PWR_CHK_VOLT
-unsigned int VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE        = 0;    // User³z¹LI2C³]©w¤§POST_PWR_CHK_VOLT¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_UPS_CHARGE_VOLT_EVENT             = 0;    // User³z¹LI2C³]©wUPS_CHARGE_VOLT
-unsigned int VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE          = 0;    // User³z¹LI2C³]©w¤§UPS_CHARGE_VOLT¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_VPM_SHUT_DOWN_DLY_EVENT           = 0;    // User³z¹LI2C³]©wVPM_SHUT_DOWN_DLY
-unsigned int VAR_USER_CHANGE_VPM_SHUT_DOWN_DLY_VALUE        = 0;    // User³z¹LI2C³]©w¤§VPM_SHUT_DOWN_DLY¼È¦s¥ÎÅÜ¼Æ
-
-volatile int I2C_USER_SET_REFERENCE_VOLT_EVENT              = 0;    // User³z¹LI2C³]©wREFERENCE_VOLT
-unsigned int VAR_USER_CHANGE_REFERENCE_VOLT_VALUE           = 0;    // User³z¹LI2C³]©w¤§REFERENCE_VOLT¼È¦s¥ÎÅÜ¼Æ
-
-// State machine for dump RTC registers
-// = 0, Not Dump
-// = 1, Start Dump
-volatile unsigned int VAR_START_DUMP_RTC_S35390A_REGISTERS = 0;
 // for printf used <--- fputc()
 typedef void (*pFunction)(void);
-
-// Ignition Status Related
-volatile unsigned int VAR_IGN_ON_OFF = 0;
-                      // =0, ªí¥ÜIgnition at Low (Ignition Off)
-                      // =1, ªí¥ÜIgnition at High (Ignition On)
-volatile unsigned int VAR_IGN_OFF_2_ON_EVENT = 0;
-                      // =0, ªí¥ÜNo Event
-                      // =1, ªí¥Ü¦³µo¥ÍIgnition Off->On Event
-volatile unsigned int VAR_IGN_ON_2_OFF_EVENT = 0;
-                      // =0, ªí¥ÜNo Event
-                      // =1, ªí¥Ü¦³µo¥ÍIgnition On->Off Event
 
 // Power Button Status Related
 volatile unsigned int VAR_PBT_ON_OFF = 0;
@@ -260,8 +159,6 @@ volatile unsigned int VAR_EN_LED_HI_LO = 0;
 volatile unsigned int VAR_EN_LED_LO_2_HI_EVENT = 0;
 volatile unsigned int VAR_EN_LED_HI_2_LO_EVENT = 0;
 
-//rtc_time_s35390a;
-//RTC_TIME rtc_time_stm32;
 
 // VPM Flow¬ÛÃöVariables
 unsigned int VAR_VPM_PWR_ON_DLY = 0;                                // EEPROM $0010, $0011
@@ -272,24 +169,11 @@ unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE = 0;                     // ¨t²Î¦b¦óº
               // = 0 at S5, Power Off
               // = 1 at S0, Power On
               // = 2 ar S3, Suspend
-unsigned int AUTO_DETECT_REAR_VIEW_EVENT = 0;
-
 unsigned int VAR_IMM_CHANGE_WORKING_MODE_EVENT = 0;                 // ³]©w¨t²Î¥ß§Y¶i¤Jª¬ºA¨Æ¥ó
               // = 0, No Event
               // = 1, Enter Power-Off Flow Immediately
               // = 2, Enter Suspend Flow Immediately
               // «e´£¬O¨t²Î¦b¶}¾÷®É¦¹©R¥O¤~¦³®Ä
-unsigned int VAR_VPM_AT_MODE = 0;
-                      // =0, AT_MODE = 0 (Off)
-                      // =1, AT_MODE = 1 (On)
-unsigned int VAR_VPM_KEEP_ALIVE = 0;
-                      // =0, KEEP_ALIVE = 0 (Off)
-                      // =1, KEEP_ALIVE = 1 (On)
-volatile int VAR_VPM_PREBOOT_VOLTAGE_CHK = 742; // Preboot
-volatile int VAR_VPM_POSTBOOT_VOLTAGE_CHK = 742; // Postboot
-                      // ¹w³]®É¥H12Vªº¹w³]­È¬°¹w³]­È
-unsigned char VAR_VPM_PREBOOT_VOLTAGE_CHK_ENABLE = 0;
-unsigned char VAR_VPM_POSTBOOT_VOLTAGE_CHK_ENABLE = 0;
 // ·í¦bS0®Éµo¥ÍPower LowªºEvent®É­n¦p¦ó³B¸m¤§¼Ò¦¡
 // ³o©w¸q¦bEEPROM $0052³B
 // =0 (default), Notify OS and Begin Count Down
@@ -302,40 +186,6 @@ unsigned int VAR_VPM_POWER_LOW_EVT_DLY = 0;                         // EEPROM $0
 unsigned int VAR_VPM_POWER_LOW_HARD_DLY = 13;                       // EEPROM $0023, $0024
 // UPS¶}©l¥R¹q¤§¹qÀ£Threshold
 unsigned int VAR_VPM_START_CHARGING_THRESHOLD = 0x2EC;              // EEPROM $0065, $0066
-
-unsigned int VAR_VPM_POST_PWR_CHK_DLY_TIME = 2;                     // EEPROM $0017, $0018
-// Power Off Event Mask
-// bit7 : RFU
-// bit6 : RFU
-// bit5 : RFU
-// bit4 : RFU
-// bit3 : RFU
-// bit2 : RFU
-// bit1 : Ignition Wakeup Enable (Default On)
-// bit0 : RFU
-unsigned char VAR_SHUTDOWN_MASK = 0;                                // EEPROM $0026
-// Shut Down Delay
-unsigned int VAR_VPM_SHUT_DOWN_DLY = 0;                             // EEPROM $0029, $002A
-// Shut Down Function Status
-unsigned char VAR_SHUTDOWN_EN = 0;                                  // EEPROM $002B
-// DI Input Type Control
-// Trek-734_removed unsigned char VAR_DI_INPUT_TYPE_CTR = 0;                            // EEPROM $002C
-// Reference Voltage
-unsigned int VAR_REFERENCE_VOLTAGE = 0;                             // EEPROM $0071, $0072
-
-// SHUTDOWN TIMER
-volatile char VAR_SHUTDOWN_STATUS = 0;                              // Shutdown¶}±Ò©ÎÃö³¬
-volatile int VAR_SHUTDOWN_COUNTER = 0;                              // Shutdown­Ë¼Æ­p®É¾¹
-volatile char VAR_SHUTDOWN_FLAG = 0;                                // Shutdown flag
-volatile char VAR_OS_READY = 0;                                     // OS ready or not
-
-unsigned int VAR_VPM_MCU_1ST_POWERED = 1;
-                      // =0, MCU is not 1st powered
-                      // =1, MCU is 1st powered
-
-volatile int VAR_VPM_CAR_POWER_LOW_HAPPENED = 0;
-                      // =0, Car power low does not happened
-                      // =1, Car power low happened
 
 // ­p¼Æ¾¹¸ê®Æ
 unsigned int VAR_VPM_COUNTER_UPDATE_FAIL = 0;                       // ±qEEPROM§ó·sCOUNTER®É¬OFAILªº±¡ªp
@@ -395,17 +245,6 @@ unsigned char VAR_SERIAL_NUMBER_CHG_EVENT = 0; // ¬O§_µo¥Í§ïÅÜSerial Number¨Æ¥ó
 // Wakeup Event Mask
 unsigned char VAR_WAKEUP_MASK_HI = 0x00;
 unsigned char VAR_WAKEUP_MASK_LO = 0x00;
-
-// LCD & Brightness Control Status Related
-unsigned int VAR_FUNCTION_KEY_BRIGHTNESS = 0;   // Function Key Brightness
-unsigned int VAR_FUNCTION_KEY_PWM_PERIOD = 0;   // Function Key PWM Period
-
-volatile unsigned char VAR_AUTO_DETECT_RESERVE_GEAR_STATUS = 1;
-                      // =0, DI Mode
-                      // =1, Auto Detect Reserve Gear Mode
-
-// Current GPS Status
-volatile unsigned char VAR_GPS_ANTENNA_STATUS = 0;
 
 //-----------------------------------------------------------------------------
 
@@ -550,53 +389,17 @@ int main(void)
 
   // ªì©l¤ÆDebug Port
   DEBUG_PORT_INITIALIZATION();
-  DEBUG_PRINT("\n\r\n\r..: Hello TREK-734 VPM\n\r");
-
-  RTC_INITIALIZATION();
-  DEBUG_PRINT("..: STM32 RTC Init Complete\n\r");
+  DEBUG_PRINT("\n\r\n\r..: Hello DMS-SE23 VPM\n\r");
 
   // ªì©l¤ÆGPIO
   FUNC_GPIO_INIT();
   DEBUG_PRINT("..: GPIO Init Complete\n\r");
-
-//temp0816   GPS_PORT_INITIALIZATION();
-//temp0816   DEBUG_PRINT("..: GPS Port Init Complete\n\r");
 
   //Initial I2C1 Master
   I2C1_Master_Init();
 
   //Init I2C2 port as Slave transmitter/receiver
   I2C_Slave_Init();
-
-  // ªì©l¤ÆADC1
-  ADC_Configuration();
-  DEBUG_PRINT("..: ADC Init Complete\n\r");
-
-  // ªì©l¤ÆDAC2
-//temp0816   DAC2_Configuration();
-//temp0816   DEBUG_PRINT("..: DAC Init Complete\n\r");
-
-  // ªì©l¤ÆTIM1
-//temp0817  Odometer_Configuration();
-//temp0816   DEBUG_PRINT("..: TIM Init Complete\n\r");
-
-  // ªì©l¤ÆPWM
-  INIT_PWM_GPIO();
-  VAR_FUNCTION_KEY_BRIGHTNESS = 0;
-  SET_PWM_WIDTH(INIT_PWM(10000), VAR_FUNCTION_KEY_BRIGHTNESS);  // frequency is 10kHz
-  DEBUG_PRINT("..: PWM Init Complete\n\r");
-  
-  // ªì©l¤ÆExternal RTC
-  RTC_S35390A_INITIALIZATION();
-  DEBUG_PRINT("..: RTC_S35390A Init Complete\n\r");
-
-  // ±NExternal RTCªº®É¶¡§ó·s¨ìSTM32¤¤
-  (UPDATE_RTC_FROM_S35390A() == __RETURN_SUCCESS) ? \
-  DEBUG_PRINT("..: RTC Update Complete\n\r") : \
-  DEBUG_PRINT("..: RTC Update Failed!\n\r");
-
-  UPDATE_ALARM();
-  DEBUG_PRINT("..: ALARM Update Complete\n\r");
 
   // §ó·sVPMÅÜ¼Æ
   UPDATE_VPM_VARIABLE_FROM_EEPROM();
@@ -605,9 +408,6 @@ int main(void)
   //VPM version
   DEBUG_PRINT("..: VPM version : %01d.%03d\n\r", __DEF_PROJECT_MAIN_VERSION, __DEF_PROJECT_MINER_VERSION);
   DEBUG_PRINT("..: Platform ID : 0x%02X\n\r", PLATFORM_ID);
-
-  //for test
-//  DUMP_EEPROM_CONTENT();
 
   while(1)
   {
@@ -643,18 +443,6 @@ int main(void)
       VAR_1S_Event = 0;
     }
 //--------------------------------------
-//temp0816    // GPS Command
-//temp0816    if (VAR_GPS_PACKET_READY == 0)
-//temp0816    {
-//temp0816      GPS_CHECK_PACKET();
-//temp0816    }
-//temp0816    else
-//temp0816    {
-//temp0816      GPS_PROCESSING_PACKET();
-//temp0816      VAR_GPS_PACKET_READY = 0; // ³B²z¦n¤F
-//temp0816      VAR_GPS_CMD_LENGTH = 0; // TREK-30X Received BufferÂk¹s
-//temp0816    }
-//--------------------------------------
     // DEBUG Command
     if (VAR_DEBUG_PACKET_READY == 0)
     {
@@ -678,572 +466,6 @@ int main(void)
       i2c_event = EVENT_READ;
 
       I2C_Slave_Command_Processing(i2c_cmd);
-    }
-
-/*** RTC Related ***/
-//    if (I2C_USER_SET_RTC_TIME_EVENT == 1)
-//    {
-//      // User³z¹LI2C³]©w¤FRTCªº®É¶¡
-//      UPDATE_RTC_TO_S35390A(); // §ó·sRTC®É¶¡
-//      I2C_USER_SET_RTC_TIME_EVENT = 0;
-//    }
-//    if (I2C_USER_SET_RTC_TIME_EVENT == 2)
-//    { // User§ïÅÜ®É
-//      UPDATE_RTC_FROM_S35390A();
-//      VAR_RTC_TIME_S35390A.Hour = VAR_USER_CHANGE_RTC_VALUE;
-//      UPDATE_USER_DEFINED_RTC_VALUE();                      // §ó·sRTC®É¶¡
-//      UPDATE_RTC_FROM_S35390A();
-//      I2C_USER_SET_RTC_TIME_EVENT = 0;
-//    }
-//    if (I2C_USER_SET_RTC_TIME_EVENT == 3)
-//    { // User§ïÅÜ¤À
-//      UPDATE_RTC_FROM_S35390A();
-//      VAR_RTC_TIME_S35390A.Minute = VAR_USER_CHANGE_RTC_VALUE;
-//      UPDATE_USER_DEFINED_RTC_VALUE();                      // §ó·sRTC®É¶¡
-//      UPDATE_RTC_FROM_S35390A();
-//      I2C_USER_SET_RTC_TIME_EVENT = 0;
-//    }
-//    if (I2C_USER_SET_RTC_TIME_EVENT == 4)
-//    { // User§ïÅÜ¬í
-//      UPDATE_RTC_FROM_S35390A();
-//      VAR_RTC_TIME_S35390A.Second = VAR_USER_CHANGE_RTC_VALUE;
-//      UPDATE_USER_DEFINED_RTC_VALUE();                      // §ó·sRTC®É¶¡
-//      UPDATE_RTC_FROM_S35390A();
-//      I2C_USER_SET_RTC_TIME_EVENT = 0;
-//    }
-    if (I2C_USER_SET_RTC_TIME_EVENT == 1)                   // External RTC Set, YEAR
-    { // wait
-      // SDK will issue 7 interrupts to set RTC, YEAR-MONTH-DAY-WEEK-HOUR-MINUTE-SECOND
-      // The interrupt will cause I2C failed, if the I2C is processing
-    }
-    if (I2C_USER_SET_RTC_TIME_EVENT == 2)                   // External RTC Set, MONTH
-    { // wait
-      // SDK will issue 7 interrupts to set RTC, YEAR-MONTH-DAY-WEEK-HOUR-MINUTE-SECOND
-      // The interrupt will cause I2C failed, if the I2C is processing
-    }
-    if (I2C_USER_SET_RTC_TIME_EVENT == 3)                   // External RTC Set, DAY
-    { // wait
-      // SDK will issue 7 interrupts to set RTC, YEAR-MONTH-DAY-WEEK-HOUR-MINUTE-SECOND
-      // The interrupt will cause I2C failed, if the I2C is processing
-    }
-    if (I2C_USER_SET_RTC_TIME_EVENT == 4)                   // External RTC Set, WEEK
-    { // wait
-      // SDK will issue 7 interrupts to set RTC, YEAR-MONTH-DAY-WEEK-HOUR-MINUTE-SECOND
-      // The interrupt will cause I2C failed, if the I2C is processing
-    }
-    if (I2C_USER_SET_RTC_TIME_EVENT == 5)                   // External RTC Set, HOUR
-    { // wait
-      // SDK will issue 7 interrupts to set RTC, YEAR-MONTH-DAY-WEEK-HOUR-MINUTE-SECOND
-      // The interrupt will cause I2C failed, if the I2C is processing
-    }
-    if (I2C_USER_SET_RTC_TIME_EVENT == 6)                   // External RTC Set, MINUTE
-    { // wait
-      // SDK will issue 7 interrupts to set RTC, YEAR-MONTH-DAY-WEEK-HOUR-MINUTE-SECOND
-      // The interrupt will cause I2C failed, if the I2C is processing
-    }
-    if (I2C_USER_SET_RTC_TIME_EVENT == 7)                   // External RTC Set, SECOND
-    {
-      UPDATE_RTC_TO_S35390A();                              // External RTC Set
-      I2C_USER_SET_RTC_TIME_EVENT = 0;
-    }
-//--------------------------------------
-
-    // ¦³§ïÅÜSerial Number Eventµo¥Í
-    if (VAR_SERIAL_NUMBER_CHG_EVENT != 0)
-    {
-      EEPROM_UPDATE_SERIAL_NUMBER(VAR_SERIAL_NUMBER_CHG_EVENT);
-      VAR_SERIAL_NUMBER_CHG_EVENT = 0;
-    }
-//--------------------------------------
-
-/* RTC Related */
-    if (I2C_USER_SET_ALARM_TIME_EVENT == 1)
-    {
-      VAR_ALARM_TIME.DayOfWeek = VAR_USER_CHANGE_ALARM_VALUE;
-      UPDATE_USER_DEFINED_ALARM_VALUE();
-      UPDATE_ALARM();
-      I2C_USER_SET_ALARM_TIME_EVENT = 0;
-    }
-    if (I2C_USER_SET_ALARM_TIME_EVENT == 2)
-    {
-      VAR_ALARM_TIME.Hour = VAR_USER_CHANGE_ALARM_VALUE;
-      UPDATE_USER_DEFINED_ALARM_VALUE();
-      UPDATE_ALARM();
-      I2C_USER_SET_ALARM_TIME_EVENT = 0;
-    }
-    if (I2C_USER_SET_ALARM_TIME_EVENT == 3)
-    {
-      VAR_ALARM_TIME.Minute = VAR_USER_CHANGE_ALARM_VALUE;
-      UPDATE_USER_DEFINED_ALARM_VALUE();
-      UPDATE_ALARM();
-      I2C_USER_SET_ALARM_TIME_EVENT = 0;
-    }
-
-    if (I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT == 1)
-    {
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_WDG_COUNTDOWN_TIMER_VALUE >= __DEF_WDG_COUNTDOWN_TIMER_MIN) &&
-          (VAR_USER_CHANGE_WDG_COUNTDOWN_TIMER_VALUE <= __DEF_WDG_COUNTDOWN_TIMER_MAX))
-      {
-        VAR_WATCHDOG_RESET_VALUE = VAR_USER_CHANGE_WDG_COUNTDOWN_TIMER_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x50; // Watchdog Countdown Timer High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_WATCHDOG_RESET_VALUE>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x51; // Watchdog Countdown Timer Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_WATCHDOG_RESET_VALUE & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-    }
-//--------------------------------------
-
-    if (I2C_USER_LOAD_EEPROM_DEFAULT_EVENT == 1)
-    {
-      // ¦^´_¨ì¹w³]­È
-      // ¤£·|²M±¼¾÷¾¹§Ç¸¹»PWWAN MAC Address
-      EEPROM_LOAD_FACTORY_DEFAULT();
-      I2C_USER_LOAD_EEPROM_DEFAULT_EVENT = 0;
-    }
-    if (I2C_USER_LOAD_EEPROM_DEFAULT_EVENT == 2)
-    {
-      // Save User Default to EEPROM
-      EEPROM_SAVE_USER_DEFAULT();
-      I2C_USER_LOAD_EEPROM_DEFAULT_EVENT = 0;
-    }
-    if (I2C_USER_LOAD_EEPROM_DEFAULT_EVENT == 3)
-    {
-      // Load User Default to EEPROM
-      EEPROM_LOAD_USER_DEFAULT();
-      UPDATE_VPM_VARIABLE_FROM_EEPROM();
-      I2C_USER_LOAD_EEPROM_DEFAULT_EVENT = 0;
-    }
-    if (I2C_USER_LOAD_EEPROM_DEFAULT_EVENT == 4)
-    {
-      // ¦^´_¨ì¤u¼t¹w³]­È
-      EEPROM_FILL_DEFAULT_VALUE();
-      I2C_USER_LOAD_EEPROM_DEFAULT_EVENT = 0;
-    }
-//--------------------------------------
-
-   if (I2C_USER_SET_REAR_VIEW_EVENT == 1 || AUTO_DETECT_REAR_VIEW_EVENT == 1)
-   {
-     __OUT_B14_GPIO_OUT_BACKLIGHT_EN_SET_LO;
-     __MACRO_DELAY_mS(5);
-     ADV7186_RESET();
-     __MACRO_DELAY_mS(5);
-     ADV7186_LVDS();
-     __MACRO_DELAY_mS(300);
-     __OUT_B14_GPIO_OUT_BACKLIGHT_EN_SET_HI;
-     VAR_REAR_VIEW_STATUS = 0;
-     I2C_USER_SET_REAR_VIEW_EVENT = 0;
-     AUTO_DETECT_REAR_VIEW_EVENT = 0;
-   }
-   if (I2C_USER_SET_REAR_VIEW_EVENT == 2 || AUTO_DETECT_REAR_VIEW_EVENT == 2)
-   {
-     __OUT_B14_GPIO_OUT_BACKLIGHT_EN_SET_LO;
-     __MACRO_DELAY_mS(5);
-     ADV7186_RESET();
-     __MACRO_DELAY_mS(5);
-     ADV7186_CVBS();
-     __MACRO_DELAY_mS(300);
-     __OUT_B14_GPIO_OUT_BACKLIGHT_EN_SET_HI;
-     VAR_REAR_VIEW_STATUS = 1;
-     I2C_USER_SET_REAR_VIEW_EVENT = 0;
-     AUTO_DETECT_REAR_VIEW_EVENT = 0;
-   }
-//--------------------------------------
-
-    /* I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT - User set : Power LOW event delay event */
-    if (I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_VPM_POWER_LOW_EVT_DLY_VALUE >= __DEF_POWER_LOW_EVT_DLY_MIN) &&
-          (VAR_USER_CHANGE_VPM_POWER_LOW_EVT_DLY_VALUE <= __DEF_POWER_LOW_EVT_DLY_MAX))
-      {
-        VAR_VPM_POWER_LOW_EVT_DLY = VAR_USER_CHANGE_VPM_POWER_LOW_EVT_DLY_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x21; // Car Power Low Event Delay High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_POWER_LOW_EVT_DLY>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x22; // Car Power Low Event Delay Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_POWER_LOW_EVT_DLY & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-    }
-    /* I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT - User set : Power LOW hard delay event */
-    if (I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_VPM_POWER_LOW_HARD_DLY_VALUE >= __DEF_POWER_LOW_HARD_DLY_MIN) &&
-          (VAR_USER_CHANGE_VPM_POWER_LOW_HARD_DLY_VALUE <= __DEF_POWER_LOW_HARD_DLY_MAX))
-      {
-        VAR_VPM_POWER_LOW_HARD_DLY = VAR_USER_CHANGE_VPM_POWER_LOW_HARD_DLY_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x23; // Car Power Low Hard Delay High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_POWER_LOW_HARD_DLY>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x24; // Car Power Low Hard Delay Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_POWER_LOW_HARD_DLY & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-    }
-    /* I2C_USER_SET_VPM_PWR_ON_DLY_EVENT - User set : Power ON delay event */
-    if (I2C_USER_SET_VPM_PWR_ON_DLY_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_VPM_PWR_ON_DLY_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_VPM_PWR_ON_DLY_VALUE >= __DEF_PWR_ON_DLY_MIN) &&
-          (VAR_USER_CHANGE_VPM_PWR_ON_DLY_VALUE <= __DEF_PWR_ON_DLY_MAX))
-      {
-        VAR_VPM_PWR_ON_DLY = VAR_USER_CHANGE_VPM_PWR_ON_DLY_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x10; // Ignition On Delay High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_PWR_ON_DLY>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x11; // Ignition On Delay Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_PWR_ON_DLY & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-    }
-    /* I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT - User set : Power OFF event delay event */
-    if (I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_VPM_PWR_OFF_EVT_DLY_VALUE >= __DEF_PWR_OFF_EVT_DLY_MIN) &&
-          (VAR_USER_CHANGE_VPM_PWR_OFF_EVT_DLY_VALUE <= __DEF_PWR_OFF_EVT_DLY_MAX))
-      {
-        VAR_VPM_PWR_OFF_EVT_DLY = VAR_USER_CHANGE_VPM_PWR_OFF_EVT_DLY_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x12; // Ignition Off Event Delay High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_PWR_OFF_EVT_DLY>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x13; // Ignition Off Event Delay Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_PWR_OFF_EVT_DLY & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-    }
-    /* I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT - User set : Power OFF hard delay event */
-    if (I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_VPM_PWR_OFF_HARD_DLY_VALUE >= __DEF_IGN_OFF_PWR_OFF_HARD_DLY_MIN) &&
-          (VAR_USER_CHANGE_VPM_PWR_OFF_HARD_DLY_VALUE <= __DEF_IGN_OFF_PWR_OFF_HARD_DLY_MAX))
-      {
-        VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY = VAR_USER_CHANGE_VPM_PWR_OFF_HARD_DLY_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x14; // Ignition Off Run Power Off Flow Hard Delay High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x15; // Ignition Off Run Power Off Flow Hard Delay Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-    }
-    /* I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT - User set : Post power check delay event */
-    if (I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_VPM_POST_PWR_CHK_DLY_VALUE >= __DEF_POST_PWR_CHK_DLY_MIN) &&
-          (VAR_USER_CHANGE_VPM_POST_PWR_CHK_DLY_VALUE <= __DEF_POST_PWR_CHK_DLY_MAX))
-      {
-        VAR_VPM_POST_PWR_CHK_DLY_TIME = VAR_USER_CHANGE_VPM_POST_PWR_CHK_DLY_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x17; // Post-boot Power Check Delay High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_POST_PWR_CHK_DLY_TIME>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x18; // Post-boot Power Check Delay Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_POST_PWR_CHK_DLY_TIME & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-    }
-    /* I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT - User set : Pre-power check voltage event */
-    if (I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT == 2)
-    {
-      if (((VAR_SYSI2C_SYS_INFO>>6) & 0x03) == 0)
-      {
-        // 24V Car Power System
-        if ((VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE >= VAR_VPM_POSTBOOT_VOLTAGE_CHK) &&
-            (VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE <= ((__DEF_24V_CAR_PWR_PROTECT_RANGE_MAX_H<<8)|__DEF_24V_CAR_PWR_PROTECT_RANGE_MAX_L)))
-        {
-          VAR_VPM_PREBOOT_VOLTAGE_CHK = VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE;
-          // §ó·sEEPROMªº¤º®e
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x59; // 24V Pre-Boot Voltage Check High Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_PREBOOT_VOLTAGE_CHK>>8) & 0xFF;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x5A; // 24V Pre-Boot Voltage Check Low Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_PREBOOT_VOLTAGE_CHK & 0xFF;
-          VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-        }
-      }
-      else
-      {
-        // 12V Car Power System
-        if ((VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE >= VAR_VPM_POSTBOOT_VOLTAGE_CHK) &&
-            (VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE <= ((__DEF_12V_CAR_PWR_PROTECT_RANGE_MAX_H<<8)|__DEF_12V_CAR_PWR_PROTECT_RANGE_MAX_L)))
-        {
-          VAR_VPM_PREBOOT_VOLTAGE_CHK = VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE;
-          // §ó·sEEPROMªº¤º®e
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x55; // 12V Pre-Boot Voltage Check High Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_PREBOOT_VOLTAGE_CHK>>8) & 0xFF;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x56; // 12V Pre-Boot Voltage Check Low Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_PREBOOT_VOLTAGE_CHK & 0xFF;
-          VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-        }
-      }
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-    }
-    /* I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT - User set : Post power check voltage event */
-    if (I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT == 2)
-    {
-      if (((VAR_SYSI2C_SYS_INFO>>6) & 0x03) == 0)
-      {
-        // 24V Car Power System
-        if ((VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE >= ((__DEF_24V_CAR_PWR_PROTECT_RANGE_MIN_H<<8)|__DEF_24V_CAR_PWR_PROTECT_RANGE_MIN_L)) &&
-            (VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE <= VAR_VPM_PREBOOT_VOLTAGE_CHK))
-        {
-          VAR_VPM_POSTBOOT_VOLTAGE_CHK = VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE;
-          // §ó·sEEPROMªº¤º®e
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x5B; // 24V Post-Boot Voltage Check High Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_POSTBOOT_VOLTAGE_CHK>>8) & 0xFF;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x5C; // 24V Post-Boot Voltage Check Low Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_POSTBOOT_VOLTAGE_CHK & 0xFF;
-          VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-        }
-      }
-      else
-      {
-        // 12V Car Power System
-        if ((VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE >= ((__DEF_12V_CAR_PWR_PROTECT_RANGE_MIN_H<<8)|__DEF_12V_CAR_PWR_PROTECT_RANGE_MIN_L)) &&
-            (VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE <= VAR_VPM_PREBOOT_VOLTAGE_CHK))
-        {
-          VAR_VPM_POSTBOOT_VOLTAGE_CHK = VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE;
-          // §ó·sEEPROMªº¤º®e
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x57; // 12V Post-Boot Voltage Check High Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_POSTBOOT_VOLTAGE_CHK>>8) & 0xFF;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x58; // 12V Post-Boot Voltage Check Low Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_POSTBOOT_VOLTAGE_CHK & 0xFF;
-          VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-        }
-      }
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-    }
-    /* I2C_USER_SET_UPS_CHARGE_VOLT_EVENT - User set : UPS change voltage event */
-    if (I2C_USER_SET_UPS_CHARGE_VOLT_EVENT == 1)
-    {
-      I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_ON_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT = 0;
-      I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT = 0;
-      I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT = 0;
-      I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT = 0;
-    }
-    if (I2C_USER_SET_UPS_CHARGE_VOLT_EVENT == 2)
-    {
-      if (((VAR_SYSI2C_SYS_INFO>>6) & 0x03) == 0)
-      {
-        // 24V Car Power System
-        if ((VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE >= ((__DEF_24V_CAR_PWR_PROTECT_RANGE_MIN_H<<8)|__DEF_24V_CAR_PWR_PROTECT_RANGE_MIN_L)) &&
-            (VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE <= ((__DEF_24V_CAR_PWR_PROTECT_RANGE_MAX_H<<8)|__DEF_24V_CAR_PWR_PROTECT_RANGE_MAX_L)))
-        {
-          VAR_VPM_START_CHARGING_THRESHOLD = VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE;
-          // §ó·sEEPROMªº¤º®e
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x67; // 24V UPS Start Charge Voltage High Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_START_CHARGING_THRESHOLD>>8) & 0xFF;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x68; // 24V UPS Start Charge Voltage Low Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_START_CHARGING_THRESHOLD & 0xFF;
-          VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-        }
-      }
-      else
-      {
-        // 12V Car Power System
-        if ((VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE >= ((__DEF_12V_CAR_PWR_PROTECT_RANGE_MIN_H<<8)|__DEF_12V_CAR_PWR_PROTECT_RANGE_MIN_L)) &&
-            (VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE <= ((__DEF_12V_CAR_PWR_PROTECT_RANGE_MAX_H<<8)|__DEF_12V_CAR_PWR_PROTECT_RANGE_MAX_L)))
-        {
-          VAR_VPM_START_CHARGING_THRESHOLD = VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE;
-          // §ó·sEEPROMªº¤º®e
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x65; // 12V UPS Start Charge Voltage High Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_START_CHARGING_THRESHOLD>>8) & 0xFF;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-          VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x66; // 12V UPS Start Charge Voltage Low Byte
-          VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_START_CHARGING_THRESHOLD & 0xFF;
-          VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-        }
-      }
-      I2C_USER_SET_UPS_CHARGE_VOLT_EVENT = 0;
-    }
-    /* I2C_USER_SET_VPM_SHUT_DOWN_DLY_EVENT - User set : Shutdown delay event */
-    if (I2C_USER_SET_VPM_SHUT_DOWN_DLY_EVENT == 1)
-    {
-    }
-    if (I2C_USER_SET_VPM_SHUT_DOWN_DLY_EVENT == 2)
-    {
-      if ((VAR_USER_CHANGE_VPM_SHUT_DOWN_DLY_VALUE >= __DEF_SHUT_DOWN_DLY_MIN) &&
-          (VAR_USER_CHANGE_VPM_SHUT_DOWN_DLY_VALUE <= __DEF_SHUT_DOWN_DLY_MAX))
-      {
-        VAR_VPM_SHUT_DOWN_DLY = VAR_USER_CHANGE_VPM_SHUT_DOWN_DLY_VALUE;
-        // §ó·sEEPROMªº¤º®e
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x29; // Shut Down Delay High Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_VPM_SHUT_DOWN_DLY>>8) & 0xFF;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x2A; // Shut Down Delay Low Byte
-        VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_VPM_SHUT_DOWN_DLY & 0xFF;
-        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      }
-      I2C_USER_SET_VPM_SHUT_DOWN_DLY_EVENT = 0;
-    }
-    /* I2C_USER_SET_REFERENCE_VOLT_EVENT - User set : Reference voltage event */
-    if (I2C_USER_SET_REFERENCE_VOLT_EVENT == 1)
-    {
-    }
-    if (I2C_USER_SET_REFERENCE_VOLT_EVENT == 2)
-    {
-      VAR_REFERENCE_VOLTAGE = VAR_USER_CHANGE_REFERENCE_VOLT_VALUE;
-      DAC_SetChannel2Data(DAC_Align_12b_R, VAR_REFERENCE_VOLTAGE);
-      // §ó·sEEPROMªº¤º®e
-      VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
-      VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = 0x71; // Reference Voltage High Byte
-      VAR_EEPROM_WRITE_QUEUE_DATA[0] = (VAR_REFERENCE_VOLTAGE>>8) & 0xFF;
-      VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
-      VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = 0x72; // Reference Voltage Low Byte
-      VAR_EEPROM_WRITE_QUEUE_DATA[1] = VAR_REFERENCE_VOLTAGE & 0xFF;
-      VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Byte
-      I2C_USER_SET_REFERENCE_VOLT_EVENT = 0;
-    }
-      
-    if (VAR_SYSI2C_SYS_INFO_CHANGE == 1)
-    {
-      VAR_SYSI2C_SYS_INFO_CHANGE = 0;
-      REFRESH_VPM_LOW_VOLTAGE_PROTECTION_VALUE();
-      REFRESH_UPS_START_CHARGE_VOLTAGE();
     }
   }
 }

@@ -366,7 +366,6 @@ void EXTI1_IRQHandler(void)
 {
   if(EXTI_GetITStatus(EXTI_Line1) != RESET)
   {
-    VAR_IGN_OFF_2_ON_EVENT = 1; // µo¥ÍIgnition Off to On Event 
     EXTI_ClearITPendingBit(EXTI_Line1);
   }
 }

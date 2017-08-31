@@ -9,7 +9,6 @@
 
 #include "project.h"
 #include "main.h"
-#include "at_command.h"
 
 u8 TxBuffer[TxBufferSize];
 u8 RxBuffer[RxBufferSize];

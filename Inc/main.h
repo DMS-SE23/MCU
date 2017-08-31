@@ -45,15 +45,6 @@ extern int VAR_1S_Counter;
 // 做延時用的變數
 extern volatile int VAR_TIMETICK_DELAY;
 
-// GPS 用的變數
-extern volatile int VAR_GPS_PACKET_READY;
-extern volatile int VAR_GPS_CMD_LENGTH;
-extern unsigned char GPS_Cmd[GPS_CmdSize];
-extern u8 GPS_TxBuffer[TxBufferSize];
-extern u8 GPS_RxBuffer[RxBufferSize];
-extern u16 GPS_TxS, GPS_TxE; // Tx Start, End Ptr
-extern u16 GPS_RxS, GPS_RxE; // Rx Start, End Ptr
-
 // DEBUG 用的變數
 extern volatile int VAR_DEBUG_PACKET_READY;
 extern volatile int VAR_DEBUG_CMD_LENGTH;
@@ -66,73 +57,11 @@ extern u16 DEBUG_RxS, DEBUG_RxE; // Rx Start, End Ptr
 extern unsigned int VAR_BATTERY_EXIST; // Battery是否存在，預設不存在
 extern unsigned int CAR_POWER_EXIST;   // Car Power是否存在，預設不存在
 
-extern unsigned int VAR_CURRENT_V_CB_VALUE; // 目前之CAR Power Value
-extern volatile unsigned int VAR_PCB_TEMP_VALUE; // 目前之PCB Temperture Value
-extern volatile unsigned int VAR_GPS_REF_VALUE;  // 目前之GPS REF Value
-extern volatile unsigned int VAR_GPS_RF_VALUE; // 目前之GPS RF Value
-extern volatile unsigned int VAR_ODOMETER_VALUE; // Odometer counter
 extern volatile unsigned char VAR_SYSTEM_POWER_STATUS;
-
-// Multi-protocol Transceiver Status
-extern volatile unsigned int VAR_TRANSCEIVER_STATUS;
-
-// State machine for dump RTC registers
-// = 0, Not Dump
-// = 1, Start Dump
-//extern volatile unsigned int START_DUMP_RTC_S35390A_REGISTERS = 0;
-extern volatile unsigned int VAR_START_DUMP_RTC_S35390A_REGISTERS;
 
 // Car Power System Information
 extern unsigned char VAR_SYSI2C_SYS_INFO;       // EEPROM $0025
 extern unsigned int VAR_SYSI2C_SYS_INFO_CHANGE;
-
-extern volatile int I2C_USER_SET_RTC_TIME_EVENT; // User透過I2C設定RTC
-extern unsigned char VAR_USER_CHANGE_RTC_VALUE; // User透過I2C設定之RTC暫存用變數
-//extern long STM32RTC_CounterValue;
-
-extern volatile int I2C_USER_SET_WDG_COUNTDOWN_TIMER_EVENT; // User透過I2C設定WDG_COUNTDOWN_TIMER
-extern unsigned int VAR_USER_CHANGE_WDG_COUNTDOWN_TIMER_VALUE; // User透過I2C設定之WDG_COUNTDOWN_TIMER暫存用變數
-
-extern volatile int I2C_USER_SET_ALARM_TIME_EVENT; // User透過I2C設定ALARM
-extern unsigned char VAR_USER_CHANGE_ALARM_VALUE; // User透過I2C設定之ALARM暫存用變數
-
-extern volatile int I2C_USER_LOAD_EEPROM_DEFAULT_EVENT;  // User透過I2C Load EEPROM
-
-extern volatile int I2C_USER_SET_REAR_VIEW_EVENT;  // User透過I2C設定Rear View Status
-extern volatile int VAR_REAR_VIEW_STATUS;  // Rear View Status
-
-extern volatile int I2C_USER_SET_VPM_POWER_LOW_EVT_DLY_EVENT; // User透過I2C設定VPM_POWER_LOW_EVT_DLY
-extern unsigned int VAR_USER_CHANGE_VPM_POWER_LOW_EVT_DLY_VALUE; // User透過I2C設定之VPM_POWER_LOW_EVT_DLY暫存用變數
-
-extern volatile int I2C_USER_SET_VPM_POWER_LOW_HARD_DLY_EVENT; // User透過I2C設定VPM_POWER_LOW_HARD_DLY
-extern unsigned int VAR_USER_CHANGE_VPM_POWER_LOW_HARD_DLY_VALUE; // User透過I2C設定之VPM_POWER_LOW_HARD_DLY暫存用變數
-
-extern volatile int I2C_USER_SET_VPM_PWR_ON_DLY_EVENT; // User透過I2C設定VPM_PWR_ON_DLY
-extern unsigned int VAR_USER_CHANGE_VPM_PWR_ON_DLY_VALUE; // User透過I2C設定之VPM_PWR_ON_DLY暫存用變數
-
-extern volatile int I2C_USER_SET_VPM_PWR_OFF_EVT_DLY_EVENT; // User透過I2C設定VPM_PWR_OFF_EVT_DLY
-extern unsigned int VAR_USER_CHANGE_VPM_PWR_OFF_EVT_DLY_VALUE; // User透過I2C設定之VPM_PWR_OFF_EVT_DLY暫存用變數
-
-extern volatile int I2C_USER_SET_VPM_PWR_OFF_HARD_DLY_EVENT; // User透過I2C設定VPM_PWR_OFF_HARD_DLY
-extern unsigned int VAR_USER_CHANGE_VPM_PWR_OFF_HARD_DLY_VALUE; // User透過I2C設定之VPM_PWR_OFF_HARD_DLY暫存用變數
-
-extern volatile int I2C_USER_SET_VPM_POST_PWR_CHK_DLY_EVENT; // User透過I2C設定VPM_POST_PWR_CHK_DLY
-extern unsigned int VAR_USER_CHANGE_VPM_POST_PWR_CHK_DLY_VALUE; // User透過I2C設定之VPM_POST_PWR_CHK_DLY暫存用變數
-
-extern volatile int I2C_USER_SET_PRE_PWR_CHK_VOLT_EVENT; // User透過I2C設定PRE_PWR_CHK_VOLT
-extern unsigned int VAR_USER_CHANGE_PRE_PWR_CHK_VOLT_VALUE; // User透過I2C設定之PRE_PWR_CHK_VOLT暫存用變數
-
-extern volatile int I2C_USER_SET_POST_PWR_CHK_VOLT_EVENT; // User透過I2C設定POST_PWR_CHK_VOLT
-extern unsigned int VAR_USER_CHANGE_POST_PWR_CHK_VOLT_VALUE; // User透過I2C設定之POST_PWR_CHK_VOLT暫存用變數
-
-extern volatile int I2C_USER_SET_UPS_CHARGE_VOLT_EVENT; // User透過I2C設定UPS_CHARGE_VOLT
-extern unsigned int VAR_USER_CHANGE_UPS_CHARGE_VOLT_VALUE; // User透過I2C設定之UPS_CHARGE_VOLT暫存用變數
-
-extern volatile int I2C_USER_SET_VPM_SHUT_DOWN_DLY_EVENT; // User透過I2C設定VPM_SHUT_DOWN_DLY
-extern unsigned int VAR_USER_CHANGE_VPM_SHUT_DOWN_DLY_VALUE; // User透過I2C設定之VPM_SHUT_DOWN_DLY暫存用變數
-
-extern volatile int I2C_USER_SET_REFERENCE_VOLT_EVENT; // User透過I2C設定REFERENCE_VOLT
-extern unsigned int VAR_USER_CHANGE_REFERENCE_VOLT_VALUE; // User透過I2C設定之REFERENCE_VOLT暫存用變數
 
 extern unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE; // 系統在何種狀態
               // = 0 at S5, Power Off
@@ -178,17 +107,6 @@ extern volatile int VAR_WATCHDOG_STATUS;      // Watchdog開啟或關閉
 extern volatile int VAR_WATCHDOG_COUNTER;     // Watchdog倒數計時器
 extern volatile int VAR_WATCHDOG_RESET_VALUE; // Watchdog倒數計時重置值
 
-// Ignition Status Related
-extern volatile unsigned int VAR_IGN_ON_OFF;
-                      // =0, 表示Ignition at Low (Ignition Off)
-                      // =1, 表示Ignition at High (Ignition On)
-extern volatile unsigned int VAR_IGN_OFF_2_ON_EVENT;
-                      // =0, 表示No Event
-                      // =1, 表示有發生Ignition Off->On Event
-extern volatile unsigned int VAR_IGN_ON_2_OFF_EVENT;
-                      // =0, 表示No Event
-                      // =1, 表示有發生Ignition On->Off Event
-
 // Power Button Status Related
 extern volatile unsigned int VAR_PBT_ON_OFF;
                       // =0, 表示Power Button at High (Power Button Off)
@@ -215,12 +133,6 @@ extern volatile unsigned int VAR_EN_LED_HI_2_LO_EVENT;
 extern unsigned int VAR_VPM_PWR_ON_DLY;        // EEPROM $0010, $0011
 extern unsigned int VAR_VPM_PWR_OFF_EVT_DLY;   // EEPROM $0012, $0013
 extern unsigned char VAR_VPM_PWR_MODE_CTRL;    // EEPROM $0016
-extern unsigned int VAR_VPM_AT_MODE;
-                      // =0, AT_MODE = 0 (Off)
-                      // =1, AT_MODE = 1 (On)
-extern unsigned int VAR_VPM_KEEP_ALIVE;
-                      // =0, KEEP_ALIVE = 0 (Off)
-                      // =1, KEEP_ALIVE = 1 (On)
 extern unsigned int VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY; // EEPROM $0014, $0015
 // 當在S0時發生Power Low的Event時要如何處置之模式
 // 這定義在EEPROM $0052處
@@ -232,30 +144,6 @@ extern volatile int VAR_VPM_POWER_LOW_AT_S0_MODE;
 extern unsigned int VAR_VPM_POWER_LOW_EVT_DLY;   // EEPROM $0021, $0022
 // Car Power Low Hard Delay
 extern unsigned int VAR_VPM_POWER_LOW_HARD_DLY;   // EEPROM $0023, $0024
-// Power Off Event Mask
-// bit7 : RFU
-// bit6 : RFU
-// bit5 : RFU
-// bit4 : RFU
-// bit3 : RFU
-// bit2 : RFU
-// bit1 : Ignition Wakeup Enable (Default On)
-// bit0 : RFU
-extern unsigned char VAR_SHUTDOWN_MASK;  // EEPROM $0026
-// Shut Down Delay
-extern unsigned int VAR_VPM_SHUT_DOWN_DLY; // EEPROM $0029, $002A
-// Shut Down Function Status
-extern unsigned char VAR_SHUTDOWN_EN;  // EEPROM $002B
-// DI Input Type Control
-// Trek-734_removed extern unsigned char VAR_DI_INPUT_TYPE_CTR;  // EEPROM $002C
-// Reference Voltage
-extern unsigned int VAR_REFERENCE_VOLTAGE; // EEPROM $0071, $0072
-
-// SHUTDOWN TIMER
-extern volatile char VAR_SHUTDOWN_STATUS;  // Shutdown開啟或關閉
-extern volatile int VAR_SHUTDOWN_COUNTER;  // Shutdown倒數計時器
-extern volatile char VAR_SHUTDOWN_FLAG;  // Shutdown flag
-extern volatile char VAR_OS_READY; // OS ready or not
 
 // EEPROM Write Used
 extern volatile unsigned int VAR_EEPROM_WRITE_EVENT;
@@ -273,20 +161,8 @@ extern unsigned char VAR_EEPROM_MAGIC_ID_LO;
 extern unsigned char VAR_SERIAL_NUMBER[10];
 extern unsigned char VAR_SERIAL_NUMBER_CHG_EVENT; // 是否發生改變Serial Number事件
 
-extern volatile int VAR_VPM_PREBOOT_VOLTAGE_CHK; // Preboot
-extern volatile int VAR_VPM_POSTBOOT_VOLTAGE_CHK; // Postboot
-
-extern unsigned char VAR_VPM_PREBOOT_VOLTAGE_CHK_ENABLE; // Preboot
-extern unsigned char VAR_VPM_POSTBOOT_VOLTAGE_CHK_ENABLE; // postboot
-
 // UPS開始充電之電壓Threshold
 extern unsigned int VAR_VPM_START_CHARGING_THRESHOLD; // EEPROM $0065, $0066
-
-extern unsigned int VAR_VPM_POST_PWR_CHK_DLY_TIME; // EEPROM $0017, $0018
-
-extern unsigned int VAR_VPM_MCU_1ST_POWERED;
-
-extern volatile int VAR_VPM_CAR_POWER_LOW_HAPPENED;
 
 extern unsigned int VAR_DEBUG_PRINT;
 
@@ -330,17 +206,6 @@ extern unsigned char VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF;
 // Wakeup Event Mask
 extern unsigned char VAR_WAKEUP_MASK_HI;
 extern unsigned char VAR_WAKEUP_MASK_LO;
-
-// LCD & Brightness Control Status Related
-extern unsigned int VAR_FUNCTION_KEY_BRIGHTNESS;   // Function Key Brightness
-extern unsigned int VAR_FUNCTION_KEY_PWM_PERIOD;   // Function Key PWM Period
-
-extern volatile unsigned char VAR_AUTO_DETECT_RESERVE_GEAR_STATUS;
-                      // =0, DI Mode
-                      // =1, Auto Detect Reserve Gear Mode
-
-// Current GPS Status
-extern volatile unsigned char VAR_GPS_ANTENNA_STATUS;
 
 // Event Queue Used
 extern unsigned char VAR_EVENT_QUEUS[__DEF_EVENT_QUEUE_SIZE][2];

@@ -109,12 +109,12 @@ void HEART_BEAT_LED_CONTROL_TASK()
   static int current_state = 0;
   if (current_state)
   {
-    __OUT_C12_GPIO_OUT_DBG_LED_SET_HI;
+    __OUT_C3_GPIO_OUT_DBG_GPIO_SET_LO;
     current_state = 0;
   }
   else
   {
-    __OUT_C12_GPIO_OUT_DBG_LED_SET_LO;
+    __OUT_C3_GPIO_OUT_DBG_GPIO_SET_HI;
     current_state = 1;
   }
 }
