@@ -40,7 +40,7 @@
 
 void I2C2_EV_IRQHandler(void);
 void I2C2_ER_IRQHandler(void);
-void USART3_IRQHandler(void);
+void USART1_IRQHandler(void);
 void NMI_Handler(void);
 void HardFault_Handler(void);
 void MemManage_Handler(void);

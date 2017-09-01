@@ -41,8 +41,6 @@ void FUNC_GPIO_INIT()
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
   /* GPIOE Periph clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOE, ENABLE);
-  /* ADC12 Periph clock enable */
-//temp0830  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_ADC12, ENABLE); 					// DAC Periph clock enable
 
   GPIO_OUTPUT_STATUS_INIT();
 
@@ -128,7 +126,7 @@ void TASK_CHECK_BATTERY_PRESENT()
 //  {
 //    if (__IN_C9_GPIO_IN_BAT_PRES_TEST_HI) // Battery存在
 //    {
-//      DEBUG_PRINT("@@: Battery Attached\n\r");
+//      DEBUG_PRINT("@@: Battery Attached\r\n");
 //      VAR_BATTERY_EXIST = 1;
 //      VAR_SYSTEM_POWER_STATUS |= 0x10; // bit 4 = 1 for I2C CMD 0x09
 //    }
@@ -137,7 +135,7 @@ void TASK_CHECK_BATTERY_PRESENT()
 //  {
 //    if (__IN_C9_GPIO_IN_BAT_PRES_TEST_LO) // Battery不存在
 //    {
-//      DEBUG_PRINT("@@: Battery Disattached\n\r");
+//      DEBUG_PRINT("@@: Battery Disattached\r\n");
 //      VAR_BATTERY_EXIST = 0;
 //      VAR_SYSTEM_POWER_STATUS &= 0xEF; // bit 4 = 0 for I2C CMD 0x09
 //    }
@@ -198,9 +196,7 @@ void SUSPEND_WAKEUP_PIN_INIT()
   //NVIC structure to set up NVIC controller
   NVIC_InitTypeDef NVIC_InitStructure;
 
-  __MACRO_SET_EXTI_PIN(A, 1, EXTI_Trigger_Falling);		// PA1 for Ignition
-  __MACRO_SET_EXTI_PIN(A, 5, EXTI_Trigger_Falling);		// PA5 for Power Button
-  __MACRO_SET_EXTI_PIN(A, 7, EXTI_Trigger_Falling);		// PA7 for ALARM
+  __MACRO_SET_EXTI_PIN(A, 0, EXTI_Trigger_Falling);		// PA0 for Power Button
 }
 //-----------------------------------------------------------------------------
 

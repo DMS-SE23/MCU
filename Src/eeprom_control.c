@@ -7,21 +7,21 @@
 #include "eeprom_control.h"
 
 unsigned char eeprom_default[384] = {
-  /* 0000 */ 0x43,0x34,0x5,0x16,0x0,0x0,0x0,0x0,
+  /* 0000 */ 0x43,0x34,0x0,0x1F,0x0,0x0,0x0,0x0,
   /* 0008 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
-  /* 0010 */ 0x0,0x2,0x0,0x5,0x0,0x1E,0x40,0x0,
-  /* 0018 */ 0x14,0x0,0x0,0x0,0x2,0x0,0x0,0x0,
-  /* 0020 */ 0x0,0x0,0x1E,0x0,0x3C,0xC0,0x2,0x64,
-  /* 0028 */ 0x0,0x2,0x58,0x0,0x0,0x0,0x0,0x0,
+  /* 0010 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+  /* 0018 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+  /* 0020 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+  /* 0028 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   /* 0030 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   /* 0038 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   /* 0040 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   /* 0048 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
-  /* 0050 */ 0x0,0x0A,0x1,0x0,0x0,0x5,0x60,0x5,
-  /* 0058 */ 0x60,0x0A,0x56,0x0A,0x56,0x0,0x0,0x0,
-  /* 0060 */ 0x0,0x0,0x0,0x0,0x0,0x5,0x69,0x0A,
-  /* 0068 */ 0x9B,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
-  /* 0070 */ 0x0,0x4,0xD9,0x0,0x0,0x0,0x0,0x0,
+  /* 0050 */ 0x0,0x0A,0x0,0x0,0x0,0x0,0x0,0x0,
+  /* 0058 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+  /* 0060 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+  /* 0068 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+  /* 0070 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   /* 0078 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   /* 0080 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   /* 0088 */ 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
@@ -135,77 +135,6 @@ unsigned char eeprom_default[384] = {
 
 int vote_write_default = 0;
 int vote_write_default_fail = 0;
-
-void REFRESH_VPM_LOW_VOLTAGE_PROTECTION_VALUE()
-{
-//  unsigned char car_power_system;
-//  unsigned char ReturnValueH, ReturnValueL;
-//  // 判斷目前的Power System是12V or 24V
-//  car_power_system = (VAR_SYSI2C_SYS_INFO>>6) & 0x03;
-//  switch (car_power_system)
-//  {
-//    case 0: // 0 0: 24V Car Power System
-//            // Pre Boot
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x59,&ReturnValueH); // Read Pre-Boot Value
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x5A,&ReturnValueL); // Read Pre-Boot Value
-//            VAR_VPM_PREBOOT_VOLTAGE_CHK = ReturnValueH * 256 + ReturnValueL; // Preboot
-//            if (VAR_VPM_PREBOOT_VOLTAGE_CHK == 0xFFFF)
-//              VAR_VPM_PREBOOT_VOLTAGE_CHK = (int)eeprom_default[0x59] * 256 + (int)eeprom_default[0x5A];
-//            // Post Boot
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x5B,&ReturnValueH); // Read Post-Boot Value
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x5C,&ReturnValueL); // Read Post-Boot Value
-//            VAR_VPM_POSTBOOT_VOLTAGE_CHK = ReturnValueH * 256 + ReturnValueL;
-//            if (VAR_VPM_POSTBOOT_VOLTAGE_CHK == 0xFFFF)
-//              VAR_VPM_POSTBOOT_VOLTAGE_CHK = (int)eeprom_default[0x5B] * 256 + (int)eeprom_default[0x5C];
-//            break;
-//    case 3: // 1 1: 12V Car Power System
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x55,&ReturnValueH); // Read Pre-Boot Value
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x56,&ReturnValueL); // Read Pre-Boot Value
-//            VAR_VPM_PREBOOT_VOLTAGE_CHK = ReturnValueH * 256 + ReturnValueL; // Preboot
-//            if (VAR_VPM_PREBOOT_VOLTAGE_CHK == 0xFFFF)
-//              VAR_VPM_PREBOOT_VOLTAGE_CHK = (int)eeprom_default[0x55] * 256 + (int)eeprom_default[0x56];
-//            //
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x57,&ReturnValueH); // Read Post-Boot Value
-//            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x58,&ReturnValueL); // Read Post-Boot Value
-//            VAR_VPM_POSTBOOT_VOLTAGE_CHK = ReturnValueH * 256 + ReturnValueL;
-//            if (VAR_VPM_POSTBOOT_VOLTAGE_CHK == 0xFFFF)
-//              VAR_VPM_POSTBOOT_VOLTAGE_CHK = (int)eeprom_default[0x57] * 256 + (int)eeprom_default[0x58];
-//            break;
-//    case 1: // 0 1: No Define
-//    case 2: // 1 0: No Define
-//    default:
-//         break;
-//  }
-}
-
-void REFRESH_UPS_START_CHARGE_VOLTAGE()
-{
-  unsigned char car_power_system;
-  unsigned char ReturnValueH, ReturnValueL;
-  // 判斷目前的Power System是12V or 24V
-  car_power_system = (VAR_SYSI2C_SYS_INFO>>6) & 0x03;
-  switch (car_power_system)
-  {
-    case 0: // 0 0: 24V Car Power System
-            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x67,&ReturnValueH);
-            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x68,&ReturnValueL);
-            VAR_VPM_START_CHARGING_THRESHOLD = ReturnValueH * 256 + ReturnValueL;
-            if (VAR_VPM_START_CHARGING_THRESHOLD == 0xFFFF)
-              VAR_VPM_START_CHARGING_THRESHOLD = (int)eeprom_default[0x67] * 256 + (int)eeprom_default[0x68];
-            break;
-    case 3: // 1 1: 12V Car Power System
-            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x65,&ReturnValueH);
-            I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x66,&ReturnValueL);
-            VAR_VPM_START_CHARGING_THRESHOLD = ReturnValueH * 256 + ReturnValueL;
-            if (VAR_VPM_START_CHARGING_THRESHOLD == 0xFFFF)
-              VAR_VPM_START_CHARGING_THRESHOLD = (int)eeprom_default[0x65] * 256 + (int)eeprom_default[0x66];
-            break;
-    case 1: // 0 1: No Define
-    case 2: // 1 0: No Define
-    default:
-         break;
-  }
-}
 
 // 回復到預設值
 // 不會清掉機器序號與WWAN MAC Address
@@ -677,20 +606,20 @@ void UPDATE_VPM_VARIABLE_FROM_EEPROM()
     vote_write_default = 1;
   }
   I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x03,&ReturnValueL);
-  if (ReturnValueL != PLATFORM_ID)								// PLATFORM_ID, 0x16: TREK-734 VPM
+  if (ReturnValueL != PLATFORM_ID)								// PLATFORM_ID, 0x1F: DMS-SE23 MCU
   {
     vote_write_default = 1;
   }
   // 判斷是否要初始化EEPROM的預設值
   if (vote_write_default == 1)
   {
-    DEBUG_PRINT("@@ Init EEPROM to Factory Value\n\r");
+    DEBUG_PRINT("@@ Init EEPROM to Factory Value\r\n");
     EEPROM_FILL_DEFAULT_VALUE(); // EEPROM全部清成預設值, 包含機器序號與WWAN MAC Address
     __MACRO_DELAY_mS(15); // Delay 15mS
   }
   if (vote_write_default == 2)
   {
-    DEBUG_PRINT("@@ Init EEPROM to Default Value\n\r");
+    DEBUG_PRINT("@@ Init EEPROM to Default Value\r\n");
     EEPROM_LOAD_FACTORY_DEFAULT(); // EEPROM全部清成預設值, 不含機器序號與WWAN MAC Address
     __MACRO_DELAY_mS(15); // Delay 15mS
   }
@@ -711,29 +640,15 @@ void UPDATE_VPM_VARIABLE_FROM_EEPROM()
     vote_write_default_fail = 1;
   }
   I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x03,&ReturnValueL);
-  if (ReturnValueL != PLATFORM_ID) 							// PLATFORM_ID, 0x16: TREK-734 VPM
+  if (ReturnValueL != PLATFORM_ID) 							// PLATFORM_ID, 0x1F: DMS-SE23 MCU
   {
     vote_write_default_fail = 1;
   }
   // 判斷是否寫入失敗
   if (vote_write_default_fail == 1)
   {
-    DEBUG_PRINT("@@ Init EEPROM Fail\n\r");
+    DEBUG_PRINT("@@ Init EEPROM Fail\r\n");
     // 直接由預設表中設定，避免設為0xFF
-    // (1) Ignition On Delay
-    VAR_VPM_PWR_ON_DLY = (int)eeprom_default[0x10] * 256 + (int)eeprom_default[0x11]; // EEPROM $0010, $0011
-    // (2) Ignition Off Event Delay
-    VAR_VPM_PWR_OFF_EVT_DLY = (int)eeprom_default[0x12] * 256 + (int)eeprom_default[0x13];  // EEPROM $0012, $0013
-    // (3) Ignition Off Run Power Off Flow Hard Delay
-    VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY = (int)eeprom_default[0x14] * 256 + (int)eeprom_default[0x15];  // EEPROM $0014, $0015
-    // (4) 讀入Power Mode Control設定
-    VAR_VPM_PWR_MODE_CTRL = eeprom_default[0x16];    // EEPROM $0016
-    // (6) Wakeup Event Mask
-    VAR_WAKEUP_MASK_HI = eeprom_default[0x1B];  // EEPROM $001B
-    VAR_WAKEUP_MASK_LO = eeprom_default[0x1C];  // EEPROM $001C
-    // (7) Power Low Event Delay
-    VAR_VPM_POWER_LOW_EVT_DLY = (int)eeprom_default[0x21] * 256 + (int)eeprom_default[0x22];  // EEPROM $0021, $0022
-    VAR_VPM_POWER_LOW_HARD_DLY = (int)eeprom_default[0x23] * 256 + (int)eeprom_default[0x24]; // EEPROM $0023, $0024
     // (8) 更新WATCHDOG TIMER VALUE
     VAR_WATCHDOG_RESET_VALUE = (int)eeprom_default[0x50] * 256 + (int)eeprom_default[0x51]; // EEPROM $0050, $0051
     // (11) VPM Related Counter
@@ -771,42 +686,13 @@ void UPDATE_VPM_VARIABLE_FROM_EEPROM()
     VAR_SERIAL_NUMBER[9] = eeprom_default[0x39];
     // (14) User Default Area Status
     VAR_EEPROM_USER_DEFAULT_STATUS = eeprom_default[0x04];
-    // (18) Low Voltage Protection
-    VAR_SYSI2C_SYS_INFO = eeprom_default[0x25];  // EEPROM $0025
-    REFRESH_VPM_LOW_VOLTAGE_PROTECTION_VALUE();
-    REFRESH_UPS_START_CHARGE_VOLTAGE();
   }
   else
   {
     if (vote_write_default == 1)
     {
-      DEBUG_PRINT("@@ Init EEPROM Success\n\r");
+      DEBUG_PRINT("@@ Init EEPROM Success\r\n");
     }
-    // (1) Ignition On Delay
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x10,&ReturnValueH);
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x11,&ReturnValueL);
-    VAR_VPM_PWR_ON_DLY = (int)ReturnValueH * 256 + (int)ReturnValueL; // EEPROM $0010, $0011
-    // (2) Ignition Off Event Delay
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x12,&ReturnValueH);
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x13,&ReturnValueL);
-    VAR_VPM_PWR_OFF_EVT_DLY = (int)ReturnValueH * 256 + (int)ReturnValueL;  // EEPROM $0012, $0013
-    // (3) Ignition Off Run Power Off Flow Hard Delay
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x14,&ReturnValueH);
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x15,&ReturnValueL);
-    VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY = (int)ReturnValueH * 256 + (int)ReturnValueL;  // EEPROM $0014, $0015
-    // (4) 讀入AT_MODE & KEEP_ALIVE設定
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x16,&ReturnValueH);
-    VAR_VPM_PWR_MODE_CTRL = ReturnValueH;    // EEPROM $0016
-    // (6) Wakeup Event Mask
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x1B,&VAR_WAKEUP_MASK_HI); // EEPROM $001B
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x1C,&VAR_WAKEUP_MASK_LO); // EEPROM $001C
-    // (7) Power Low Event Delay
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x21,&ReturnValueH);
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x22,&ReturnValueL);
-    VAR_VPM_POWER_LOW_EVT_DLY = (int)ReturnValueH * 256 + (int)ReturnValueL;  // EEPROM $0021, $0022
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x23,&ReturnValueH);
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x24,&ReturnValueL);
-    VAR_VPM_POWER_LOW_HARD_DLY = (int)ReturnValueH * 256 + (int)ReturnValueL; // EEPROM $0023, $0024
     // (8) 更新WATCHDOG TIMER VALUE
     I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x50,&ReturnValueH);
     I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x51,&ReturnValueL);
@@ -837,11 +723,6 @@ void UPDATE_VPM_VARIABLE_FROM_EEPROM()
     I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x39,&VAR_SERIAL_NUMBER[9]);
     // (14) User Default Area Status
     I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x04,&VAR_EEPROM_USER_DEFAULT_STATUS);
-    // (18) Low Voltage Protection
-    I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,0x25,&ReturnValueL);
-    VAR_SYSI2C_SYS_INFO = ReturnValueL;  // EEPROM $0025
-    REFRESH_VPM_LOW_VOLTAGE_PROTECTION_VALUE();
-    REFRESH_UPS_START_CHARGE_VOLTAGE();
   }
 }
 
@@ -869,46 +750,37 @@ void EEPROM_ERASE_VALUE()
 // Dump來自於EEPROM的參數資料
 void DUMP_EEPROM_PARAMETER_VALUES()
 {
-  DEBUG_PRINT ("--- EEPROM PARAMETERS --------------------------------------\n\r");
-  DEBUG_PRINT ("EEPROM Write Default (0:No, 1:Yes): %d\n\r",vote_write_default);
-  DEBUG_PRINT ("EEPROM Write Default Fail (0:No, 1:Yes): %d\n\r",vote_write_default_fail);
-  DEBUG_PRINT ("VAR_VPM_PWR_ON_DLY ($10,$11): %04X\n\r",VAR_VPM_PWR_ON_DLY);
-  DEBUG_PRINT ("VAR_VPM_PWR_OFF_EVT_DLY ($12,$13): %04X\n\r",VAR_VPM_PWR_OFF_EVT_DLY);
-  DEBUG_PRINT ("VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY ($14,$15) : %04X\n\r",VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY);
-  DEBUG_PRINT ("VAR_VPM_PWR_MODE_CTRL ($16): %02X\n\r",VAR_VPM_PWR_MODE_CTRL);
-  DEBUG_PRINT ("VAR_WAKEUP_MASK_HI,LO ($1B,$1C): %02X%02X\n\r",VAR_WAKEUP_MASK_HI,VAR_WAKEUP_MASK_LO);
-  DEBUG_PRINT ("VAR_VPM_POWER_LOW_EVT_DLY ($21,$22): %04X\n\r",VAR_VPM_POWER_LOW_EVT_DLY);
-  DEBUG_PRINT ("VAR_VPM_POWER_LOW_HARD_DLY ($23,$24): %04X\n\r",VAR_VPM_POWER_LOW_HARD_DLY);
-  DEBUG_PRINT ("VAR_SYSI2C_SYS_INFO ($25): %02X\n\r",VAR_SYSI2C_SYS_INFO);
-  DEBUG_PRINT ("VAR_WATCHDOG_RESET_VALUE ($50,$51): %04X\n\r",VAR_WATCHDOG_RESET_VALUE);
-  DEBUG_PRINT ("VAR_VPM_START_CHARGING_THRESHOLD: %04X\n\r",VAR_VPM_START_CHARGING_THRESHOLD);
+  DEBUG_PRINT ("--- EEPROM PARAMETERS --------------------------------------\r\n");
+  DEBUG_PRINT ("EEPROM Write Default (0:No, 1:Yes): %d\r\n",vote_write_default);
+  DEBUG_PRINT ("EEPROM Write Default Fail (0:No, 1:Yes): %d\r\n",vote_write_default_fail);
+  DEBUG_PRINT ("VAR_WATCHDOG_RESET_VALUE ($50,$51): %04X\r\n",VAR_WATCHDOG_RESET_VALUE);
 }
 
 // Dump VPM Related Counter, 計數器資料
 void DUMP_CURRENT_COUNTERS()
 {
-//  DEBUG_PRINT ("--- COUNTERS IN SYSTEM -------------------------------------\n\r");
-//  DEBUG_PRINT ("VAR_COUNTER_ENABLE_POWER_ON_COUNT: %02X\n\r",VAR_COUNTER_ENABLE_POWER_ON_COUNT);
-//  //printf ("VAR_VPM_COUNTER_UPDATE_FAIL: %02X\n\r", VAR_VPM_COUNTER_UPDATE_FAIL);    // =1, Fail Occurs
-//  DEBUG_PRINT ("VAR_VPM_PWR_ON_TIME_YEAR: %04X\n\r",VAR_VPM_PWR_ON_TIME_YEAR);                     // EEPROM $00C0, $00C1
-//  DEBUG_PRINT ("VAR_VPM_PWR_ON_MIN_HIGH_WORD: %04X\n\r",VAR_VPM_PWR_ON_MIN_HIGH_WORD);             // EEPROM $00C2, $00C3
-//  DEBUG_PRINT ("VAR_VPM_PWR_ON_MIN_LOW_WORD: %04X\n\r",VAR_VPM_PWR_ON_MIN_LOW_WORD);               // EEPROM $00C4, $00C5
-//  DEBUG_PRINT ("VAR_VPM_PWR_ON_IGN_CNT_ACC: %04X\n\r",VAR_VPM_PWR_ON_IGN_CNT_ACC);                 // EEPROM $00C6, $00C7
-//  DEBUG_PRINT ("VAR_VPM_PWR_ON_IGN_CNT: %04X\n\r",VAR_VPM_PWR_ON_IGN_CNT);                         // EEPROM $00C8, $00C9
-//  DEBUG_PRINT ("VAR_VPM_PWR_LOW_OFF_CNT_ACC: %04X\n\r",VAR_VPM_PWR_LOW_OFF_CNT_ACC);               // EEPROM $00CE, $00CF
-//  DEBUG_PRINT ("VAR_VPM_PWR_LOW_OFF_CNT: %04X\n\r",VAR_VPM_PWR_LOW_OFF_CNT);                       // EEPROM $00D0, $00D1
-//  DEBUG_PRINT ("VAR_VPM_IGN_OFF_CNT_ACC: %04X\n\r",VAR_VPM_IGN_OFF_CNT_ACC);                       // EEPROM $00D2, $00D3
-//  DEBUG_PRINT ("VAR_VPM_IGN_OFF_CNT: %04X\n\r",VAR_VPM_IGN_OFF_CNT);                               // EEPROM $00D4, $00D5
-//  DEBUG_PRINT ("VAR_VPM_BAT_OVR_TMP_CNT_ACC: %04X\n\r",VAR_VPM_BAT_OVR_TMP_CNT_ACC);               // EEPROM $00D6, $00D7
-//  DEBUG_PRINT ("VAR_VPM_BAT_OVR_TMP_CNT: %04X\n\r",VAR_VPM_BAT_OVR_TMP_CNT);                       // EEPROM $00D8, $00D9
-//  DEBUG_PRINT ("VAR_VPM_PRE_VCHK_OFF_CNT_ACC: %04X\n\r",VAR_VPM_PRE_VCHK_OFF_CNT_ACC);             // EEPROM $00DA, $00DB
-//  DEBUG_PRINT ("VAR_VPM_PRE_VCHK_OFF_CNT: %04X\n\r",VAR_VPM_PRE_VCHK_OFF_CNT);                     // EEPROM $00DC, $00DD
-//  DEBUG_PRINT ("VAR_VPM_POST_VCHK_OFF_CNT_ACC: %04X\n\r",VAR_VPM_POST_VCHK_OFF_CNT_ACC);           // EEPROM $00DE, $00DF
-//  DEBUG_PRINT ("VAR_VPM_POST_VCHK_OFF_CNT: %04X\n\r",VAR_VPM_POST_VCHK_OFF_CNT);                   // EEPROM $00E0, $00E1
-//  DEBUG_PRINT ("VAR_VPM_WDOG_RST_CNT_ACC: %04X\n\r",VAR_VPM_WDOG_RST_CNT_ACC);                     // EEPROM $00E2, $00E3
-//  DEBUG_PRINT ("VAR_VPM_WDOG_RST_CNT: %04X\n\r",VAR_VPM_WDOG_RST_CNT);                             // EEPROM $00E4, $00E5
-//  DEBUG_PRINT ("VAR_VPM_PWR_ON_KEEP_ALIVE_CNT_ACC: %04X\n\r",VAR_VPM_PWR_ON_KEEP_ALIVE_CNT_ACC);   // EEPROM $00E6, $00E7
-//  DEBUG_PRINT ("VAR_VPM_PWR_ON_KEEP_ALIVE_CNT: %04X\n\r",VAR_VPM_PWR_ON_KEEP_ALIVE_CNT);           // EEPROM $00E8, $00E9
+//  DEBUG_PRINT ("--- COUNTERS IN SYSTEM -------------------------------------\r\n");
+//  DEBUG_PRINT ("VAR_COUNTER_ENABLE_POWER_ON_COUNT: %02X\r\n",VAR_COUNTER_ENABLE_POWER_ON_COUNT);
+//  //printf ("VAR_VPM_COUNTER_UPDATE_FAIL: %02X\r\n", VAR_VPM_COUNTER_UPDATE_FAIL);    // =1, Fail Occurs
+//  DEBUG_PRINT ("VAR_VPM_PWR_ON_TIME_YEAR: %04X\r\n",VAR_VPM_PWR_ON_TIME_YEAR);                     // EEPROM $00C0, $00C1
+//  DEBUG_PRINT ("VAR_VPM_PWR_ON_MIN_HIGH_WORD: %04X\r\n",VAR_VPM_PWR_ON_MIN_HIGH_WORD);             // EEPROM $00C2, $00C3
+//  DEBUG_PRINT ("VAR_VPM_PWR_ON_MIN_LOW_WORD: %04X\r\n",VAR_VPM_PWR_ON_MIN_LOW_WORD);               // EEPROM $00C4, $00C5
+//  DEBUG_PRINT ("VAR_VPM_PWR_ON_IGN_CNT_ACC: %04X\r\n",VAR_VPM_PWR_ON_IGN_CNT_ACC);                 // EEPROM $00C6, $00C7
+//  DEBUG_PRINT ("VAR_VPM_PWR_ON_IGN_CNT: %04X\r\n",VAR_VPM_PWR_ON_IGN_CNT);                         // EEPROM $00C8, $00C9
+//  DEBUG_PRINT ("VAR_VPM_PWR_LOW_OFF_CNT_ACC: %04X\r\n",VAR_VPM_PWR_LOW_OFF_CNT_ACC);               // EEPROM $00CE, $00CF
+//  DEBUG_PRINT ("VAR_VPM_PWR_LOW_OFF_CNT: %04X\r\n",VAR_VPM_PWR_LOW_OFF_CNT);                       // EEPROM $00D0, $00D1
+//  DEBUG_PRINT ("VAR_VPM_IGN_OFF_CNT_ACC: %04X\r\n",VAR_VPM_IGN_OFF_CNT_ACC);                       // EEPROM $00D2, $00D3
+//  DEBUG_PRINT ("VAR_VPM_IGN_OFF_CNT: %04X\r\n",VAR_VPM_IGN_OFF_CNT);                               // EEPROM $00D4, $00D5
+//  DEBUG_PRINT ("VAR_VPM_BAT_OVR_TMP_CNT_ACC: %04X\r\n",VAR_VPM_BAT_OVR_TMP_CNT_ACC);               // EEPROM $00D6, $00D7
+//  DEBUG_PRINT ("VAR_VPM_BAT_OVR_TMP_CNT: %04X\r\n",VAR_VPM_BAT_OVR_TMP_CNT);                       // EEPROM $00D8, $00D9
+//  DEBUG_PRINT ("VAR_VPM_PRE_VCHK_OFF_CNT_ACC: %04X\r\n",VAR_VPM_PRE_VCHK_OFF_CNT_ACC);             // EEPROM $00DA, $00DB
+//  DEBUG_PRINT ("VAR_VPM_PRE_VCHK_OFF_CNT: %04X\r\n",VAR_VPM_PRE_VCHK_OFF_CNT);                     // EEPROM $00DC, $00DD
+//  DEBUG_PRINT ("VAR_VPM_POST_VCHK_OFF_CNT_ACC: %04X\r\n",VAR_VPM_POST_VCHK_OFF_CNT_ACC);           // EEPROM $00DE, $00DF
+//  DEBUG_PRINT ("VAR_VPM_POST_VCHK_OFF_CNT: %04X\r\n",VAR_VPM_POST_VCHK_OFF_CNT);                   // EEPROM $00E0, $00E1
+//  DEBUG_PRINT ("VAR_VPM_WDOG_RST_CNT_ACC: %04X\r\n",VAR_VPM_WDOG_RST_CNT_ACC);                     // EEPROM $00E2, $00E3
+//  DEBUG_PRINT ("VAR_VPM_WDOG_RST_CNT: %04X\r\n",VAR_VPM_WDOG_RST_CNT);                             // EEPROM $00E4, $00E5
+//  DEBUG_PRINT ("VAR_VPM_PWR_ON_KEEP_ALIVE_CNT_ACC: %04X\r\n",VAR_VPM_PWR_ON_KEEP_ALIVE_CNT_ACC);   // EEPROM $00E6, $00E7
+//  DEBUG_PRINT ("VAR_VPM_PWR_ON_KEEP_ALIVE_CNT: %04X\r\n",VAR_VPM_PWR_ON_KEEP_ALIVE_CNT);           // EEPROM $00E8, $00E9
 }
 
 void DUMP_EEPROM_CONTENT()
@@ -923,7 +795,7 @@ void DUMP_EEPROM_CONTENT()
       I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x00,(iCount1+iCount2)&0xFF,&ReturnValue);
       DEBUG_PRINT (" %02X",ReturnValue);
     }
-    DEBUG_PRINT ("\n\r");
+    DEBUG_PRINT ("\r\n");
   }
   for (iCount1 = 0; iCount1 < 128; iCount1 += 16)
   {
@@ -933,7 +805,7 @@ void DUMP_EEPROM_CONTENT()
       I2C_EEPROM_24LC512_READ_BYTE(0xA0,0x01,(iCount1+iCount2)&0xFF,&ReturnValue);
       DEBUG_PRINT (" %02X",ReturnValue);
     }
-    DEBUG_PRINT ("\n\r");
+    DEBUG_PRINT ("\r\n");
   }
 }
 
@@ -1659,7 +1531,7 @@ void TASK_COUNTING_POWER_ON_MINUTES()
   if (LOCAL_VAR_UPDATE_TO_EEPROM < 10) return;
   // 以下為每隔10分鐘要更新到EEPROM中一次
   LOCAL_VAR_UPDATE_TO_EEPROM = 0;
-  DEBUG_PRINT ("..: update to eeprom power-on-time\n\r");
+  DEBUG_PRINT ("..: update to eeprom power-on-time\r\n");
   WRITEBACK_POWER_ON_TIME(0); // 更新LOW WORD Only
 }
 //=============================================================================

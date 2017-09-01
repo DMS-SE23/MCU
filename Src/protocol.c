@@ -310,7 +310,7 @@ unsigned char Get_Platform_String(int type, int index)
 //      if ((ATCmd[2] == 'Q') && (ATCmd[3] == 'G')) {ATCMD_EVQG(); return;}
 //      if ((ATCmd[2] == 'Q') && (ATCmd[3] == 'F')) {ATCMD_EVQF(); return;}
 //    }
-//    printf ("ERR-E01\n\r"); // 不認識的Exx Command
+//    printf ("ERR-E01\r\n"); // 不認識的Exx Command
 //    return;
 //  }
 //

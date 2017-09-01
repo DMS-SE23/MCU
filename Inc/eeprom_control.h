@@ -4,11 +4,9 @@
 //EEPROM FACTORY DEFAULT VALUE
 #define MAGIC_WD_HI			0x43		//offset : 0x00
 #define MAGIC_WD_LO			0x34		//offset : 0x01
-#define EEPROM_VERSION		        0x05		//offset : 0x02
-#define PLATFORM_ID			0x16		//offset : 0x03 //TREK-734
+#define EEPROM_VERSION		        0x00		//offset : 0x02
+#define PLATFORM_ID			0x1F		//offset : 0x03 //DMS-SE23
 
-void REFRESH_VPM_LOW_VOLTAGE_PROTECTION_VALUE(void);
-void REFRESH_UPS_START_CHARGE_VOLTAGE(void);
 // 回復到預設值
 // 不會清掉機器序號與WWAN MAC Address
 void EEPROM_LOAD_FACTORY_DEFAULT(void);

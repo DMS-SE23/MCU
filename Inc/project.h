@@ -21,54 +21,11 @@
 #define __DEF_PROJECT_NAME_11 '0'
 #define __DEF_PROJECT_NAME_12 '1'
 
-// 12V的CAR POWER PROTECTION RANGE
-// |(10.11V)--------(11.43V)--------(12.26V)|
-//   MIN             DEFAULT         MAX
-// 0x05C4 = 12.26V
-// 0x0560 = 11.43V
-// 0x04C1 = 10.11V
-#define __DEF_12V_CAR_PWR_PROTECT_RANGE_MAX_H     0x05
-#define __DEF_12V_CAR_PWR_PROTECT_RANGE_MAX_L     0xC4
-#define __DEF_12V_CAR_PWR_PROTECT_RANGE_MIN_H     0x04
-#define __DEF_12V_CAR_PWR_PROTECT_RANGE_MIN_L     0xC1
-#define __DEF_12V_CAR_PWR_PROTECT_RANGE_DEFAULT_H 0x05
-#define __DEF_12V_CAR_PWR_PROTECT_RANGE_DEFAULT_L 0x60
-// 24V的CAR POWER PROTECTION RANGE
-// |(21.09V)--------(22.42V)--------(23.29V)|
-//   MIN             DEFAULT         MAX
-// 0x0ABD = 23.29V
-// 0x0A56 = 22.42V
-// 0x09B9 = 21.09V
-#define __DEF_24V_CAR_PWR_PROTECT_RANGE_MAX_H     0x0A
-#define __DEF_24V_CAR_PWR_PROTECT_RANGE_MAX_L     0xBD
-#define __DEF_24V_CAR_PWR_PROTECT_RANGE_MIN_H     0x09
-#define __DEF_24V_CAR_PWR_PROTECT_RANGE_MIN_L     0xB9
-#define __DEF_24V_CAR_PWR_PROTECT_RANGE_DEFAULT_H 0x0A
-#define __DEF_24V_CAR_PWR_PROTECT_RANGE_DEFAULT_L 0x56
-
-#define __DEF_12V_CAR_PWR_VOLTAGE_UNIT            0.008306
-#define __DEF_24V_CAR_PWR_VOLTAGE_UNIT            0.008472
-
 // VPM EVENT TIMEOUT DELAY MAX
-#define __DEF_PWR_ON_DLY_MIN                  0x0001
-#define __DEF_PWR_ON_DLY_MAX                  0x4650
-#define __DEF_PWR_OFF_EVT_DLY_MIN             0x0001
-#define __DEF_PWR_OFF_EVT_DLY_MAX             0x4650
-#define __DEF_IGN_OFF_PWR_OFF_HARD_DLY_MIN    0x0001
-#define __DEF_IGN_OFF_PWR_OFF_HARD_DLY_MAX    0x4650
-#define __DEF_POWER_LOW_EVT_DLY_MIN           0x0001
-#define __DEF_POWER_LOW_EVT_DLY_MAX           0x0E10
-#define __DEF_POWER_LOW_HARD_DLY_MIN          0x0001
-#define __DEF_POWER_LOW_HARD_DLY_MAX          0x0E10
-#define __DEF_POST_PWR_CHK_DLY_MIN            0x0001
-#define __DEF_POST_PWR_CHK_DLY_MAX            0x4650
-#define __DEF_WDG_COUNTDOWN_TIMER_MIN         0x0001
-#define __DEF_WDG_COUNTDOWN_TIMER_MAX         0xFFFF
-#define __DEF_SHUT_DOWN_DLY_MIN               0x0001
-#define __DEF_SHUT_DOWN_DLY_MAX               0x0E10
+#define __DEF_WDG_COUNTDOWN_TIMER_MIN         1
+#define __DEF_WDG_COUNTDOWN_TIMER_MAX         65535
 
 #define __DEF_EVENT_QUEUE_SIZE      64
-#define __DEF_SERIAL_NUMBER_SIZE    10
 
 // 定義取得某一位數的值，並轉成ASC II Code
 // 取得百位數
@@ -78,18 +35,14 @@
 // 取得個位數
 #define __MACRO_GET_DIGITAL_IN_UNITS(x)    (x%10)+0x30
 
-
 // Define for Protocol
 #define RxBufferSize  128
 #define TxBufferSize  128
-#define GPS_CmdSize   128
 #define DEBUG_CmdSize 128
 
 // Define for I2C1
 #define DEF_BQBQ27541_ADDRESS  0x16                         //0001-0110 => W
                                                             //0001-0111 => R
-
-
 // ----------------------
 // EEPROM讀寫相關巨集
 // ----------------------
@@ -232,34 +185,6 @@ __no_init volatile int BOOT_CHECK_REBOOT;
 // ----------------------
 #define __RETURN_SUCCESS    0
 #define __RETURN_FAIL       -1
-
-// RTC結構之定義
-typedef union
-{
-  unsigned char rtc_data[7];
-  struct
-  {
-    unsigned char Year;
-    unsigned char Month;
-    unsigned char DayOfMonth;
-    unsigned char DayOfWeek;
-    unsigned char Hour;
-    unsigned char Minute;
-    unsigned char Second;
-  };
-} RTC_TIME;
-
-// ALARM結構之定義
-typedef union
-{
-  unsigned char alarm_data[3];
-  struct
-  {
-    unsigned char DayOfWeek;
-    unsigned char Hour;
-    unsigned char Minute;
-  };
-} ALARM_TIME;
 
 // Timer Tick用巨集
 

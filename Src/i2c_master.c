@@ -43,7 +43,7 @@ void I2C1_Master_Init()
   I2C_Init(I2C1, &I2C_InitStructure);
   I2C_Cmd(I2C1, ENABLE);
 
-  DEBUG_PRINT("..: I2C1 Master Init Complete\n\r");
+  DEBUG_PRINT("..: I2C1 Master Init Complete\r\n");
 }
 //-----------------------------------------------------------------------------
 

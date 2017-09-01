@@ -321,14 +321,12 @@ void TASK_Main_Event_Generator()
   // 每100mSEvent
   if (VAR_100mS_Counter >= 100)
   {
-    //printf ("Timer %d\n\r",VAR_100mS_Counter);
     VAR_100mS_Event = 1;
     VAR_100mS_Counter = 0;
   }
   // 一秒的Event發生
   if (VAR_1S_Counter >= 1000)
   {
-    //printf ("Timer %d\n\r",VAR_1S_Counter);
     VAR_1S_Event = 1;
     VAR_1S_Counter = 0;
   }
@@ -389,11 +387,11 @@ int main(void)
 
   // 初始化Debug Port
   DEBUG_PORT_INITIALIZATION();
-  DEBUG_PRINT("\n\r\n\r..: Hello DMS-SE23 VPM\n\r");
+  DEBUG_PRINT("\r\n\r\n..: Hello DMS-SE23 VPM\r\n");
 
   // 初始化GPIO
   FUNC_GPIO_INIT();
-  DEBUG_PRINT("..: GPIO Init Complete\n\r");
+  DEBUG_PRINT("..: GPIO Init Complete\r\n");
 
   //Initial I2C1 Master
   I2C1_Master_Init();
@@ -403,11 +401,11 @@ int main(void)
 
   // 更新VPM變數
   UPDATE_VPM_VARIABLE_FROM_EEPROM();
-  DEBUG_PRINT("..: EEPROM Update Complete\n\r");
+  DEBUG_PRINT("..: EEPROM Update Complete\r\n");
 
   //VPM version
-  DEBUG_PRINT("..: VPM version : %01d.%03d\n\r", __DEF_PROJECT_MAIN_VERSION, __DEF_PROJECT_MINER_VERSION);
-  DEBUG_PRINT("..: Platform ID : 0x%02X\n\r", PLATFORM_ID);
+  DEBUG_PRINT("..: VPM version : %01d.%03d\r\n", __DEF_PROJECT_MAIN_VERSION, __DEF_PROJECT_MINER_VERSION);
+  DEBUG_PRINT("..: Platform ID : 0x%02X\r\n", PLATFORM_ID);
 
   while(1)
   {

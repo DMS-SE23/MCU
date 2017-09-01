@@ -50,21 +50,26 @@
 *******************************************************************************/
 void I2C2_EV_IRQHandler(void)
 {
+  uint32_t idx = Tx_Idx, len = Tx_Len;  
+  
   if (I2C_GetFlagStatus(I2C2, I2C_FLAG_ADDR))
   {
-    Rx_Idx2 = 0;
+    Rx_Idx = 0;
     I2C_ClearFlag(I2C2, I2C_FLAG_ADDR);
   }
   if (I2C_GetFlagStatus(I2C2, I2C_FLAG_TXIS))
   {
-    I2C_Slave_TX_UserCallback();
-    I2C2->TXDR = Buffer_Tx2;
+    if(idx < len) {
+      I2C2->TXDR = Buffer_Tx[Tx_Idx++];
+    } else {
+      I2C2->TXDR = 0xFF;
+    }
   }
   if (I2C_GetFlagStatus(I2C2, I2C_FLAG_RXNE))
   {
     uint8_t temp;
     temp = (uint8_t)I2C2->RXDR;
-    Buffer_Rx2[Rx_Idx2++] = temp;
+    Buffer_Rx[Rx_Idx++] = temp;
   }
   if (I2C_GetFlagStatus(I2C2, I2C_FLAG_NACKF))
   {
@@ -124,59 +129,39 @@ void I2C2_ER_IRQHandler(void)
 }
 
 /*******************************************************************************
-* Function Name  : USART3_Handler
-* Description    : This function handles USART3 exception.
+* Function Name  : USART1_Handler
+* Description    : This function handles USART1 exception.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void USART3_IRQHandler(void) //USART3_IRQHandler()
+void USART1_IRQHandler(void)
 {
-//  // Handle OverRun
-//  if(USART_GetFlagStatus(USART3, USART_FLAG_ORE)==SET)
-//  {
-//	  USART_ClearFlag(USART3, USART_FLAG_ORE);
-//      USART_ReceiveData(USART3);
-//  }
-//
-//  if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-//  {
-//      /* Read one byte from the receive data register */
-//      API_RxBuffer[API_RxE++] = (USART_ReceiveData(USART3) & 0xFF);
-//      if(API_RxE==RxBufferSize)
-//          API_RxE = 0;
-//
-//      if((API_RxS+RxBufferSize-1)%RxBufferSize==API_RxE)  // check buffer overflow
-//      {
-//          /* Disable the Receive interrupt */
-//          USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);
-//      }
-//  }
-  if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+  if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
   {
       /* Read one byte from the receive data register */
-      DEBUG_RxBuffer[DEBUG_RxE++] = (USART_ReceiveData(USART3) & 0xFF);
+      DEBUG_RxBuffer[DEBUG_RxE++] = (USART_ReceiveData(USART1) & 0xFF);
       if(DEBUG_RxE==RxBufferSize)
           DEBUG_RxE = 0;
 
       if((DEBUG_RxS+RxBufferSize-1)%RxBufferSize==DEBUG_RxE)  // check buffer overflow
       {
           /* Disable the Receive interrupt */
-          USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);
+          USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
       }
   }
 
-  if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET)
+  if(USART_GetITStatus(USART1, USART_IT_TXE) != RESET)
   {
       if(DEBUG_TxS==DEBUG_TxE)
       {
           /* Disable the EVAL_COM1 Transmit interrupt */
-          USART_ITConfig(USART3, USART_IT_TXE, DISABLE);
+          USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
       }
       else
       {
           /* Write one byte to the transmit data register */
-          USART_SendData(USART3, DEBUG_TxBuffer[DEBUG_TxS++]);
+          USART_SendData(USART1, DEBUG_TxBuffer[DEBUG_TxS++]);
           if(DEBUG_TxS==TxBufferSize)
               DEBUG_TxS = 0;
       }
@@ -323,37 +308,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 /*            STM32 Peripherals Interrupt Handlers                        */
 /******************************************************************************/
-
-/*******************************************************************************
-* Function Name  : USB_IRQHandler
-* Description    : This function handles USB Low Priority interrupts
-*                  requests.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-//void USB_LP_CAN1_RX0_IRQHandler(void)
-//{
-//  USB_Istr();
-//}
-
-/*******************************************************************************
-* Function Name  : DMA1_Channel1_IRQHandler
-* Description    : This function handles DMA1 Channel 1 interrupt request.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void DMA1_Channel1_IRQHandler(void)
-{
-  /* Test on DMA1 Channel1 Transfer Complete interrupt */
-  if (DMA_GetITStatus(DMA1_IT_TC1))
-  {
-    /* Clear DMA1 Channel1 Transfer Complete pending bit */
-    DMA_ClearITPendingBit(DMA1_IT_TC1);
-  }
-}
-
 /*******************************************************************************
 * Function Name  : EXTI_IRQHandler
 * Description    : This function handles External lines interrupt request.
@@ -361,69 +315,13 @@ void DMA1_Channel1_IRQHandler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-// PA1 for Ignition
-void EXTI1_IRQHandler(void)
+// PA0 for Power Button
+void EXTI0_IRQHandler(void)
 {
-  if(EXTI_GetITStatus(EXTI_Line1) != RESET)
+  if(EXTI_GetITStatus(EXTI_Line0) != RESET)
   {
-    EXTI_ClearITPendingBit(EXTI_Line1);
+    EXTI_ClearITPendingBit(EXTI_Line0);
   }
 }
-
-// PA5 for Power Button
-// PA7 for Alarm
-void EXTI9_5_IRQHandler(void)
-{
-  if(EXTI_GetITStatus(EXTI_Line5) != RESET)
-  {
-    EXTI_ClearITPendingBit(EXTI_Line5);
-  }
-  if(EXTI_GetITStatus(EXTI_Line7) != RESET)
-  {
-    EXTI_ClearITPendingBit(EXTI_Line7);
-  }
-}
-#if !defined(STM32L1XX_MD) &&  !defined(STM32L1XX_HD) && !defined(STM32L1XX_MD_PLUS)&& ! defined (STM32F37X) && ! defined (STM32F30X)
-/*******************************************************************************
-* Function Name  : EXTI15_10_IRQHandler
-* Description    : This function handles External lines 15 to 10 interrupt request.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void EXTI15_10_IRQHandler(void)
-{
-}
-
-#endif /*STM32L1XX_HD*/
-
-/*******************************************************************************
-* Function Name  : USB_FS_WKUP_IRQHandler
-* Description    : This function handles USB WakeUp interrupt request.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void USBWakeUp_IRQHandler(void)
-{
-  EXTI_ClearITPendingBit(EXTI_Line18);
-}
-/******************************************************************************/
-/*                 STM32 Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
-/*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32xxx.s).                                            */
-/******************************************************************************/
-
-/*******************************************************************************
-* Function Name  : PPP_IRQHandler
-* Description    : This function handles PPP interrupt request.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-/*void PPP_IRQHandler(void)
-{
-}*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
