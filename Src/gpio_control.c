@@ -23,6 +23,7 @@ void GPIO_OUTPUT_STATUS_INIT()
   __OUT_B5_GPIO_OUT_CPU_ONKEY_BAR_SET_HI;
   __OUT_C3_GPIO_OUT_DBG_GPIO_SET_LO;
   __OUT_C8_GPIO_OUT_BAT_CHARGER_EN_SET_LO;
+  __OUT_D15_GPIO_OUT_PMIC_ON_REQ_SET_LO;
   __OUT_E2_GPIO_OUT_LED_PWR_G_SET_HI;
   __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_HI;
   __OUT_E4_GPIO_OUT_LED_RED_SET_HI;
@@ -39,6 +40,8 @@ void FUNC_GPIO_INIT()
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
   /* GPIOC Periph clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+  /* GPIOD Periph clock enable */
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOD, ENABLE);
   /* GPIOE Periph clock enable */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOE, ENABLE);
 
@@ -70,8 +73,9 @@ void FUNC_GPIO_INIT()
   // GPIO Group B
     // Input - Floating
       // __IN_B1_GPIO_IN_DC_IN_DETECT
+      // __IN_B2_GPIO_IN_PG_VCC_3V3
       // __IN_B12_GPIO_IN_BAT_PRES
-  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_1 | GPIO_Pin_12;
+  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_12;
   GPIO_InitStructure.GPIO_Speed	=	GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode	=	GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd	=	GPIO_PuPd_NOPULL;
@@ -106,6 +110,17 @@ void FUNC_GPIO_INIT()
   GPIO_InitStructure.GPIO_PuPd	=	GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOC, &GPIO_InitStructure);
 
+/* GPIOD ============================================================> */
+  // GPIO Group D  
+    // Output - Push-pull
+      // __OUT_D15_GPIO_OUT_PMIC_ON_REQ
+  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_15;
+  GPIO_InitStructure.GPIO_Speed	=	GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode	=	GPIO_Mode_OUT;
+  GPIO_InitStructure.GPIO_OType	=	GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_PuPd	=	GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOD, &GPIO_InitStructure);
+
 /* GPIOE ============================================================> */
   // GPIO Group E  
     // Output - Push-pull
@@ -122,24 +137,24 @@ void FUNC_GPIO_INIT()
 //-----------------------------------------------------------------------------
 void TASK_CHECK_BATTERY_PRESENT()
 {
-//  if (VAR_BATTERY_EXIST == 0) // 原本Battery不存在
-//  {
-//    if (__IN_C9_GPIO_IN_BAT_PRES_TEST_HI) // Battery存在
-//    {
-//      DEBUG_PRINT("@@: Battery Attached\r\n");
-//      VAR_BATTERY_EXIST = 1;
+  if (VAR_BATTERY_EXIST == 0) // 原本Battery不存在
+  {
+    if (__IN_B12_GPIO_IN_BAT_PRES_TEST_HI) // Battery存在
+    {
+      DEBUG_PRINT("@@: Battery Attached\r\n");
+      VAR_BATTERY_EXIST = 1;
 //      VAR_SYSTEM_POWER_STATUS |= 0x10; // bit 4 = 1 for I2C CMD 0x09
-//    }
-//  }
-//  else // 原本Battery存在
-//  {
-//    if (__IN_C9_GPIO_IN_BAT_PRES_TEST_LO) // Battery不存在
-//    {
-//      DEBUG_PRINT("@@: Battery Disattached\r\n");
-//      VAR_BATTERY_EXIST = 0;
+    }
+  }
+  else // 原本Battery存在
+  {
+    if (__IN_B12_GPIO_IN_BAT_PRES_TEST_LO) // Battery不存在
+    {
+      DEBUG_PRINT("@@: Battery Disattached\r\n");
+      VAR_BATTERY_EXIST = 0;
 //      VAR_SYSTEM_POWER_STATUS &= 0xEF; // bit 4 = 0 for I2C CMD 0x09
-//    }
-//  }
+    }
+  }
 }
 //-----------------------------------------------------------------------------
 // 控制Power LED

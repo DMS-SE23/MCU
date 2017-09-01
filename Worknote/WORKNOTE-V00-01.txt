@@ -3,8 +3,19 @@
 1. Create project. (Code base from TREK-734 VPM V0.093 "2017-08-17 BACKUP 022 V17")
 2. Modify GPIO pin define, VPM flow; and remove no use functions (ADC, ADV7186, AT command, DAC, odometer, PWM, RTC).
 3. Modify Debug port pin define, EEPROM context table, Wake-up pin define, I2C slave protocol, and add some I2C commands.
+4. Add GPIO pin define:
+   a. __IN_B2_GPIO_IN_PG_VCC_3V3
+   b. __OUT_D15_GPIO_OUT_PMIC_ON_REQ
+5. Modify Power on sequence.
 
 ---------------------------
+2017-09-01 BACKUP 004 V01
+-------------------------
+1. Add GPIO pin define:
+   a. __IN_B2_GPIO_IN_PG_VCC_3V3
+   b. __OUT_D15_GPIO_OUT_PMIC_ON_REQ
+2. Modify Power on sequence.
+
 2017-09-01 BACKUP 003 V01
 -------------------------
 1. Modify Debug port pin define, EEPROM context table, Wake-up pin define, I2C slave protocol, and add some I2C commands.

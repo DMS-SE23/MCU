@@ -102,7 +102,6 @@ void TASK_VPM_CONTROL()
             if (RCC_GetFlagStatus(RCC_FLAG_PORRST))             // Power on from power cable
             {
               __MACRO_VPM_TRACE(">>: Power In Start\n\r");
-              var_boot_source_pass_wait_ignition = 1;
             }
             else                                                //                    ___
             if (RCC_GetFlagStatus(RCC_FLAG_PINRST))             // ¦¹¬°«öRESET PIN => RST
@@ -238,22 +237,30 @@ void TASK_VPM_CONTROL()
             if (var_VPM_Count_Down_by_10mS-- <= 0)
             {
               __OUT_B5_GPIO_OUT_CPU_ONKEY_BAR_SET_HI;
-              var_VPM_Count_Down_by_10mS = 50;
               __MACRO_CHANGE_VPM_STATE_TO(3020);
                return;
             }
             break;
     case 3020:  // Do Power On Sequence 4
             __DEBUG_VPM_TRACE("@@: VPM (3020) Power On Sequence 4\n\r");
-            if (var_VPM_Count_Down_by_10mS-- <= 0)
-            {
-              __OUT_A7_GPIO_OUT_UP_CPU_RST_BAR_SET_HI;
-              __MACRO_CHANGE_VPM_STATE_TO(3025);
-               return;
-            }
+            __OUT_D15_GPIO_OUT_PMIC_ON_REQ_SET_HI;
+            __MACRO_CHANGE_VPM_STATE_TO(3025);
             break;
     case 3025:  // Do Power On Sequence 5
             __DEBUG_VPM_TRACE("@@: VPM (3025) Power On Sequence 5\n\r");
+            if (__IN_B2_GPIO_IN_PG_VCC_3V3_TEST_HI)
+            {
+              __MACRO_CHANGE_VPM_STATE_TO(3030);
+               return;
+            }
+            break;
+    case 3030:  // Do Power On Sequence 6
+            __DEBUG_VPM_TRACE("@@: VPM (3030) Power On Sequence 6\n\r");
+            __OUT_A7_GPIO_OUT_UP_CPU_RST_BAR_SET_HI;
+            __MACRO_CHANGE_VPM_STATE_TO(3035);
+            break;
+    case 3035:  // Do Power On Sequence 7
+            __DEBUG_VPM_TRACE("@@: VPM (3035) Power On Sequence 7\n\r");
             DEBUG_PRINT("@@: Hello DMS-SE23 MCU Power On\r\n");
             __MACRO_CHANGE_VPM_STATE_TO(3100);
             break;

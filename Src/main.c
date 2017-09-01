@@ -399,9 +399,9 @@ int main(void)
   //Init I2C2 port as Slave transmitter/receiver
   I2C_Slave_Init();
 
-  // 更新VPM變數
-  UPDATE_VPM_VARIABLE_FROM_EEPROM();
-  DEBUG_PRINT("..: EEPROM Update Complete\r\n");
+//  // 更新VPM變數
+//  UPDATE_VPM_VARIABLE_FROM_EEPROM();
+//  DEBUG_PRINT("..: EEPROM Update Complete\r\n");
 
   //VPM version
   DEBUG_PRINT("..: VPM version : %01d.%03d\r\n", __DEF_PROJECT_MAIN_VERSION, __DEF_PROJECT_MINER_VERSION);

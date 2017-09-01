@@ -110,6 +110,8 @@
 /*** GPIOB ***/
 #define	__IN_B1_GPIO_IN_DC_IN_DETECT_TEST_HI	                GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_1)
 #define	__IN_B1_GPIO_IN_DC_IN_DETECT_TEST_LO	                !GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_1)
+#define	__IN_B2_GPIO_IN_PG_VCC_3V3_TEST_HI	                GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_2)
+#define	__IN_B2_GPIO_IN_PG_VCC_3V3_TEST_LO	                !GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_2)
 #define	__OUT_B5_GPIO_OUT_CPU_ONKEY_BAR_SET_HI                  GPIOB->BSRR=0x00000001<<5
 #define	__OUT_B5_GPIO_OUT_CPU_ONKEY_BAR_SET_LO      	        GPIOB->BRR=0x00000001<<5
 #define	__IN_B12_GPIO_IN_BAT_PRES_TEST_HI	                GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_12)
@@ -121,6 +123,9 @@
 #define	__OUT_C8_GPIO_OUT_BAT_CHARGER_EN_SET_LO	                GPIOC->BRR=0x00000001<<8
 #define __IN_C13_GPIO_IN_VPM_PC13_TEST_HI                       GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13)
 #define __IN_C13_GPIO_IN_VPM_PC13_TEST_LO                       !GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13)
+/*** GPIOD ***/
+#define	__OUT_D15_GPIO_OUT_PMIC_ON_REQ_SET_HI			GPIOD->BSRR=0x00000001<<15
+#define	__OUT_D15_GPIO_OUT_PMIC_ON_REQ_SET_LO			GPIOD->BRR=0x00000001<<15
 /*** GPIOE ***/
 #define	__OUT_E2_GPIO_OUT_LED_PWR_G_SET_HI			GPIOE->BSRR=0x00000001<<2
 #define	__OUT_E2_GPIO_OUT_LED_PWR_G_SET_LO			GPIOE->BRR=0x00000001<<2
