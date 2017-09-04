@@ -1927,13 +1927,13 @@
       <name>$PROJ_DIR$\Inc\eeprom_control.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\Inc\event_control.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\Inc\gpio_control.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Inc\hook_tasks.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Inc\hotkey_control.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Inc\i2c_master.h</name>
@@ -2050,13 +2050,13 @@
       <name>$PROJ_DIR$\Src\eeprom_control.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\Src\event_control.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\Src\gpio_control.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Src\hook_tasks.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Src\hotkey_control.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Src\i2c_master.c</name>
@@ -2153,6 +2153,9 @@
     <name>WORKNOTE</name>
     <file>
       <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-01.txt</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-02.txt</name>
     </file>
   </group>
 </project>

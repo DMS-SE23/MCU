@@ -40,27 +40,9 @@ void DBG_DUMP_COUNT_DOWN_VALUE(long var_VPM_Count_Down_by_10mS)
   }
 }
 
-void DBG_DUMP_COUNT_DOWN_VALUE_EX(long var_VPM_Count_Down_by_10mS_ING_OFF, long var_VPM_Count_Down_by_10mS_Low_Power)
-{
-  // Debug家Α陪ボ玥ミ
-  if (VAR_TRACE_VPM_STATE != 1) return;
-  // –陪ボΩ
-  if (VAR_COUNT_1_SEC == 0)
-  {
-    VAR_COUNT_1_SEC = 1;
-    DEBUG_PRINT ("@@ Count Down for IGN OFF Delay = %d, Count Down for Low Power Delay = %d\n\r", var_VPM_Count_Down_by_10mS_ING_OFF/100, var_VPM_Count_Down_by_10mS_Low_Power/100);
-  }
-  else
-  {
-    VAR_COUNT_1_SEC++;
-    if (VAR_COUNT_1_SEC >= 100) VAR_COUNT_1_SEC = 0;
-  }
-}
-
 void TASK_VPM_CONTROL()
 {
   static long var_VPM_Count_Down_by_10mS;
-  static long var_VPM_Count_Down_by_10mS_Low_Power;
   static int var_boot_source_pass_wait_ignition = 0;
 
   // ========== VPM 篈诀 ========== //
@@ -297,72 +279,11 @@ void TASK_VPM_CONTROL()
               return;
             }
             break;
-    case 4200: // Set Delay Time = Car Power Low Event Delay
-            __DEBUG_VPM_TRACE("@@: VPM (4200) Set Car Power Low Event Delay Time\n\r");
-            var_VPM_Count_Down_by_10mS_Low_Power = 100 * (long)VAR_VPM_POWER_LOW_EVT_DLY;
-            __MACRO_CHANGE_VPM_STATE_TO(4300);
-            VAR_COUNT_1_SEC = 0; // 陪ボ计﹍て
-            break;
-    case 4300: // Wait for Car Power Low Event Delay Timeout and Check Car Power Status
-            __DEBUG_VPM_TRACE("@@: VPM (4300) Wait for Car Power Low Event Delay Timeout and Check Car Power Status\n\r");
-            // Counter计 ----------------------
-            DBG_DUMP_COUNT_DOWN_VALUE(var_VPM_Count_Down_by_10mS_Low_Power);
-            // Timeout
-            if (var_VPM_Count_Down_by_10mS_Low_Power-- <= 0)
-            {
-              __MACRO_VPM_TRACE(">>: VPM->4520 Timeout, Check Car Power Low Event Mode\n\r");
-              INC_VPM_EVENT_LOG_CNT(3); // 牟祇Car Power Low to Off
-              EVENTQUEUE_INSERT_TO_QUEUE(0x08,0x02);    // Interrupt OS : Car Power Low
-              __MACRO_CHANGE_VPM_STATE_TO(4518); // 秈Set Delay Time = Write LOG to EEPROM Delay
-              return;
-            }          
-            // ㏑秈Power-Off
-            if (VAR_IMM_CHANGE_WORKING_MODE_EVENT == 1)
-            {
-              // ミ秈Notify OS Power-Off
-              __MACRO_VPM_TRACE(">>: VPM->4510 CMD Force Enter POWER DOWN FLOW\n\r");
-              VAR_IMM_CHANGE_WORKING_MODE_EVENT = 0; // 矪瞶筁
-              __MACRO_CHANGE_VPM_STATE_TO(4510);
-              return;
-            }           
-            break;
     case 4510:  // Set Delay Time = Ignition Off Power Off Hard Delay
             __DEBUG_VPM_TRACE("@@: VPM (4510) Set Ignition Off Power Off Hard Delay Time\n\r");
             var_VPM_Count_Down_by_10mS = 100 * (long)60;
             __MACRO_CHANGE_VPM_STATE_TO(4800);
             VAR_COUNT_1_SEC = 0; // 陪ボ计﹍て
-            break;
-    case 4518:  // Set Delay Time = Write LOG to EEPROM Delay
-            __DEBUG_VPM_TRACE("@@: VPM (4518) Set Write LOG to EEPROM Delay Time\n\r");
-            var_VPM_Count_Down_by_10mS = 100; // 璶单1S
-            __MACRO_CHANGE_VPM_STATE_TO(4519);
-            break;
-    case 4519:  // Wait for Write LOG to EEPROM Delay Timeout
-            __DEBUG_VPM_TRACE("@@: VPM (4519) Wait for Write LOG to EEPROM Delay Timeout\n\r");
-            if (var_VPM_Count_Down_by_10mS-- <= 0)
-            {
-              __MACRO_CHANGE_VPM_STATE_TO(4520);  // 秈Set Delay Time = Car Power Low Hard Delay
-              return;
-            }
-            break;
-    case 4520: // Set Delay Time = Car Power Low Hard Delay
-            __DEBUG_VPM_TRACE("@@: VPM (4520) Set Car Power Low Hard Delay Time\n\r");
-            var_VPM_Count_Down_by_10mS = 100 * (long)VAR_VPM_POWER_LOW_HARD_DLY;
-            __MACRO_CHANGE_VPM_STATE_TO(4800);
-            VAR_COUNT_1_SEC = 0; // 陪ボ计﹍て
-            break;
-    case 4698:  // Set Delay Time = Write LOG to EEPROM Delay
-            __DEBUG_VPM_TRACE("@@: VPM (4698) Set Write LOG to EEPROM Delay Time\n\r");
-            var_VPM_Count_Down_by_10mS = 100;               // 璶单1S
-            __MACRO_CHANGE_VPM_STATE_TO(4699);
-            break;
-    case 4699:  // Wait for Write LOG to EEPROM Delay Timeout
-            __DEBUG_VPM_TRACE("@@: VPM (4699) Wait for Write LOG to EEPROM Delay Timeout\n\r");
-            if (var_VPM_Count_Down_by_10mS-- <= 0)
-            {
-              __MACRO_CHANGE_VPM_STATE_TO(4850);            // 秈Turn Off Backlight and Peripheral Powers
-              return;
-            }
             break;
     case 4800:  // Wait for Power Off Flow Hard Delay Time Out or LCD Backlight Going Low
             __DEBUG_VPM_TRACE("@@: VPM (4800) Wait Power Off Flow Hard Delay Time Out or LCD Backlight Going Low\n\r");

@@ -123,28 +123,6 @@ extern volatile unsigned int VAR_PBT_POWER_ON_EVENT;
                       // =0, 表示No Event
                       // =1, 表示有發生Power Button Power On Event(2s)
 
-// EN LED Status Related
-extern volatile unsigned int VAR_EN_LED_HI_LO;
-extern volatile unsigned int VAR_EN_LED_LO_2_HI_EVENT;
-extern volatile unsigned int VAR_EN_LED_HI_2_LO_EVENT;
-
-// VPM Flow相關Variables
-// VPM Variables
-extern unsigned int VAR_VPM_PWR_ON_DLY;        // EEPROM $0010, $0011
-extern unsigned int VAR_VPM_PWR_OFF_EVT_DLY;   // EEPROM $0012, $0013
-extern unsigned char VAR_VPM_PWR_MODE_CTRL;    // EEPROM $0016
-extern unsigned int VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY; // EEPROM $0014, $0015
-// 當在S0時發生Power Low的Event時要如何處置之模式
-// 這定義在EEPROM $0052處
-// =0 (default), Notify OS and Begin Count Down
-// =1, Not Notify OS, begin Count Down
-// =2, Notify OS Only
-extern volatile int VAR_VPM_POWER_LOW_AT_S0_MODE;
-// Car Power Low Event Delay
-extern unsigned int VAR_VPM_POWER_LOW_EVT_DLY;   // EEPROM $0021, $0022
-// Car Power Low Hard Delay
-extern unsigned int VAR_VPM_POWER_LOW_HARD_DLY;   // EEPROM $0023, $0024
-
 // EEPROM Write Used
 extern volatile unsigned int VAR_EEPROM_WRITE_EVENT;
               // =0, No Write Event
@@ -202,10 +180,6 @@ extern unsigned char VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF;
                       // =0x21, DI2 event occurs
                       // =0x22, DI3 event occurs
                       // =0x23, DI4 event occurs
-
-// Wakeup Event Mask
-extern unsigned char VAR_WAKEUP_MASK_HI;
-extern unsigned char VAR_WAKEUP_MASK_LO;
 
 // Event Queue Used
 extern unsigned char VAR_EVENT_QUEUS[__DEF_EVENT_QUEUE_SIZE][2];

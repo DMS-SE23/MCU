@@ -1,0 +1,8 @@
+[V000.02 Release Note Summary]
+------------------------------
+1. Add GPI_EventManager function.
+
+---------------------------
+2017-09-04 BACKUP 005 V02
+-------------------------
+1. Add GPI_EventManager function.

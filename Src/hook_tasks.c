@@ -10,7 +10,7 @@
 #include "battery_info.h"
 #include "watchdog.h"
 #include "eeprom_control.h"
-#include "hotkey_control.h"
+#include "event_control.h"
 #include "i2c_slave.h"
 
 // ===============================
@@ -25,8 +25,8 @@ void TASK_Hook_5mS()
 // 10mS Hook主函式
 void TASK_Hook_10mS()
 {
+  GPI_EventManager();
   TASK_VPM_CONTROL();
-//  TASK_KEYBOARD_SCAN();
 }
 
 // 25mS Hook主函式

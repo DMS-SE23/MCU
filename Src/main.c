@@ -154,17 +154,7 @@ volatile unsigned int VAR_PBT_POWER_ON_EVENT = 0;
                       // =0, ªí¥ÜNo Event
                       // =1, ªí¥Ü¦³µo¥ÍPower Button Power On Event(2s)
 
-// EN LED Status Related
-volatile unsigned int VAR_EN_LED_HI_LO = 0;
-volatile unsigned int VAR_EN_LED_LO_2_HI_EVENT = 0;
-volatile unsigned int VAR_EN_LED_HI_2_LO_EVENT = 0;
-
-
 // VPM Flow¬ÛÃöVariables
-unsigned int VAR_VPM_PWR_ON_DLY = 0;                                // EEPROM $0010, $0011
-unsigned int VAR_VPM_PWR_OFF_EVT_DLY = 0;                           // EEPROM $0012, $0013
-unsigned char VAR_VPM_PWR_MODE_CTRL = 0;                            // EEPROM $0016
-unsigned int VAR_VPM_IGN_OFF_PWR_OFF_HARD_DLY = 0;                  // EEPROM $0014, $0015
 unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE = 0;                     // ¨t²Î¦b¦óºØª¬ºA
               // = 0 at S5, Power Off
               // = 1 at S0, Power On
@@ -174,18 +164,6 @@ unsigned int VAR_IMM_CHANGE_WORKING_MODE_EVENT = 0;                 // ³]©w¨t²Î¥
               // = 1, Enter Power-Off Flow Immediately
               // = 2, Enter Suspend Flow Immediately
               // «e´£¬O¨t²Î¦b¶}¾÷®É¦¹©R¥O¤~¦³®Ä
-// ·í¦bS0®Éµo¥ÍPower LowªºEvent®É­n¦p¦ó³B¸m¤§¼Ò¦¡
-// ³o©w¸q¦bEEPROM $0052³B
-// =0 (default), Notify OS and Begin Count Down
-// =1, Not Notify OS, begin Count Down
-// =2, Notify OS Only
-volatile int VAR_VPM_POWER_LOW_AT_S0_MODE = 0;
-// Car Power Low Event Delay
-unsigned int VAR_VPM_POWER_LOW_EVT_DLY = 0;                         // EEPROM $0021, $0022
-// Car Power Low Hard Delay
-unsigned int VAR_VPM_POWER_LOW_HARD_DLY = 13;                       // EEPROM $0023, $0024
-// UPS¶}©l¥R¹q¤§¹qÀ£Threshold
-unsigned int VAR_VPM_START_CHARGING_THRESHOLD = 0x2EC;              // EEPROM $0065, $0066
 
 // ­p¼Æ¾¹¸ê®Æ
 unsigned int VAR_VPM_COUNTER_UPDATE_FAIL = 0;                       // ±qEEPROM§ó·sCOUNTER®É¬OFAILªº±¡ªp
@@ -241,10 +219,6 @@ unsigned char VAR_EEPROM_MAGIC_ID_LO = 0;
 // ¦s©ñSerial Number³B
 unsigned char VAR_SERIAL_NUMBER[10] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 unsigned char VAR_SERIAL_NUMBER_CHG_EVENT = 0; // ¬O§_µo¥Í§ïÅÜSerial Number¨Æ¥ó
-
-// Wakeup Event Mask
-unsigned char VAR_WAKEUP_MASK_HI = 0x00;
-unsigned char VAR_WAKEUP_MASK_LO = 0x00;
 
 //-----------------------------------------------------------------------------
 
