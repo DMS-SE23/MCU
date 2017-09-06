@@ -61,16 +61,6 @@ void TASK_VPM_CONTROL()
     case 0: // Start
             __DEBUG_VPM_TRACE("@@: VPM (0000) DMS-SE23 MCU Start\n\r");
             __MACRO_CHANGE_VPM_STATE_TO(200);
-            /*
-            // Testing Debug用之部分
-            VAR_VPM_KEEP_ALIVE = 0; // KEEP_ALIVE = OFF
-            //VAR_VPM_KEEP_ALIVE = 1; // KEEP_ALIVE = ON
-            VAR_WAKEUP_MASK_HI |= 0x04; // DI1 Wakeup
-            VAR_WAKEUP_MASK_HI |= 0x08; // DI2 Wakeup
-            //VAR_WAKEUP_MASK_HI |= 0x10; // RTC Wakeup
-            //VAR_VPM_PREBOOT_VOLTAGE_CHK_ENABLE = 1; // Do Pre Boot Car Power Check
-            //VAR_VPM_POSTBOOT_VOLTAGE_CHK_ENABLE = 1; // Do Post Boot Car Power Check
-            */
             break;
     case 200: // Initialization
             __DEBUG_VPM_TRACE("@@: VPM (0200) Initial VPM System\n\r");
@@ -107,19 +97,6 @@ void TASK_VPM_CONTROL()
     // ******************************** //
     // ***** OFF MODE STATES ********** //
     // ******************************** //
-    case 998:  // Set Delay Time = Write LOG to EEPROM Delay
-            __DEBUG_VPM_TRACE("@@: VPM (0998) Set Write LOG to EEPROM Delay Time\n\r");
-            var_VPM_Count_Down_by_10mS = 100; // 要等1S
-            __MACRO_CHANGE_VPM_STATE_TO(999);
-            break;
-    case 999:  // Wait for Write LOG to EEPROM Delay Timeout
-            __DEBUG_VPM_TRACE("@@: VPM (0999) Wait for Write LOG to EEPROM Delay Timeout\n\r");
-            if (var_VPM_Count_Down_by_10mS-- <= 0)
-            {
-              __MACRO_CHANGE_VPM_STATE_TO(1000);  // 進入Start Power Off Sequence
-              return;
-            }
-            break;
     case 1000:  // Start Power Off Sequence
             __DEBUG_VPM_TRACE("@@: VPM (1000) Start Power Off Sequence\n\r");
             __MACRO_CHANGE_VPM_STATE_TO(1100);
@@ -130,6 +107,9 @@ void TASK_VPM_CONTROL()
             break;
     case 1900:  // Initial Some Detection Variables
             __DEBUG_VPM_TRACE("@@: VPM (1900) Clear Detection Variables\n\r");
+            // 清除Power Button Events，跳到下一狀態才會
+            // 開始偵測Power Button On之Event 
+            VAR_POWER_BUTTON_POWER_ON_EVENT = 0;
             // Initial last wakeup event source
             VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF = 0x00;
             // Turn Off Power LED
@@ -140,39 +120,11 @@ void TASK_VPM_CONTROL()
             //VAR_EVENT_INPUT = 0;
             //VAR_EVENT_OUTPUT = 0;
             //VAR_EVENT_SIZE = 0;
-            // 設定進入Power Off 2秒後Sleep
-            var_VPM_Count_Down_by_10mS = 100 * (long)2;
             __MACRO_CHANGE_VPM_STATE_TO(2000);
-            VAR_COUNT_1_SEC = 0;                                            // 顯示倒數值初始化
             break;
     case 2000:  // Power Off State
             // Wait System Events
             __DEBUG_VPM_TRACE("@@: VPM (2000) Power Off State\n\r");
-            // 印出Counter的倒數值
-            DBG_DUMP_COUNT_DOWN_VALUE(var_VPM_Count_Down_by_10mS);
-            // 進入Power Off State後2秒進入MCU Sleep
-            if (var_VPM_Count_Down_by_10mS-- <= 0)
-            {
-              DEBUG_PRINT("><: VPM->2000 MCU Sleep\n\r");
-              // Clear Event Queue
-              //VAR_EVENT_INPUT = 0;
-              //VAR_EVENT_OUTPUT = 0;
-              //VAR_EVENT_SIZE = 0;
-              I2C_DeInit(I2C1);                                             // Deinit I2C1
-              SUSPEND_WAKEUP_PIN_INIT();
-              // STOP MODE
-//              PWR_EnterSTOPMode(PWR_Regulator_LowPower, PWR_STOPEntry_WFI);
-              // STANDBY MODE
-              //PWR_EnterSTANDBYMode();
-              // 清醒之後
-              SYSCLKConfig_STOP();
-              REINIT_AFTER_WAKEUP_RESUME_FROM_SUSPEND();
-              I2C1_Master_Init();                                           // Init I2C
-              // 設定進入Power Off 2秒後Sleep
-              var_VPM_Count_Down_by_10mS = 100 * (long)2;
-              VAR_COUNT_1_SEC = 0;                                          // 顯示倒數值初始化
-              return;
-            }
             //-----------------------------------------------------------------
             // 需要忽略Power Button Status時
             // 這是因為按下Reset Button or Software Reset，直接開機進去
@@ -187,8 +139,9 @@ void TASK_VPM_CONTROL()
             }
             //-----------------------------------------------------------------
             // 判斷是否以Power Button開機
-            if (__IN_A0_GPIO_IN_UP_POWER_KEY_BAR_TEST_LO)
+            if (VAR_POWER_BUTTON_POWER_ON_EVENT == 1)
             {
+              VAR_POWER_BUTTON_POWER_ON_EVENT = 0;
               __MACRO_VPM_TRACE(">>: VPM->3000 Power Button Triggered\n\r");
               VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF = 0x10;       // Power Button Event
               __MACRO_CHANGE_VPM_STATE_TO(3000);        // 進入Start Power On Sequence
@@ -248,22 +201,17 @@ void TASK_VPM_CONTROL()
             break;
     case 3100:  // Turn On Power LED
             __DEBUG_VPM_TRACE("@@: VPM (3100) Turn On Power LED\n\r");
-            // Turn On Power LED (Red)
-            VAR_SYSTEM_POWER_SYSTEM_STATE = 1;
+            __OUT_E2_GPIO_OUT_LED_PWR_G_SET_LO;
             __MACRO_CHANGE_VPM_STATE_TO(3300);
             break;
     case 3300:  // Turn On Peripheral and Related Powers
             __DEBUG_VPM_TRACE("@@: VPM (3300) Turn On Peripheral and Related Powers\n\r");
-            // Turn On Power LED (Green)
-            VAR_SYSTEM_POWER_SYSTEM_STATE = 2;
             // 打開POWER ON 時間 COUNT
             VAR_COUNTER_ENABLE_POWER_ON_COUNT = 1;
             __MACRO_CHANGE_VPM_STATE_TO(3500);
             break;
-    case 3500:  // Clear Ignition and Power Button Events
-            __DEBUG_VPM_TRACE("@@: VPM (3500) Clear Ignition and Power Button Events\n\r");
-            VAR_PBT_OFF_2_ON_EVENT = 0;
-            VAR_PBT_ON_2_OFF_EVENT = 0;
+    case 3500:  // Clear Power Button Events
+            __DEBUG_VPM_TRACE("@@: VPM (3500) Clear Power Button Events\n\r");
             VAR_IMM_CHANGE_WORKING_MODE_EVENT = 0;
             __MACRO_CHANGE_VPM_STATE_TO(4000);
             break;
@@ -309,8 +257,6 @@ void TASK_VPM_CONTROL()
     case 4500:  // Turn Off Power LED
             __DEBUG_VPM_TRACE("@@: VPM (4500) Turn Off Power LED\n\r");
             GPIO_OUTPUT_STATUS_INIT();
-            // Turn Off Power LED
-            VAR_SYSTEM_POWER_SYSTEM_STATE = 0;
             // 關閉POWER ON 時間 COUNT
             VAR_COUNTER_ENABLE_POWER_ON_COUNT = 0;
             // 寫回POWER_ON時間COUNT

@@ -1,8 +1,15 @@
 [V000.02 Release Note Summary]
 ------------------------------
 1. Add GPI_EventManager function.
+2. Add power button on and power button override event detection.
+3. Add power LED control.
 
 ---------------------------
+2017-09-06 BACKUP 006 V02
+-------------------------
+1. Add power button on and power button override event detection.
+2. Add power LED control.
+
 2017-09-04 BACKUP 005 V02
 -------------------------
 1. Add GPI_EventManager function.

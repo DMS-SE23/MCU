@@ -5,12 +5,6 @@ void GPIO_OUTPUT_STATUS_INIT();
 // GPIO initialization
 extern void FUNC_GPIO_INIT();
 
-//GPIO Output Control
-/*GPIO Group A*/
-/*GPIO Group B*/
-// Charger On = High
-// Charger Off = Low
-
 void TASK_CHECK_BATTERY_PRESENT();
 void TASK_LED_CONTROL();
 

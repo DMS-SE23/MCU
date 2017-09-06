@@ -68,8 +68,6 @@ extern unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE; // ╰参贺篈
               // = 1 at S0, Power On
               // = 2 ar S3, Suspend
 
-extern unsigned int AUTO_DETECT_REAR_VIEW_EVENT;
-
 // 筿琌筁放跑计
 // = 0, ⊿Τ筁放
 // = 1, 筁放
@@ -108,20 +106,12 @@ extern volatile int VAR_WATCHDOG_COUNTER;     // Watchdog计璸竟
 extern volatile int VAR_WATCHDOG_RESET_VALUE; // Watchdog计璸竚
 
 // Power Button Status Related
-extern volatile unsigned int VAR_PBT_ON_OFF;
-                      // =0, ボPower Button at High (Power Button Off)
-                      // =1, ボPower Button at Low (Power Button On)
-extern volatile unsigned int VAR_PBT_OFF_2_ON_EVENT;
+extern volatile unsigned int VAR_POWER_BUTTON_POWER_ON_EVENT;
                       // =0, ボNo Event
-                      // =1, ボΤ祇ネPower Button Off->On Event
-extern volatile unsigned int VAR_PBT_ON_2_OFF_EVENT;
+                      // =1, ボΤ祇ネPower Button Power On Event
+extern volatile unsigned int VAR_POWER_BUTTON_OVERRIDE_EVENT;
                       // =0, ボNo Event
-                      // =1, ボΤ祇ネPower Button On->Off Event
-extern volatile unsigned int VAR_PBT_COUNTER;
-                      // 魁Power Button砆溃Ω计(5ms)
-extern volatile unsigned int VAR_PBT_POWER_ON_EVENT;
-                      // =0, ボNo Event
-                      // =1, ボΤ祇ネPower Button Power On Event(2s)
+                      // =1, ボΤ祇ネPower Button Override Event
 
 // EEPROM Write Used
 extern volatile unsigned int VAR_EEPROM_WRITE_EVENT;
@@ -138,9 +128,6 @@ extern unsigned char VAR_EEPROM_MAGIC_ID_LO;
 // Serial Number矪
 extern unsigned char VAR_SERIAL_NUMBER[10];
 extern unsigned char VAR_SERIAL_NUMBER_CHG_EVENT; // 琌祇ネэ跑Serial Numberㄆン
-
-// UPS秨﹍筿ぇ筿溃Threshold
-extern unsigned int VAR_VPM_START_CHARGING_THRESHOLD; // EEPROM $0065, $0066
 
 extern unsigned int VAR_DEBUG_PRINT;
 

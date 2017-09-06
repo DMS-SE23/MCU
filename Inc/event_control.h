@@ -3,20 +3,8 @@
 
 
 //Event Definition==========================================
-#define T_DEBOUNCE_10ms	1
-#define T_DEBOUNCE_50ms	5
 #define T_DEBOUNCE_100ms	10
-#define T_DEBOUNCE_150ms	15
-#define T_DEBOUNCE_200ms	20
-#define T_DEBOUNCE_250ms	25
-#define T_DEBOUNCE_300ms	30
-#define T_DEBOUNCE_350ms	35
-#define T_DEBOUNCE_400ms	40
-#define T_DEBOUNCE_450ms	45
-#define T_DEBOUNCE_500ms	50
-#define T_DEBOUNCE_1s	100
-#define T_DEBOUNCE_2s	200
-#define T_DEBOUNCE_5s	500
+#define T_DEBOUNCE_7s	        700
 
 struct Event_handler {
   unsigned char* status;
@@ -31,15 +19,25 @@ struct Event_handler {
 
 //Debounce Time
 extern int T_GPI_DEBOUNCE_0;
+extern int T_GPI_DEBOUNCE_1;
 
 //Debounce Counter
-extern volatile int POWER_BUTTON_COUNTER;
+extern volatile int POWER_BUTTON_ON_COUNTER;
+extern volatile int POWER_BUTTON_OVERRIDE_COUNTER;
 
 //Debounce Status
-extern unsigned char POWER_BUTTON_STATUS;
+extern unsigned char POWER_BUTTON_ON_STATUS;
+extern unsigned char POWER_BUTTON_OVERRIDE_STATUS;
 
-//Override Counter
-extern volatile int POWER_BUTTON_OVERRIDE_COUNTER;
+//Power Button On Pressed Event
+void PWR_Button_On_Pressed(void);
+//Power Button On Released Event
+void PWR_Button_On_Released(void);
+
+//Power Button Override Pressed Event
+void PWR_Button_Override_Pressed(void);
+//Power Button Override Released Event
+void PWR_Button_Override_Released(void);
 
 // 10ms Hook
 void GPI_EventManager(void);

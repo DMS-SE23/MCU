@@ -1,25 +1,40 @@
 #include "main.h"
 #include "event_control.h"
 
-
 //Debounce Time
-int T_GPI_DEBOUNCE_0 = T_DEBOUNCE_100ms;		//Power Button
+int T_GPI_DEBOUNCE_0 = T_DEBOUNCE_100ms;		//Power Button On
+int T_GPI_DEBOUNCE_1 = T_DEBOUNCE_7s;		        //Power Button Override
 
 //Debounce Counter
-volatile int POWER_BUTTON_COUNTER = 0;			//Power Button
-
-//Override Counter
-volatile int POWER_BUTTON_OVERRIDE_COUNTER = 0;	          //Power Button
+volatile int POWER_BUTTON_ON_COUNTER = 0;		//Power Button On
+volatile int POWER_BUTTON_OVERRIDE_COUNTER = 0;         //Power Button Override
 
 //Debounce Status
-unsigned char POWER_BUTTON_STATUS = 1;			//Power Button
+unsigned char POWER_BUTTON_ON_STATUS = 1;		//Power Button On
+unsigned char POWER_BUTTON_OVERRIDE_STATUS = 1;		//Power Button Override
 
-void PWR_Button_Pressed(void)
+//Power Button On Pressed Event
+void PWR_Button_On_Pressed(void)
+{
+  VAR_POWER_BUTTON_POWER_ON_EVENT = 1;
+}
+
+//Power Button On Released Event
+void PWR_Button_On_Released(void)
 {
 }
 
-void PWR_Button_Released(void)
+//Power Button Override Pressed Event
+void PWR_Button_Override_Pressed(void)
 {
+  VAR_POWER_BUTTON_OVERRIDE_EVENT = 1;
+  T_GPI_DEBOUNCE_1 = T_DEBOUNCE_100ms;
+}
+
+//Power Button Override Released Event
+void PWR_Button_Override_Released(void)
+{
+  T_GPI_DEBOUNCE_1 = T_DEBOUNCE_7s;
 }
 
 void NullEvent(void)
@@ -28,8 +43,10 @@ void NullEvent(void)
 
 const struct Event_handler Debounce_Check[] = 
 {
-  //Power Button
-  {&POWER_BUTTON_STATUS, &POWER_BUTTON_COUNTER, &T_GPI_DEBOUNCE_0, GPIOA, GPIO_Pin_0, PWR_Button_Pressed, PWR_Button_Released, NullEvent},
+  //Power Button On
+  {&POWER_BUTTON_ON_STATUS, &POWER_BUTTON_ON_COUNTER, &T_GPI_DEBOUNCE_0, GPIOA, GPIO_Pin_0, PWR_Button_On_Pressed, PWR_Button_On_Released, NullEvent},
+  //Power Button Override
+  {&POWER_BUTTON_OVERRIDE_STATUS, &POWER_BUTTON_OVERRIDE_COUNTER, &T_GPI_DEBOUNCE_1, GPIOA, GPIO_Pin_0, PWR_Button_Override_Pressed, PWR_Button_Override_Released, NullEvent},
 };
 
 

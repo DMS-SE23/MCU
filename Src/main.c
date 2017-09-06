@@ -40,6 +40,7 @@
 #include "eeprom_control.h"
 #include "stm32f30x_dbgmcu.h"
 #include "debug_port.h"
+#include "vpm_control.h"
 
 //-----------------------------------------------------------------------------
 
@@ -139,20 +140,12 @@ volatile int VAR_WATCHDOG_RESET_VALUE                       = 10;   // Watchdog­
 typedef void (*pFunction)(void);
 
 // Power Button Status Related
-volatile unsigned int VAR_PBT_ON_OFF = 0;
-                      // =0, ªí¥ÜPower Button at High (Power Button Off)
-                      // =1, ªí¥ÜPower Button at Low (Power Button On)
-volatile unsigned int VAR_PBT_OFF_2_ON_EVENT = 0;
+volatile unsigned int VAR_POWER_BUTTON_POWER_ON_EVENT = 0;
                       // =0, ªí¥ÜNo Event
-                      // =1, ªí¥Ü¦³µo¥ÍPower Button Off->On Event
-volatile unsigned int VAR_PBT_ON_2_OFF_EVENT = 0;
+                      // =1, ªí¥Ü¦³µo¥ÍPower Button Power On Event
+volatile unsigned int VAR_POWER_BUTTON_OVERRIDE_EVENT = 0;
                       // =0, ªí¥ÜNo Event
-                      // =1, ªí¥Ü¦³µo¥ÍPower Button On->Off Event
-volatile unsigned int VAR_PBT_COUNTER = 0;
-                      // ¬ö¿ýPower Button³Q«öÀ£¦¸¼Æ(5ms)
-volatile unsigned int VAR_PBT_POWER_ON_EVENT = 0;
-                      // =0, ªí¥ÜNo Event
-                      // =1, ªí¥Ü¦³µo¥ÍPower Button Power On Event(2s)
+                      // =1, ªí¥Ü¦³µo¥ÍPower Button Override Event
 
 // VPM Flow¬ÛÃöVariables
 unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE = 0;                     // ¨t²Î¦b¦óºØª¬ºA
@@ -438,6 +431,12 @@ int main(void)
       i2c_event = EVENT_READ;
 
       I2C_Slave_Command_Processing(i2c_cmd);
+    }
+//--------------------------------------    
+    if (VAR_POWER_BUTTON_OVERRIDE_EVENT == 1)
+    {
+      VAR_POWER_BUTTON_OVERRIDE_EVENT = 0;
+      VPM_STATE = 4500;
     }
   }
 }
