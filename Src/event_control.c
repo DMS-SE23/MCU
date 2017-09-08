@@ -2,16 +2,22 @@
 #include "event_control.h"
 
 //Debounce Time
-int T_GPI_DEBOUNCE_0 = T_DEBOUNCE_100ms;		//Power Button On
-int T_GPI_DEBOUNCE_1 = T_DEBOUNCE_7s;		        //Power Button Override
+int POWER_BUTTON_ON_DEBOUNCE            = T_DEBOUNCE_100ms;     //Power Button On
+int POWER_BUTTON_OVERRIDE_DEBOUNCE      = T_DEBOUNCE_7s;        //Power Button Override
+int DC_IN_DEBOUNCE                      = T_DEBOUNCE_100ms;     //DC In
+int BATTERY_ATTACHED_DEBOUNCE           = T_DEBOUNCE_100ms;     //Battery Attached
 
 //Debounce Counter
-volatile int POWER_BUTTON_ON_COUNTER = 0;		//Power Button On
-volatile int POWER_BUTTON_OVERRIDE_COUNTER = 0;         //Power Button Override
+volatile int POWER_BUTTON_ON_COUNTER            = 0;    //Power Button On
+volatile int POWER_BUTTON_OVERRIDE_COUNTER      = 0;    //Power Button Override
+volatile int DC_IN_COUNTER                      = 0;    //DC In
+volatile int BATTERY_ATTACHED_COUNTER           = 0;    //Battery Attached
 
 //Debounce Status
-unsigned char POWER_BUTTON_ON_STATUS = 1;		//Power Button On
-unsigned char POWER_BUTTON_OVERRIDE_STATUS = 1;		//Power Button Override
+unsigned char POWER_BUTTON_ON_STATUS            = 1;    //Power Button On
+unsigned char POWER_BUTTON_OVERRIDE_STATUS      = 1;    //Power Button Override
+unsigned char DC_IN_STATUS                      = 1;    //DC In
+unsigned char BATTERY_ATTACHED_STATUS           = 0;    //Battery Attached
 
 //Power Button On Pressed Event
 void PWR_Button_On_Pressed(void)
@@ -27,14 +33,43 @@ void PWR_Button_On_Released(void)
 //Power Button Override Pressed Event
 void PWR_Button_Override_Pressed(void)
 {
+  DEBUG_PRINT("@@: Power Button Override\r\n");
   VAR_POWER_BUTTON_OVERRIDE_EVENT = 1;
-  T_GPI_DEBOUNCE_1 = T_DEBOUNCE_100ms;
+  POWER_BUTTON_OVERRIDE_DEBOUNCE = T_DEBOUNCE_100ms;
 }
 
 //Power Button Override Released Event
 void PWR_Button_Override_Released(void)
 {
-  T_GPI_DEBOUNCE_1 = T_DEBOUNCE_7s;
+  POWER_BUTTON_OVERRIDE_DEBOUNCE = T_DEBOUNCE_7s;
+}
+
+//DC In
+void DC_IN(void)
+{
+  DEBUG_PRINT("@@: DC IN\r\n");
+  CAR_POWER_EXIST = 1;
+}
+
+//DC Out
+void DC_OUT(void)
+{
+  DEBUG_PRINT("@@: DC OUT\r\n");
+  CAR_POWER_EXIST = 0;
+}
+
+//Battery Attached
+void BATTERY_ATTACHED(void)
+{
+  DEBUG_PRINT("@@: Battery Attached\r\n");
+  VAR_BATTERY_EXIST = 1;
+}
+
+//Battery Disattached
+void BATTERY_DISATTACHED(void)
+{
+  DEBUG_PRINT("@@: Battery Disattached\r\n");
+  VAR_BATTERY_EXIST = 0;
 }
 
 void NullEvent(void)
@@ -44,9 +79,13 @@ void NullEvent(void)
 const struct Event_handler Debounce_Check[] = 
 {
   //Power Button On
-  {&POWER_BUTTON_ON_STATUS, &POWER_BUTTON_ON_COUNTER, &T_GPI_DEBOUNCE_0, GPIOA, GPIO_Pin_0, PWR_Button_On_Pressed, PWR_Button_On_Released, NullEvent},
+  {&POWER_BUTTON_ON_STATUS, &POWER_BUTTON_ON_COUNTER, &POWER_BUTTON_ON_DEBOUNCE, GPIOA, GPIO_Pin_0, PWR_Button_On_Pressed, PWR_Button_On_Released, NullEvent},
   //Power Button Override
-  {&POWER_BUTTON_OVERRIDE_STATUS, &POWER_BUTTON_OVERRIDE_COUNTER, &T_GPI_DEBOUNCE_1, GPIOA, GPIO_Pin_0, PWR_Button_Override_Pressed, PWR_Button_Override_Released, NullEvent},
+  {&POWER_BUTTON_OVERRIDE_STATUS, &POWER_BUTTON_OVERRIDE_COUNTER, &POWER_BUTTON_OVERRIDE_DEBOUNCE, GPIOA, GPIO_Pin_0, PWR_Button_Override_Pressed, PWR_Button_Override_Released, NullEvent},
+  //DC In
+  {&DC_IN_STATUS, &DC_IN_COUNTER, &DC_IN_DEBOUNCE, GPIOB, GPIO_Pin_1, DC_IN, DC_OUT, NullEvent},
+  //Battery Attached
+  {&BATTERY_ATTACHED_STATUS, &BATTERY_ATTACHED_COUNTER, &BATTERY_ATTACHED_DEBOUNCE, GPIOB, GPIO_Pin_12, BATTERY_DISATTACHED, BATTERY_ATTACHED, NullEvent},
 };
 
 

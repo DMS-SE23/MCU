@@ -57,40 +57,45 @@ extern u16 DEBUG_RxS, DEBUG_RxE; // Rx Start, End Ptr
 extern unsigned int VAR_BATTERY_EXIST; // Battery琌箇砞ぃ
 extern unsigned int CAR_POWER_EXIST;   // Car Power琌箇砞ぃ
 
-extern volatile unsigned char VAR_SYSTEM_POWER_STATUS;
-
-// Car Power System Information
-extern unsigned char VAR_SYSI2C_SYS_INFO;       // EEPROM $0025
-extern unsigned int VAR_SYSI2C_SYS_INFO_CHANGE;
-
 extern unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE; // ╰参贺篈
               // = 0 at S5, Power Off
               // = 1 at S0, Power On
               // = 2 ar S3, Suspend
-
-// 筿琌筁放跑计
-// = 0, ⊿Τ筁放
-// = 1, 筁放
-extern volatile unsigned int VAR_BATTERY_OVER_TEMPERATURE;
-
-// 筿琌筿跑计
-// = 0, ⊿Τ筿
-// = 1, 筿
-extern volatile unsigned int VAR_BATTERY_UNDER_PERCENTAGE;
-
-// 筿琌筁放ó筿琌跑计
-// = 0, ⊿Τ筁放┪ó筿
-// = 1, 筁放ó筿ぃ
-extern volatile unsigned int VAR_BATTERY_PROTECTION_FLAG;
+extern unsigned char VAR_BATTERY_STATE;  // 筿贺篈
+              // = 0, Battery disattached
+              // = 1, Battery not fully charged
+              // = 2, Battery fully charged
+              // = 3, DC out, and Battery attached
 
 // for battery information
-extern unsigned int BAT_INFO_Temperature;           //0x08
-extern unsigned int BAT_INFO_Voltage;               //0x09
-extern unsigned int BAT_INFO_Flags;                 //0x16
-extern unsigned int BAT_INFO_Current;               //0x0A
-extern unsigned int BAT_INFO_AverageCurrent;        //0x0B
-extern unsigned int BAT_INFO_TimeToEmpty;           //0x11
-extern unsigned int BAT_INFO_StateOfCharge;         //0x0D
+extern unsigned int BAT_INFO_RemainingCapacityAlarm;      // 0x01
+extern unsigned int BAT_INFO_RemainingTimeAlarm;          // 0x02
+extern unsigned int BAT_INFO_BatteryMode;                 // 0x03
+extern unsigned int BAT_INFO_AtRate;                      // 0x04
+extern unsigned int BAT_INFO_AtRateTimeToFull;            // 0x05
+extern unsigned int BAT_INFO_AtRateTimeToEmpty;           // 0x06
+extern unsigned int BAT_INFO_AtRateOK;                    // 0x07
+extern unsigned int BAT_INFO_Temperature;                 // 0x08
+extern unsigned int BAT_INFO_Voltage;                     // 0x09
+extern unsigned int BAT_INFO_Current;                     // 0x0A
+extern unsigned int BAT_INFO_AverageCurrent;              // 0x0B
+extern unsigned int BAT_INFO_MaxError;                    // 0x0C
+extern unsigned int BAT_INFO_RelativeStateOfCharge;       // 0x0D
+extern unsigned int BAT_INFO_AbsoluteStateOfCharge;       // 0x0E
+extern unsigned int BAT_INFO_RemainingCapacity;           // 0x0F
+extern unsigned int BAT_INFO_FullChargeCapacity;          // 0x10
+extern unsigned int BAT_INFO_RunTimeToEmpty;              // 0x11
+extern unsigned int BAT_INFO_AverageTimeToEmpty;          // 0x12
+extern unsigned int BAT_INFO_AverageTimeToFull;           // 0x13
+extern unsigned int BAT_INFO_ChargingCurrent;             // 0x14
+extern unsigned int BAT_INFO_ChargingVoltage;             // 0x15
+extern unsigned int BAT_INFO_BatteryStatus;               // 0x16
+extern unsigned int BAT_INFO_CycleCount;                  // 0x17
+extern unsigned int BAT_INFO_DesignCapacity;              // 0x18
+extern unsigned int BAT_INFO_DesignVoltage;               // 0x19
+extern unsigned int BAT_INFO_SpecificationInfo;           // 0x1A
+extern unsigned int BAT_INFO_ManufacturerDate;            // 0x1B
+extern unsigned int BAT_INFO_SerialNumber;                // 0x1C
 
 extern volatile int VAR_TRACE_VPM_STATE;
 

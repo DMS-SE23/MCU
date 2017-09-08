@@ -41,8 +41,8 @@
 #define DEBUG_CmdSize 128
 
 // Define for I2C1
-#define DEF_BQBQ27541_ADDRESS  0x16                         //0001-0110 => W
-                                                            //0001-0111 => R
+#define DEF_BQ40Z50_ADDRESS  0x16                         //0001-0110 => W
+                                                          //0001-0111 => R
 // ----------------------
 // EEPROMÅª¼g¬ÛÃö¥¨¶°
 // ----------------------

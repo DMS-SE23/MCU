@@ -18,16 +18,22 @@ struct Event_handler {
 };
 
 //Debounce Time
-extern int T_GPI_DEBOUNCE_0;
-extern int T_GPI_DEBOUNCE_1;
+extern int POWER_BUTTON_ON_DEBOUNCE;
+extern int POWER_BUTTON_OVERRIDE_DEBOUNCE;
+extern int DC_IN_DEBOUNCE;
+extern int BATTERY_ATTACHED_DEBOUNCE;
 
 //Debounce Counter
 extern volatile int POWER_BUTTON_ON_COUNTER;
 extern volatile int POWER_BUTTON_OVERRIDE_COUNTER;
+extern volatile int DC_IN_COUNTER;
+extern volatile int BATTERY_ATTACHED_COUNTER;
 
 //Debounce Status
 extern unsigned char POWER_BUTTON_ON_STATUS;
 extern unsigned char POWER_BUTTON_OVERRIDE_STATUS;
+extern unsigned char DC_IN_STATUS;
+extern unsigned char BATTERY_ATTACHED_STATUS;
 
 //Power Button On Pressed Event
 void PWR_Button_On_Pressed(void);
@@ -39,8 +45,17 @@ void PWR_Button_Override_Pressed(void);
 //Power Button Override Released Event
 void PWR_Button_Override_Released(void);
 
+//DC In
+void DC_IN(void);
+//DC Out
+void DC_OUT(void);
+
+//Battery Attached
+void BATTERY_ATTACHED(void);
+//Battery Disattached
+void BATTERY_DISATTACHED(void);
+
 // 10ms Hook
 void GPI_EventManager(void);
-
 
 #endif

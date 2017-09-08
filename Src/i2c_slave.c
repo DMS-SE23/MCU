@@ -145,6 +145,8 @@ void I2C_Slave_STOP_UserCallback()
     case I2CCMD_GET_BATTERY_PACK_TEMPERATURE:               //0x93
     case I2CCMD_GET_BATTERY_PACK_VOLTAGE:                   //0x94
     case I2CCMD_GET_BATTERY_PACK_AVERAGE_CURRENT:           //0x95
+    case I2CCMD_GET_BATTERY_PACK_TIME_TO_FULL:              //0x96
+    case I2CCMD_GET_BATTERY_PACK_STATE:                     //0x9F
       
     /* External EEPROM Access Class : 0xA0 ~ 0xAF */
     case I2CCMD_GET_SERIAL_NUMBER:                          //0xA4
@@ -209,16 +211,43 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       
     /* Battery Control and Information Class : 0x90 ~ 0x9F */
     case I2CCMD_GET_BATTERY_PACK_STATE_OF_CHARGE:           //0x90
+      SET_TX_BUFFER((BAT_INFO_RelativeStateOfCharge >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_RelativeStateOfCharge);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_TIME_TO_EMPTY:             //0x91
+      SET_TX_BUFFER((BAT_INFO_AverageTimeToEmpty >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_AverageTimeToEmpty);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_FLAGS:                     //0x92
+      SET_TX_BUFFER((BAT_INFO_BatteryStatus >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_BatteryStatus);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_TEMPERATURE:               //0x93
+      SET_TX_BUFFER((BAT_INFO_Temperature >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_Temperature);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_VOLTAGE:                   //0x94
+      SET_TX_BUFFER((BAT_INFO_Voltage >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_Voltage);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_AVERAGE_CURRENT:           //0x95
+      SET_TX_BUFFER((BAT_INFO_AverageCurrent >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_AverageCurrent);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_TIME_TO_FULL:              //0x96
+      SET_TX_BUFFER((BAT_INFO_AverageTimeToFull >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_AverageTimeToFull);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_STATE:                     //0x9F
+      SET_TX_BUFFER(VAR_BATTERY_STATE & 0xFF);
+      CHK_TX_BUFFER();
       break;
       
     /* External EEPROM Access Class : 0xA0 ~ 0xAF */
@@ -330,7 +359,7 @@ int EVENTQUEUE_INSERT_TO_QUEUE(unsigned char evt_class, unsigned char evt_id)
   // 有Event在Event Queue中，舉起來說有Interrupt
   if (VAR_EVENT_SIZE != 0)
   {
-    __OUT_A11_GPIO_OUT_UP_I2C_INT_BAR_SET_LO;
+    __OUT_A11_GPIO_OUT_UP_I2C_INT_BAR_SET_HI;
   }
 
   return 0;
@@ -356,7 +385,7 @@ int EVENTQUEUE_DELETE_FROM_QUEUE()
   // 抓完後沒有Event了，取消Interrupt
   if (VAR_EVENT_SIZE == 0)
   {
-    __OUT_A11_GPIO_OUT_UP_I2C_INT_BAR_SET_HI;
+    __OUT_A11_GPIO_OUT_UP_I2C_INT_BAR_SET_LO;
   }
 
   return (return_code);

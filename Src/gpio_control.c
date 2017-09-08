@@ -135,75 +135,55 @@ void FUNC_GPIO_INIT()
   GPIO_Init(GPIOE, &GPIO_InitStructure);
 }
 //-----------------------------------------------------------------------------
-void TASK_CHECK_BATTERY_PRESENT()
+
+void TASK_POWER_LED_CONTROL()
 {
-  if (VAR_BATTERY_EXIST == 0) // 原本Battery不存在
+  if ((CAR_POWER_EXIST == 1) && (VAR_SYSTEM_POWER_SYSTEM_STATE == 1))   // DC in, and Boot-up system
   {
-    if (__IN_B12_GPIO_IN_BAT_PRES_TEST_HI) // Battery存在
-    {
-      DEBUG_PRINT("@@: Battery Attached\r\n");
-      VAR_BATTERY_EXIST = 1;
-//      VAR_SYSTEM_POWER_STATUS |= 0x10; // bit 4 = 1 for I2C CMD 0x09
-    }
+    // Turn on power LED
+    __OUT_E2_GPIO_OUT_LED_PWR_G_SET_LO;
   }
-  else // 原本Battery存在
+  else
   {
-    if (__IN_B12_GPIO_IN_BAT_PRES_TEST_LO) // Battery不存在
-    {
-      DEBUG_PRINT("@@: Battery Disattached\r\n");
-      VAR_BATTERY_EXIST = 0;
-//      VAR_SYSTEM_POWER_STATUS &= 0xEF; // bit 4 = 0 for I2C CMD 0x09
-    }
+    __OUT_E2_GPIO_OUT_LED_PWR_G_SET_HI;
   }
 }
-//-----------------------------------------------------------------------------
-// 控制Power LED
-// Power Off: 關閉
-//
-void TASK_LED_CONTROL()
+
+void TASK_BATTERY_LED_CONTROL()
 {
-//  static int var_LED_state = 0;
-//  // 需要判斷目前是否為Power-Off
-//  // 在Power On狀態下
-//  if (VAR_SYSTEM_POWER_SYSTEM_STATE == 0)           // Power Off State
-//  {
-//    // LED Off
-//    __OUT_B0_GPIO_OUT_LED_RED_SET_HI;
-//    __OUT_B1_GPIO_OUT_LED_GREEN_SET_HI;
-//    return;
-//  }
-//  if (VAR_SYSTEM_POWER_SYSTEM_STATE == 1)           // Power On (Red)
-//  {
-//    __OUT_B0_GPIO_OUT_LED_RED_SET_LO;
-//    __OUT_B1_GPIO_OUT_LED_GREEN_SET_HI;
-//    return;
-//  }
-//  if (VAR_SYSTEM_POWER_SYSTEM_STATE == 2)           // Power On (Green)
-//  {
-//    // 若Car Power不存在
-//    if (CAR_POWER_EXIST)
-//    {
-//      // Car Power Exist
-//      // Always On
-//      __OUT_B0_GPIO_OUT_LED_RED_SET_HI;
-//      __OUT_B1_GPIO_OUT_LED_GREEN_SET_LO;
-//      var_LED_state = 0;
-//    }
-//    else
-//    {
-//      // Car Power Lost
-//      __OUT_B1_GPIO_OUT_LED_GREEN_SET_HI;
-//      switch (var_LED_state)
-//      {
-//        case 0:
-//        case 1:
-//        case 2: __OUT_B0_GPIO_OUT_LED_RED_SET_HI; var_LED_state++; break;
-//        case 3: __OUT_B0_GPIO_OUT_LED_RED_SET_LO; var_LED_state = 0; break;
-//      }
-//    }
-//  }
+  static int var_LED_state = 0;
+  
+  if (VAR_BATTERY_STATE == 0)           // Battery disattached
+  {
+    // Turn off battery LED
+    __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_HI;
+  }
+  else if (VAR_BATTERY_STATE == 1)      // Battery not fully charged
+  {
+    // Blinking battery LED
+    if (var_LED_state)
+    {
+      __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_HI;
+      var_LED_state = 0;
+    }
+    else
+    {
+      __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_LO;
+      var_LED_state = 1;
+    }
+  }
+  else if (VAR_BATTERY_STATE == 2)      // Battery fully charged
+  {
+    // Turn on battery LED
+    __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_LO;
+  }
+  else if (VAR_BATTERY_STATE == 3)      // DC out, and Battery attached
+  {
+    // Turn off battery LED
+    __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_HI;
+  }
 }
-//-----------------------------------------------------------------------------
+
 void SUSPEND_WAKEUP_PIN_INIT()
 {
   //EXTI structure to init EXT

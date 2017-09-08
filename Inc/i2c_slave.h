@@ -54,6 +54,8 @@ extern uint8_t Buffer_Tx[MAX_I2C_TX_BUFFER];
 #define I2CCMD_GET_BATTERY_PACK_TEMPERATURE                 0x93
 #define I2CCMD_GET_BATTERY_PACK_VOLTAGE                     0x94
 #define I2CCMD_GET_BATTERY_PACK_AVERAGE_CURRENT             0x95
+#define I2CCMD_GET_BATTERY_PACK_TIME_TO_FULL                0x96
+#define I2CCMD_GET_BATTERY_PACK_STATE                       0x9F
 
 /* External EEPROM Access Class : 0xA0 ~ 0xAF */
 #define I2CCMD_EEPROM_LOAD_DEFAULT                          0xA0

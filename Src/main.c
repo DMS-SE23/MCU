@@ -76,60 +76,35 @@ u16 DEBUG_RxS=0, DEBUG_RxE=0; // Rx Start, End Ptr
 volatile unsigned int VAR_BATTERY_EXIST = 0; // Battery¬O§_¦s¦b¡A¹w³]¤£¦s¦b
 volatile unsigned int CAR_POWER_EXIST = 0;   // Car Power¬O§_¦s¦b¡A¹w³]¤£¦s¦b
 
-volatile unsigned char VAR_SYSTEM_POWER_STATUS = 0; // ¨ÑÀ³µ¹I2C 0x09¥Î
-                  // SYSTEM_POWER_STATUS Used
-                  // bit 4, for BAT1 exist or not
-                  // bit 0, for EXTPWR exist or not
-                  // ------------------------------
-                  // = 0, not exist
-                  // = 1, exist
-
-// ¹q¦À¬O§_¹L·ÅªºÅÜ¼Æ
-// = 0, ¨S¦³¹L·Å
-// = 1, ¹L·Å
-volatile unsigned int VAR_BATTERY_OVER_TEMPERATURE = 0;
-
-// ¹q¦À¬O§_§C¹qªºÅÜ¼Æ
-// = 0, ¨S¦³§C¹q
-// = 1, §C¹q
-volatile unsigned int VAR_BATTERY_UNDER_PERCENTAGE = 0;
-
-// ¹q¦À¬O§_¹L·Å¥B¨®¹q¬O§_¦s¦bªºÅÜ¼Æ
-// = 0, ¨S¦³¹L·Å©Î¨®¹q¦s¦b
-// = 1, ¹L·Å¥B¨®¹q¤£¦s¦b
-volatile unsigned int VAR_BATTERY_PROTECTION_FLAG = 0;
-
 // for battery information
-//unsigned int BAT_INFO_AtRate = 0;                   // 0x02, 0x03
-//unsigned int BAT_INFO_UnfilteredSOC = 0;            // 0x04, 0x05
-unsigned int BAT_INFO_Temperature = 0;              // 0x06, 0x07
-unsigned int BAT_INFO_Voltage = 0;                  // 0x08, 0x09
-unsigned int BAT_INFO_Flags = 0;                    // 0x0A, 0x0B
-//unsigned int BAT_INFO_NomAvailableCapacity = 0;     // 0x0C, 0x0D
-//unsigned int BAT_INFO_FullAvailableCapacity = 0;    // 0x0E, 0x0F
-//unsigned int BAT_INFO_RemainingCapacity = 0;        // 0x10, 0x11
-//unsigned int BAT_INFO_FullChargeCapacity = 0;       // 0x12, 0x13
-unsigned int BAT_INFO_Current = 0;                  // 0x14, 0x15
-unsigned int BAT_INFO_AverageCurrent = 0;           // 0x14, 0x15
-unsigned int BAT_INFO_TimeToEmpty = 0;              // 0x16, 0x17
-//unsigned int BAT_INFO_FilteredFCC = 0;              // 0x18, 0x19
-//unsigned int BAT_INFO_StandbyCurrent = 0;           // 0x1A, 0x1B
-//unsigned int BAT_INFO_UnfilteredFCC = 0;            // 0x1C, 0x1D
-//unsigned int BAT_INFO_MaxLoadCurrent = 0;           // 0x1E, 0x1F
-//unsigned int BAT_INFO_UnfilteredRM = 0;             // 0x20, 0x21
-//unsigned int BAT_INFO_FilteredRM = 0;               // 0x22, 0x23
-//unsigned int BAT_INFO_AveragePower = 0;             // 0x24, 0x25
-//unsigned int BAT_INFO_InternalTemperature = 0;      // 0x28, 0x29
-//unsigned int BAT_INFO_CycleCount = 0;               // 0x2A, 0x2B
-unsigned int BAT_INFO_StateOfCharge = 0;            // 0x2C, 0x2D
-//unsigned int BAT_INFO_StateOfHealth = 0;            // 0x2E, 0x2F
-//unsigned int BAT_INFO_PassedCharge = 0;             // 0x34, 0x35
-//unsigned int BAT_INFO_DOD0 = 0;                     // 0x36, 0x37
-//unsigned int BAT_INFO_SelfDischargeCurrent = 0;     // 0x38, 0x39
-
-// Car Power System Information
-unsigned char VAR_SYSI2C_SYS_INFO = 0;  // EEPROM $0025
-unsigned int VAR_SYSI2C_SYS_INFO_CHANGE = 0;
+unsigned int BAT_INFO_RemainingCapacityAlarm = 0;     // 0x01
+unsigned int BAT_INFO_RemainingTimeAlarm = 0;         // 0x02
+unsigned int BAT_INFO_BatteryMode = 0;                // 0x03
+unsigned int BAT_INFO_AtRate = 0;                     // 0x04
+unsigned int BAT_INFO_AtRateTimeToFull = 0;           // 0x05
+unsigned int BAT_INFO_AtRateTimeToEmpty = 0;          // 0x06
+unsigned int BAT_INFO_AtRateOK = 0;                   // 0x07
+unsigned int BAT_INFO_Temperature = 0;                // 0x08
+unsigned int BAT_INFO_Voltage = 0;                    // 0x09
+unsigned int BAT_INFO_Current = 0;                    // 0x0A
+unsigned int BAT_INFO_AverageCurrent = 0;             // 0x0B
+unsigned int BAT_INFO_MaxError = 0;                   // 0x0C
+unsigned int BAT_INFO_RelativeStateOfCharge = 0;      // 0x0D
+unsigned int BAT_INFO_AbsoluteStateOfCharge = 0;      // 0x0E
+unsigned int BAT_INFO_RemainingCapacity = 0;          // 0x0F
+unsigned int BAT_INFO_FullChargeCapacity = 0;         // 0x10
+unsigned int BAT_INFO_RunTimeToEmpty = 0;             // 0x11
+unsigned int BAT_INFO_AverageTimeToEmpty = 0;         // 0x12
+unsigned int BAT_INFO_AverageTimeToFull = 0;          // 0x13
+unsigned int BAT_INFO_ChargingCurrent = 0;            // 0x14
+unsigned int BAT_INFO_ChargingVoltage = 0;            // 0x15
+unsigned int BAT_INFO_BatteryStatus = 0;              // 0x16
+unsigned int BAT_INFO_CycleCount = 0;                 // 0x17
+unsigned int BAT_INFO_DesignCapacity = 0;             // 0x18
+unsigned int BAT_INFO_DesignVoltage = 0;              // 0x19
+unsigned int BAT_INFO_SpecificationInfo = 0;          // 0x1A
+unsigned int BAT_INFO_ManufacturerDate = 0;           // 0x1B
+unsigned int BAT_INFO_SerialNumber = 0;               // 0x1C
 
 // WATCHDOG TIMER
 volatile int VAR_WATCHDOG_STATUS                            = 0;    // Watchdog¶}±Ò©ÎÃö³¬
@@ -152,6 +127,11 @@ unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE = 0;                     // ¨t²Î¦b¦óº
               // = 0 at S5, Power Off
               // = 1 at S0, Power On
               // = 2 ar S3, Suspend
+unsigned char VAR_BATTERY_STATE = 0;                                // ¹q¦À¦b¦óºØª¬ºA
+              // = 0, Battery disattached
+              // = 1, Battery not fully charged
+              // = 2, Battery fully charged
+              // = 3, DC out, and Battery attached
 unsigned int VAR_IMM_CHANGE_WORKING_MODE_EVENT = 0;                 // ³]©w¨t²Î¥ß§Y¶i¤Jª¬ºA¨Æ¥ó
               // = 0, No Event
               // = 1, Enter Power-Off Flow Immediately

@@ -3,8 +3,35 @@
 1. Add GPI_EventManager function.
 2. Add power button on and power button override event detection.
 3. Add power LED control.
+4. Modify battery information offset.
+5. Add battery charge control.
+6. Add DC in and battery attached event detection.
+7. Add battery LED control.
+8. Add I2C command:
+   a. Battery pack state of charge.
+   b. Battery pack time to empty.
+   c. Battery pack flags.
+   d. Battery pack temperature.
+   e. Battery pack average current.
+   f. Battery pack time to full.
+   g. Battery pack state.
 
 ---------------------------
+2017-09-08 BACKUP 006 V02
+-------------------------
+1. Modify battery information offset.
+2. Add battery charge control.
+3. Add DC in and battery attached event detection.
+4. Add battery LED control.
+5. Add I2C command:
+   a. Battery pack state of charge.
+   b. Battery pack time to empty.
+   c. Battery pack flags.
+   d. Battery pack temperature.
+   e. Battery pack average current.
+   f. Battery pack time to full.
+   g. Battery pack state.
+
 2017-09-06 BACKUP 006 V02
 -------------------------
 1. Add power button on and power button override event detection.
