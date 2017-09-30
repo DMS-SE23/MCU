@@ -4,7 +4,7 @@
 //EEPROM FACTORY DEFAULT VALUE
 #define MAGIC_WD_HI			0x43		//offset : 0x00
 #define MAGIC_WD_LO			0x34		//offset : 0x01
-#define EEPROM_VERSION		        0x00		//offset : 0x02
+#define EEPROM_VERSION		        0x01		//offset : 0x02
 #define PLATFORM_ID			0x1F		//offset : 0x03 //DMS-SE23
 
 // 回復到預設值
@@ -16,10 +16,8 @@ void EEPROM_SAVE_USER_DEFAULT(void);
 int EEPROM_LOAD_USER_DEFAULT(void);
 // 回復到工廠預設值
 void EEPROM_FILL_DEFAULT_VALUE(void);
-// Update Watchdog Timer
-void WRITE_EEPROM_WATCHDOG_TIMER_VALUE(int value);
 // 更改存在EEPROM中的Serial Number
-void EEPROM_UPDATE_SERIAL_NUMBER(int change_byte);
+void EEPROM_UPDATE_SERIAL_NUMBER();
 // 更新EEPROM的Task序列
 void TASK_EEPROM_UPDATE_BYTES(void);
 // 由EEPROM更新VPM的參數設定

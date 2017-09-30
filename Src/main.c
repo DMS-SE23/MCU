@@ -27,20 +27,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 
-#include "stm32f30x_conf.h"
-// User Define Header Files
-#include "project.h"
-#include "gpio_control.h"
-#include "hook_tasks.h"
-#include "protocol.h"
-#include "i2c_slave.h"
-#include "i2c_master.h"
-#include <stdio.h>        				            // for printf
-#include <stdarg.h>
-#include "eeprom_control.h"
-#include "stm32f30x_dbgmcu.h"
-#include "debug_port.h"
-#include "vpm_control.h"
+#include "includes.h"
 
 //-----------------------------------------------------------------------------
 
@@ -73,8 +60,8 @@ u8 DEBUG_RxBuffer[RxBufferSize];
 u16 DEBUG_TxS=0, DEBUG_TxE=0; // Tx Start, End Ptr
 u16 DEBUG_RxS=0, DEBUG_RxE=0; // Rx Start, End Ptr
 
-volatile unsigned int VAR_BATTERY_EXIST = 0; // Battery是否存在，預設不存在
-volatile unsigned int CAR_POWER_EXIST = 0;   // Car Power是否存在，預設不存在
+unsigned char VAR_BATTERY_EXIST = 0; // Battery是否存在，預設不存在
+unsigned char CAR_POWER_EXIST = 0;   // Car Power是否存在，預設不存在
 
 // for battery information
 unsigned int BAT_INFO_RemainingCapacityAlarm = 0;     // 0x01
@@ -107,7 +94,7 @@ unsigned int BAT_INFO_ManufacturerDate = 0;           // 0x1B
 unsigned int BAT_INFO_SerialNumber = 0;               // 0x1C
 
 // WATCHDOG TIMER
-volatile int VAR_WATCHDOG_STATUS                            = 0;    // Watchdog開啟或關閉
+volatile unsigned char VAR_WATCHDOG_STATUS                  = 0;    // Watchdog開啟或關閉
 volatile int VAR_WATCHDOG_COUNTER                           = 0;    // Watchdog倒數計時器
 volatile int VAR_WATCHDOG_RESET_VALUE                       = 10;   // Watchdog倒數計時重置值
 
@@ -171,11 +158,8 @@ unsigned int VAR_DEBUG_PRINT = 0;
 // 上一次喚醒系統的Event
 unsigned char VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF = 0;
                       // =0x00, No last wakeup event occurs
-                      // =0x01, Ignition Off to On event occurs
-                      // =0x20, DI1 event occurs
-                      // =0x21, DI2 event occurs
-                      // =0x22, DI3 event occurs
-                      // =0x23, DI4 event occurs
+                      // =0x10, Power-Button event occurs
+                      // =0x40, Reset Button or Software Reset Event
 
 // EEPROM Write Used
 volatile unsigned int VAR_EEPROM_WRITE_EVENT = 0;
@@ -191,6 +175,7 @@ unsigned char VAR_EEPROM_MAGIC_ID_LO = 0;
 
 // 存放Serial Number處
 unsigned char VAR_SERIAL_NUMBER[10] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+unsigned char VAR_SERIAL_NUMBER_BUFFER[10] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 unsigned char VAR_SERIAL_NUMBER_CHG_EVENT = 0; // 是否發生改變Serial Number事件
 
 //-----------------------------------------------------------------------------
@@ -203,7 +188,7 @@ int VAR_EVENT_INPUT                     = 0;
 int VAR_EVENT_OUTPUT                    = 0;
 int VAR_EVENT_SIZE                      = 0;
 int VAR_ALREADY_NOTIFY_OS_CAR_POWER_LOW = 0;
-int VAR_INTERRUPT_STATUS                = 0;
+unsigned char VAR_INTERRUPT_STATUS      = 0;
 //-----------------------------------------------------------------------------
 
 // I2C Master Used
@@ -346,9 +331,9 @@ int main(void)
   //Init I2C2 port as Slave transmitter/receiver
   I2C_Slave_Init();
 
-//  // 更新VPM變數
-//  UPDATE_VPM_VARIABLE_FROM_EEPROM();
-//  DEBUG_PRINT("..: EEPROM Update Complete\r\n");
+  // 更新VPM變數
+  UPDATE_VPM_VARIABLE_FROM_EEPROM();
+  DEBUG_PRINT("..: EEPROM Update Complete\r\n");
 
   //VPM version
   DEBUG_PRINT("..: VPM version : %01d.%03d\r\n", __DEF_PROJECT_MAIN_VERSION, __DEF_PROJECT_MINER_VERSION);
@@ -417,6 +402,12 @@ int main(void)
     {
       VAR_POWER_BUTTON_OVERRIDE_EVENT = 0;
       VPM_STATE = 4500;
+    }
+//-------------------------------------- 
+    if (VAR_SERIAL_NUMBER_CHG_EVENT == 1)
+    {
+      EEPROM_UPDATE_SERIAL_NUMBER();
+      VAR_SERIAL_NUMBER_CHG_EVENT = 0;
     }
   }
 }

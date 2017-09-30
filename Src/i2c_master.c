@@ -1,8 +1,4 @@
-#include "stm32f30x_conf.h"
-#include "project.h"
-#include "main.h"
-#include "debug_port.h"
-#include "i2c_master.h"
+#include "includes.h"
 
 #define I2C_TIMEOUT  0x8000
 

@@ -10,10 +10,7 @@
   ******************************************************************************
   */
 
-#include "main.h"
-#include "gpio_control.h"
-#include "vpm_control.h"
-#include <stdio.h>
+#include "includes.h"
 
 void GPIO_OUTPUT_STATUS_INIT()
 {

@@ -19,18 +19,21 @@ struct Event_handler {
 
 //Debounce Time
 extern int POWER_BUTTON_ON_DEBOUNCE;
+extern int POWER_BUTTON_OFF_DEBOUNCE;
 extern int POWER_BUTTON_OVERRIDE_DEBOUNCE;
 extern int DC_IN_DEBOUNCE;
 extern int BATTERY_ATTACHED_DEBOUNCE;
 
 //Debounce Counter
 extern volatile int POWER_BUTTON_ON_COUNTER;
+extern volatile int POWER_BUTTON_OFF_COUNTER;
 extern volatile int POWER_BUTTON_OVERRIDE_COUNTER;
 extern volatile int DC_IN_COUNTER;
 extern volatile int BATTERY_ATTACHED_COUNTER;
 
 //Debounce Status
 extern unsigned char POWER_BUTTON_ON_STATUS;
+extern unsigned char POWER_BUTTON_OFF_STATUS;
 extern unsigned char POWER_BUTTON_OVERRIDE_STATUS;
 extern unsigned char DC_IN_STATUS;
 extern unsigned char BATTERY_ATTACHED_STATUS;
@@ -39,6 +42,11 @@ extern unsigned char BATTERY_ATTACHED_STATUS;
 void PWR_Button_On_Pressed(void);
 //Power Button On Released Event
 void PWR_Button_On_Released(void);
+
+//Power Button Off Pressed Event
+void PWR_Button_Off_Pressed(void);
+//Power Button Off Released Event
+void PWR_Button_Off_Released(void);
 
 //Power Button Override Pressed Event
 void PWR_Button_Override_Pressed(void);

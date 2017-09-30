@@ -1,11 +1,4 @@
-#include "stm32f30x_conf.h"
-// User Define Header Files
-#include "project.h"
-#include "gpio_control.h"
-#include <stdio.h>        // for printf
-#include "eeprom_control.h"
-#include "main.h"
-#include "debug_port.h"
+#include "includes.h"
 
 void TASK_WATCHDOG()
 {

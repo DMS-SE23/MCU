@@ -1,14 +1,4 @@
-#include "stm32f30x_conf.h"
-#include "stm32_it.h"
-#include <system_stm32f30x.h>
-//#include <core_cm3.h>
-#include <stm32f30x.h>
-#include "gpio_control.h"
-#include <stdio.h>
-
-
-#include "project.h"
-#include "main.h"
+#include "includes.h"
 
 u8 TxBuffer[TxBufferSize];
 u8 RxBuffer[RxBufferSize];

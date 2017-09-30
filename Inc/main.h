@@ -28,19 +28,19 @@
 // This variable is rise high in time tick interrupt
 
 // Event Flags
-extern int VAR_1mS_Event;
-extern int VAR_5mS_Event;
-extern int VAR_10mS_Event;
-extern int VAR_25mS_Event;
-extern int VAR_100mS_Event;
-extern int VAR_1S_Event;
+extern volatile int VAR_1mS_Event;
+extern volatile int VAR_5mS_Event;
+extern volatile int VAR_10mS_Event;
+extern volatile int VAR_25mS_Event;
+extern volatile int VAR_100mS_Event;
+extern volatile int VAR_1S_Event;
 // Event Counting Used Variables
-extern int VAR_1mS_Counter;
-extern int VAR_5mS_Counter;
-extern int VAR_10mS_Counter;
-extern int VAR_25mS_Counter;
-extern int VAR_100mS_Counter;
-extern int VAR_1S_Counter;
+extern volatile int VAR_1mS_Counter;
+extern volatile int VAR_5mS_Counter;
+extern volatile int VAR_10mS_Counter;
+extern volatile int VAR_25mS_Counter;
+extern volatile int VAR_100mS_Counter;
+extern volatile int VAR_1S_Counter;
 
 // 做延時用的變數
 extern volatile int VAR_TIMETICK_DELAY;
@@ -54,8 +54,8 @@ extern u8 DEBUG_RxBuffer[RxBufferSize];
 extern u16 DEBUG_TxS, DEBUG_TxE; // Tx Start, End Ptr
 extern u16 DEBUG_RxS, DEBUG_RxE; // Rx Start, End Ptr
 
-extern unsigned int VAR_BATTERY_EXIST; // Battery是否存在，預設不存在
-extern unsigned int CAR_POWER_EXIST;   // Car Power是否存在，預設不存在
+extern unsigned char VAR_BATTERY_EXIST; // Battery是否存在，預設不存在
+extern unsigned char CAR_POWER_EXIST;   // Car Power是否存在，預設不存在
 
 extern unsigned int VAR_SYSTEM_POWER_SYSTEM_STATE; // 系統在何種狀態
               // = 0 at S5, Power Off
@@ -106,7 +106,7 @@ extern unsigned int VAR_IMM_CHANGE_WORKING_MODE_EVENT; // 設定系統立即進入狀態事
               // 前提是系統在開機時此命令才有效
 
 // WATCHDOG TIMER
-extern volatile int VAR_WATCHDOG_STATUS;      // Watchdog開啟或關閉
+extern volatile unsigned char VAR_WATCHDOG_STATUS;      // Watchdog開啟或關閉
 extern volatile int VAR_WATCHDOG_COUNTER;     // Watchdog倒數計時器
 extern volatile int VAR_WATCHDOG_RESET_VALUE; // Watchdog倒數計時重置值
 
@@ -132,6 +132,7 @@ extern unsigned char VAR_EEPROM_MAGIC_ID_LO;
 
 // 存放Serial Number處
 extern unsigned char VAR_SERIAL_NUMBER[10];
+extern unsigned char VAR_SERIAL_NUMBER_BUFFER[10];
 extern unsigned char VAR_SERIAL_NUMBER_CHG_EVENT; // 是否發生改變Serial Number事件
 
 extern unsigned int VAR_DEBUG_PRINT;
@@ -166,12 +167,8 @@ extern unsigned char VAR_COUNTER_ENABLE_POWER_ON_COUNT; // 是否開始進行Power On 
 // 上一次喚醒系統的Event
 extern unsigned char VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF;
                       // =0x00, No last wakeup event occurs
-                      // =0x01, Ignition Off to On event occurs
                       // =0x10, Power-Button event occurs
-                      // =0x20, DI1 event occurs
-                      // =0x21, DI2 event occurs
-                      // =0x22, DI3 event occurs
-                      // =0x23, DI4 event occurs
+                      // =0x40, Reset Button or Software Reset Event
 
 // Event Queue Used
 extern unsigned char VAR_EVENT_QUEUS[__DEF_EVENT_QUEUE_SIZE][2];
@@ -179,7 +176,7 @@ extern int VAR_EVENT_INPUT;
 extern int VAR_EVENT_OUTPUT;
 extern int VAR_EVENT_SIZE;
 extern int VAR_ALREADY_NOTIFY_OS_CAR_POWER_LOW;
-extern int VAR_INTERRUPT_STATUS;
+extern unsigned char VAR_INTERRUPT_STATUS;
 
 // I2C Master Used
 extern long TimeOutCounter;

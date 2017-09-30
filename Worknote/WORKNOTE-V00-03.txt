@@ -1,0 +1,14 @@
+[V000.03 Release Note Summary]
+------------------------------
+1. Add power button to power off interrupt.
+2. Add I2C command:
+    a. Watchdog Class.
+    b. External EEPROM Access Class.
+
+---------------------------
+2017-09-30 BACKUP 007 V03
+-------------------------
+1. Add power button to power off interrupt.
+2. Add I2C command:
+    a. Watchdog Class.
+    b. External EEPROM Access Class.

@@ -1,17 +1,4 @@
-#include "stm32f30x_conf.h"
-// User Define Header Files
-#include "project.h"
-#include "gpio_control.h"
-#include "vpm_control.h"
-#include "main.h"
-#include "stm32f30x_adc.h"
-#include "stdio.h"
-#include "stm32f30x_rtc.h"
-#include "battery_info.h"
-#include "watchdog.h"
-#include "eeprom_control.h"
-#include "event_control.h"
-#include "i2c_slave.h"
+#include "includes.h"
 
 // ===============================
 // Hook Tasks Main Processing Area
@@ -32,7 +19,7 @@ void TASK_Hook_10mS()
 // 25mS Hook主函式
 void TASK_Hook_25mS()
 {
-//  TASK_EEPROM_UPDATE_BYTES(); // 每25mS Write EEPROM一次
+  TASK_EEPROM_UPDATE_BYTES(); // 每25mS Write EEPROM一次
 }
 
 // 100mS Hook主函式

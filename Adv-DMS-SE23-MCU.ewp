@@ -1942,10 +1942,10 @@
       <name>$PROJ_DIR$\Inc\i2c_slave.h</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\Inc\main.h</name>
+      <name>$PROJ_DIR$\Inc\includes.h</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\Inc\platform_config.h</name>
+      <name>$PROJ_DIR$\Inc\main.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Inc\project.h</name>
@@ -2156,6 +2156,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-02.txt</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-03.txt</name>
     </file>
   </group>
 </project>

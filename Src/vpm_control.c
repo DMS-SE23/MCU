@@ -10,13 +10,7 @@
   ******************************************************************************
   */
 
-#include "main.h"
-#include "vpm_control.h"
-#include "gpio_control.h"
-#include "i2c_master.h"
-#include "i2c_slave.h"
-#include "eeprom_control.h"
-#include "debug_port.h"
+#include "includes.h"
 
 /*set to zero at initial state*/
 int VPM_STATE = 0;
@@ -257,7 +251,10 @@ void TASK_VPM_CONTROL()
             break;
     case 4500:  // Turn Off Power LED
             __DEBUG_VPM_TRACE("@@: VPM (4500) Turn Off Power LED\r\n");
+            // Init GPO
             GPIO_OUTPUT_STATUS_INIT();
+            // 關閉中斷服務
+            VAR_INTERRUPT_STATUS = 0;
             // 關閉POWER ON 時間 COUNT
             VAR_COUNTER_ENABLE_POWER_ON_COUNT = 0;
             // 寫回POWER_ON時間COUNT

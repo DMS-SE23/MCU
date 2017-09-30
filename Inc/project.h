@@ -3,7 +3,7 @@
 // 主版本, 0~255
 #define __DEF_PROJECT_MAIN_VERSION   0
 // 次版本, 0~255
-#define __DEF_PROJECT_MINER_VERSION  2
+#define __DEF_PROJECT_MINER_VERSION  3
 
 #define __DEF_PROJECT_NAME_STRING_SIZE 12
 // 平台名稱, 12個字元組 (12 Bytes)
@@ -135,9 +135,9 @@
 #define	__OUT_E4_GPIO_OUT_LED_RED_SET_LO	                GPIOE->BRR=0x00000001<<4
 
 // 定義CPU Serial Number位址 =================================================================
-#define DevID_SNo0     *((u16 *)0x1FFFF7E8);
-#define DevID_SNo1     *((u32 *)0x1FFFF7EC);
-#define DevID_SNo2     *((u32 *)0x1FFFF7F0);
+#define DevID_SNo0     *((u32 *)0x1FFFF7AC);
+#define DevID_SNo1     *((u32 *)0x1FFFF7B0);
+#define DevID_SNo2     *((u32 *)0x1FFFF7B4);
 
 
 // 定義 Shared Data with Boot Loader

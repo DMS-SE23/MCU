@@ -1,10 +1,4 @@
-#include "project.h"
-#include "i2c_slave.h"
-#include "main.h"
-#include "vpm_control.h"
-#include <stdio.h>
-#include "eeprom_control.h"
-#include "i2c_master.h"
+#include "includes.h"
 
 /*I2C Tx index & Rx index*/
 __IO uint32_t Rx_Idx=0, Tx_Idx=0, Tx_Len;
@@ -178,35 +172,92 @@ void I2C_Slave_STOP_UserCallback()
 // ------------------------------------------------------------
 void I2C_Slave_Command_Processing(uint8_t cmd)
 {
-//  uint8_t ui8;
-//  uint16_t ui16;
+  uint8_t ui8;
+  uint16_t ui16;
   
   switch (cmd)	 //from rxbuffer index "0" to tell what i2c command is.
   {
     /* System and Power Control Class : 0x20 ~ 0x3F */
     case I2CCMD_GET_INTERRUPT_EVENT:                        //0x20
+      ui16 = EVENTQUEUE_DELETE_FROM_QUEUE();
+      SET_TX_BUFFER((ui16 >> 8) & 0xFF);
+      INS_TX_BUFFER(ui16 & 0xFF);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_INTERRUPT_STATUS:                       //0x37
+      SET_TX_BUFFER(VAR_INTERRUPT_STATUS & 0xFF);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_SET_INTERRUPT_STATUS:                       //0x38
+      if (Buffer_Rx[1] == 0)
+      {
+        VAR_INTERRUPT_STATUS = 0;
+      }
+      else if (Buffer_Rx[1] == 1)
+      {
+        VAR_INTERRUPT_STATUS = 1;
+      }
       break;
     case I2CCMD_FORCE_VPM_ENTER_POWER_OFF_MODE:             //0x39
+      VAR_IMM_CHANGE_WORKING_MODE_EVENT = 1;
       break;
     case I2CCMD_GET_LAST_WAKEUP_SYSTEM_TRIGGER_SOURCE:      //0x3A
+      SET_TX_BUFFER(VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF & 0xFF);
+      CHK_TX_BUFFER();
       break;
       
     /* Watchdog Class : 0x70 ~ 0x7F */
     case I2CCMD_GET_WATCHDOG_STATUS:                        //0x70
+      ui8 = VAR_WATCHDOG_STATUS;
+      SET_TX_BUFFER(ui8 & 0xFF);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_SET_WATCHDOG_STATUS:                        //0x71
+      if (Buffer_Rx[1] == 0)
+      {
+        VAR_WATCHDOG_STATUS = 0;
+      }
+      else if (Buffer_Rx[1] == 1)
+      {
+        VAR_WATCHDOG_COUNTER = VAR_WATCHDOG_RESET_VALUE;
+        VAR_WATCHDOG_STATUS = 1;
+      }
       break;
     case I2CCMD_GET_WATCHDOG_COUNT_DOWN_TIMER:              //0x72
+      ui16 = VAR_WATCHDOG_RESET_VALUE;
+      SET_TX_BUFFER((ui16 >> 8) & 0xFF);
+      INS_TX_BUFFER(ui16 & 0xFF);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_SET_WATCHDOG_COUNT_DOWN_TIMER:              //0x73
+      ui16 = (Buffer_Rx[1] << 8) | Buffer_Rx[2];
+      ui8 = 0;
+      if (ui16 != 0)
+      {
+        VAR_WATCHDOG_RESET_VALUE = ui16;
+        ui8 = 0x50;
+      }
+      
+      // 更新EEPROM的內容
+      if (ui8 > 0)
+      {
+        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[0] = 0x00;
+        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[0] = ui8;
+        VAR_EEPROM_WRITE_QUEUE_DATA[0] = Buffer_Rx[1];
+        VAR_EEPROM_WRITE_QUEUE_ADDR_HI[1] = 0x00;
+        VAR_EEPROM_WRITE_QUEUE_ADDR_LO[1] = ui8+1;
+        VAR_EEPROM_WRITE_QUEUE_DATA[1] = Buffer_Rx[2];
+        VAR_EEPROM_WRITE_EVENT = 2; // Write 2 Bytes
+      }
       break;
     case I2CCMD_GET_WATCHDOG_CURRENT_COUNTER:               //0x74
+      ui16 = VAR_WATCHDOG_COUNTER;
+      SET_TX_BUFFER((ui16 >> 8) & 0xFF);
+      INS_TX_BUFFER(ui16 & 0xFF);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_RESET_WATCHDOG_CURRENT_COUNTER:             //0x75
+      VAR_WATCHDOG_COUNTER = VAR_WATCHDOG_RESET_VALUE;
       break;
       
     /* Battery Control and Information Class : 0x90 ~ 0x9F */
@@ -252,16 +303,39 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       
     /* External EEPROM Access Class : 0xA0 ~ 0xAF */
     case I2CCMD_EEPROM_LOAD_DEFAULT:                        //0xA0
+      EEPROM_LOAD_FACTORY_DEFAULT();
+      UPDATE_VPM_VARIABLE_FROM_EEPROM();
       break;
     case I2CCMD_EEPROM_SAVE_USER_DEFAULT:                   //0xA1
+      EEPROM_SAVE_USER_DEFAULT();
       break;
     case I2CCMD_EEPROM_LOAD_USER_DEFAULT:                   //0xA2
+      EEPROM_LOAD_USER_DEFAULT();
+      UPDATE_VPM_VARIABLE_FROM_EEPROM();
       break;
     case I2CCMD_EEPROM_RESET_TO_FACTORY_DEFAULT:            //0xA3
+      EEPROM_FILL_DEFAULT_VALUE();
+      UPDATE_VPM_VARIABLE_FROM_EEPROM();
       break;
     case I2CCMD_GET_SERIAL_NUMBER:                          //0xA4
+      SET_TX_BUFFER(VAR_SERIAL_NUMBER[0]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[1]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[2]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[3]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[4]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[5]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[6]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[7]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[8]);
+      INS_TX_BUFFER(VAR_SERIAL_NUMBER[9]);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_SET_SERIAL_NUMBER:                          //0xA5
+      for(int i = 0 ; i < 10 ; i++)
+      {
+        VAR_SERIAL_NUMBER_BUFFER[i] = Buffer_Rx[i+1];
+      }
+      VAR_SERIAL_NUMBER_CHG_EVENT = 1;
       break;
       
     /* Diagnostic and Event Log Counters Class : 0xD0 ~ 0xDF */
@@ -333,8 +407,9 @@ int EVENTQUEUE_INSERT_TO_QUEUE(unsigned char evt_class, unsigned char evt_id)
 {
   // =======================================
   // VPM必須在開機狀態，才能塞入Event Queue
-//  if (VPM_STATE < 3000) return 1;
-//  if (VPM_STATE > 4000) return 1;
+  if (VPM_STATE < 3000) return 1;
+  if (VPM_STATE > 5000) return 1;
+  // VPM必須在CPU通知Driver Ready後，才能塞入Event Queue
   if (VAR_INTERRUPT_STATUS == 0) return 1;
   // =======================================
   // 要塞到Event Queue中，不可為0x00

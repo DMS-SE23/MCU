@@ -1,19 +1,4 @@
-#include "stm32f30x_conf.h"
-#include "stm32_it.h"
-#include <system_stm32f30x.h>
-//#include <core_cm3.h>
-#include <stm32f30x.h>
-#include "gpio_control.h"
-#include "main.h"
-#include <stdio.h>
-
-#include "project.h"
-#include "i2c_master.h"
-#include "i2c_slave.h"
-#include "eeprom_control.h"
-#include "battery_info.h"
-#include "debug_port.h"
-#include "vpm_control.h"
+#include "includes.h"
 
 int I2C_BatteryRead2Byte(unsigned char ReadAddr, unsigned int *ReturndValue)
 {
