@@ -3,7 +3,7 @@
 // 主版本, 0~255
 #define __DEF_PROJECT_MAIN_VERSION   0
 // 次版本, 0~255
-#define __DEF_PROJECT_MINER_VERSION  3
+#define __DEF_PROJECT_MINER_VERSION  4
 
 #define __DEF_PROJECT_NAME_STRING_SIZE 12
 // 平台名稱, 12個字元組 (12 Bytes)
@@ -116,6 +116,8 @@
 #define	__OUT_B5_GPIO_OUT_CPU_ONKEY_BAR_SET_LO      	        GPIOB->BRR=0x00000001<<5
 #define	__IN_B12_GPIO_IN_BAT_PRES_TEST_HI	                GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_12)
 #define	__IN_B12_GPIO_IN_BAT_PRES_TEST_LO	                !GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_12)
+#define	__IN_B14_GPIO_IN_UP_BLK_EN_TEST_HI	                GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_14)
+#define	__IN_B14_GPIO_IN_UP_BLK_EN_TEST_LO	                !GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_14)
 /*** GPIOC ***/
 #define	__OUT_C3_GPIO_OUT_DBG_GPIO_SET_HI			GPIOC->BSRR=0x00000001<<3
 #define	__OUT_C3_GPIO_OUT_DBG_GPIO_SET_LO			GPIOC->BRR=0x00000001<<3

@@ -3,8 +3,6 @@
 #define __I2C_SLAVE_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f30x.h"
-
 /* Exported types ------------------------------------------------------------*/
 typedef enum {NOEVENT = 0, EVENT_NOTYET_READ = 1,EVENT_READ =2} EventStatus;
 

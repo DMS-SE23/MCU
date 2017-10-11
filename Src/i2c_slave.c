@@ -174,6 +174,8 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
 {
   uint8_t ui8;
   uint16_t ui16;
+  uint32_t read_address;
+  uint32_t checksum_tag;
   
   switch (cmd)	 //from rxbuffer index "0" to tell what i2c command is.
   {
@@ -374,12 +376,45 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_FIRMWARE_CHECKSUM_VERIFY_METHOD:        //0xF2
+      read_address = BootloaderAddress + FLASH_SIZE - (CHKSUM_TAG_OFFSET + CHKSUM_TAG_SIZE);
+      checksum_tag= *((uint32_t*)read_address);
+      ui8 = 0xFF;
+      if (checksum_tag == CHK_ALL_TIME)
+      {
+        ui8 = 0x00;
+      }
+      else if (checksum_tag == CHK_ONCE)
+      {
+        ui8 = 0x01;
+      }
+      else if (checksum_tag == DO_NOT_CHK)
+      {
+        ui8 = 0x02;
+      }
+      SET_TX_BUFFER(ui8);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_VPM_BOOTLOADER_VERSION:                 //0xF3
+      read_address = BootloaderAddress + FLASH_SIZE - (BSL_VERSION_OFFSET + BSL_VERSION_SIZE);
+      ui16 = *((uint16_t*)read_address);
+      SET_TX_BUFFER((ui16 & 0xFF00) >> 8);
+      INS_TX_BUFFER(ui16 & 0xFF);
+      CHK_TX_BUFFER();
       break;
     case I2CCMD_ENTER_FIRMWARE_DOWNLOAD_MODE:               //0xF4
+      #ifdef NDEBUG // Release Mode才存在支援
+      {
+        BOOT_SIG = 0xbabecafe;
+        peripheral_irq_disable();
+        u32 JumpAddress = *(__IO u32*) (BootloaderAddress + 4);
+        pFunction Jump_To_Bootloader = (pFunction) JumpAddress;
+        __set_MSP(*(__IO u32*) BootloaderAddress);
+        Jump_To_Bootloader();
+      }
+      #endif // of NDEBUG
       break;
     case I2CCMD_WARM_START:                                 //0xF5
+      peripheral_irq_disable();
       NVIC_SystemReset();
       break;
     case I2CCMD_GET_VPM_FIRMWARE_MODE:                      //0xFE

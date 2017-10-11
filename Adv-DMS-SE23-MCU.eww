@@ -4,6 +4,9 @@
   <project>
     <path>$WS_DIR$\Adv-DMS-SE23-MCU.ewp</path>
   </project>
+  <project>
+    <path>$WS_DIR$\Adv-DMS-SE23-MCU-BL.ewp</path>
+  </project>
   <batchBuild/>
 </workspace>
 

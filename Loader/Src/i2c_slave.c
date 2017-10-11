@@ -1,5 +1,4 @@
-#include "i2c_slave.h"
-#include <stdio.h>
+#include "includes.h"
 
 /*I2C Tx index & Rx index*/
 __IO uint8_t Tx_Idx2=0, Rx_Idx2=0;

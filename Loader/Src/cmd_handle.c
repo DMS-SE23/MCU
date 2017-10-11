@@ -1,9 +1,4 @@
-#include "stdio.h"
-#include "string.h"
-#include "cmd_handle.h"
-#include "common.h"
-#include "config.h"
-#include "i2c_slave.h"
+#include "includes.h"
 
 FLASH_Status FLASHStatus = FLASH_COMPLETE;
 pFunction Jump_To_Bootloader;

@@ -23,9 +23,6 @@
 #define _COMMON_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f30x.h"
-
-
 /* Exported types ------------------------------------------------------------*/
 typedef  void (*pFunction)(void);
 extern pFunction Jump_To_Application;

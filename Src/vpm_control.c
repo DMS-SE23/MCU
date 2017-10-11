@@ -238,12 +238,12 @@ void TASK_VPM_CONTROL()
               __MACRO_CHANGE_VPM_STATE_TO(4850);                            // 進入Turn Off Backlight and Peripheral Powers
               return;
             }
-//            if (__IN_B12_GPIO_IN_BLK_EN_TEST_LO)                             // LCD Backlight Going Low
-//            {
-//              __MACRO_VPM_TRACE(">>: VPM->4850 LCD Backlight Going Low\r\n");
-//              __MACRO_CHANGE_VPM_STATE_TO(4850);                            // 進入Turn Off Backlight and Peripheral Powers
-//              return;
-//            }
+            if (__IN_B14_GPIO_IN_UP_BLK_EN_TEST_LO)                             // LCD Backlight Going Low
+            {
+              __MACRO_VPM_TRACE(">>: VPM->4850 LCD Backlight Going Low\r\n");
+              __MACRO_CHANGE_VPM_STATE_TO(4850);                            // 進入Turn Off Backlight and Peripheral Powers
+              return;
+            }
             break;
     case 4850:  // Turn Off Backlight and Peripheral Powers
             __DEBUG_VPM_TRACE("@@: VPM (4850) Turn Off Backlight and Peripheral Powers\r\n");

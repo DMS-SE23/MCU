@@ -23,14 +23,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "common.h"
-#include "at_packet.h"
-#include "gpio_control.h"
-#include "cmd_handle.h"
-#include "hook_tasks.h"
-#include "config.h"
-#include "i2c_slave.h"
-#include "i2c_master.h"
+#include "includes.h"
 
 uint32_t JumpAddress;
 pFunction Jump_To_Application;
@@ -190,7 +183,6 @@ void BootloaderMode_Enter(void)
 
   //Init I2C for firmware update
   I2C_Slave_Init();
-  I2C_Master_Init();
 
   while (1)
   {

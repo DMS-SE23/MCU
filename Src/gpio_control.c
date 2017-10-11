@@ -72,7 +72,9 @@ void FUNC_GPIO_INIT()
       // __IN_B1_GPIO_IN_DC_IN_DETECT
       // __IN_B2_GPIO_IN_PG_VCC_3V3
       // __IN_B12_GPIO_IN_BAT_PRES
-  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_12;
+      // __IN_B14_GPIO_IN_UP_BLK_EN
+  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_12|
+                                        GPIO_Pin_14;
   GPIO_InitStructure.GPIO_Speed	=	GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode	=	GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd	=	GPIO_PuPd_NOPULL;

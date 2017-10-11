@@ -34,19 +34,19 @@ Info Data	2k
 #define FLASH_SIZE				(0x40000)
 
 #define BSL_FW_VERSION_MAJOR				0
-#define BSL_FW_VERSION_MINOR				2
-#define PRODUCT_ID				"TREK-734-VPM"
+#define BSL_FW_VERSION_MINOR				1
+#define PRODUCT_ID				"DMS-SE23-MCU"
 
 #define __DEF_PROJECT_NAME_STRING_SIZE 12
 // 平台名稱, 12個字元組 (12 Bytes)
-#define __DEF_PROJECT_NAME_1  'T'
-#define __DEF_PROJECT_NAME_2  'R'
-#define __DEF_PROJECT_NAME_3  'E'
-#define __DEF_PROJECT_NAME_4  'K'
-#define __DEF_PROJECT_NAME_5  '-'
-#define __DEF_PROJECT_NAME_6  '7'
-#define __DEF_PROJECT_NAME_7  '3'
-#define __DEF_PROJECT_NAME_8  '4'
+#define __DEF_PROJECT_NAME_1  'D'
+#define __DEF_PROJECT_NAME_2  'M'
+#define __DEF_PROJECT_NAME_3  'S'
+#define __DEF_PROJECT_NAME_4  '-'
+#define __DEF_PROJECT_NAME_5  'S'
+#define __DEF_PROJECT_NAME_6  'E'
+#define __DEF_PROJECT_NAME_7  '2'
+#define __DEF_PROJECT_NAME_8  '3'
 // 配合PCB版號
 #define __DEF_PROJECT_NAME_9  '-'
 #define __DEF_PROJECT_NAME_10 'A'
@@ -62,9 +62,9 @@ Info Data	2k
 #define __MACRO_GET_DIGITAL_IN_UNITS(x)    (x%10)+0x30 
 
 #define   DevID_FlashSize  *((u16 *)0x1FFFF7E0);  
-#define   DevID_SNo0       *((u16 *)0x1FFFF7E8);  
-#define   DevID_SNo1       *((u32 *)0x1FFFF7EC);  
-#define   DevID_SNo2       *((u32 *)0x1FFFF7F0); 
+#define   DevID_SNo0       *((u32 *)0x1FFFF7AC);  
+#define   DevID_SNo1       *((u32 *)0x1FFFF7B0);  
+#define   DevID_SNo2       *((u32 *)0x1FFFF7B4); 
 
 //Information data offset in flash, count from backwards
 #define CMP_TAG_OFFSET			        0x00

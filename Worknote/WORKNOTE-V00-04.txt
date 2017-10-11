@@ -1,0 +1,16 @@
+[V000.04 Release Note Summary]
+------------------------------
+1. Add I2C command:
+   a. Get firmware checksum verify method.
+   b. Get VPM bootloader version.
+   c. Enter firmware download mode.
+2. Add GPIO BLK_EN to sense CPU status.
+   
+---------------------------
+2017-10-11 BACKUP 008 V04
+-------------------------
+1. Add I2C command:
+   a. Get firmware checksum verify method.
+   b. Get VPM bootloader version.
+   c. Enter firmware download mode.
+2. Add GPIO BLK_EN to sense CPU status.

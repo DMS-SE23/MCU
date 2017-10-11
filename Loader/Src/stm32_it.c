@@ -29,10 +29,7 @@
 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32_it.h"
-#include "hook_tasks.h"
-#include "gpio_control.h"
-#include "i2c_slave.h"
+#include "includes.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -171,13 +168,11 @@ void SysTick_Handler(void)
     {
         if (__MACRO_CHECK_IS_LED_ON)
         {
-            __OUT_B0_GPIO_OUT_LED_RED_SET_LO;
-            __OUT_B1_GPIO_OUT_LED_GREEN_SET_HI;
+            __OUT_E2_GPIO_OUT_LED_PWR_G_SET_LO;
         }
         else
         {
-            __OUT_B0_GPIO_OUT_LED_RED_SET_HI;
-            __OUT_B1_GPIO_OUT_LED_GREEN_SET_HI;
+            __OUT_E2_GPIO_OUT_LED_PWR_G_SET_HI;
         }
         VAR_TIMETICK_DELAY = 0;
     }

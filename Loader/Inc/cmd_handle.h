@@ -2,8 +2,6 @@
 #ifndef _CMD_HANDLE_H
 #define _CMD_HANDLE_H
 
-#include "stm32f30x.h"
-
 typedef enum eErrorCode
 {
     ErrCode_OK		       	= 0x00,

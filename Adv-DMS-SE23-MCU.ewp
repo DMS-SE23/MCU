@@ -981,7 +981,7 @@
         <option>
           <name>Variant</name>
           <version>21</version>
-          <state>0</state>
+          <state>40</state>
         </option>
         <option>
           <name>GEndianMode</name>
@@ -990,20 +990,20 @@
         <option>
           <name>Input variant</name>
           <version>3</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>Input description</name>
-          <state></state>
+          <state>Full formatting.</state>
         </option>
         <option>
           <name>Output variant</name>
           <version>2</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>Output description</name>
-          <state></state>
+          <state>Full formatting.</state>
         </option>
         <option>
           <name>GOutputBinary</name>
@@ -1012,25 +1012,25 @@
         <option>
           <name>FPU</name>
           <version>4</version>
-          <state>0</state>
+          <state>6</state>
         </option>
         <option>
           <name>OGCoreOrChip</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>GRuntimeLibSelect</name>
           <version>0</version>
-          <state>1</state>
+          <state>2</state>
         </option>
         <option>
           <name>GRuntimeLibSelectSlave</name>
           <version>0</version>
-          <state>1</state>
+          <state>2</state>
         </option>
         <option>
           <name>RTDescription</name>
-          <state></state>
+          <state>Use the full configuration of the C/C++ runtime library. Full locale interface, C locale, file descriptor support, multibytes in printf and scanf, and hex floats in strtod.</state>
         </option>
         <option>
           <name>OGProductVersion</name>
@@ -1038,7 +1038,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state></state>
+          <state>7.40.1.8463</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -1050,15 +1050,15 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state></state>
+          <state>STM32F303xC	ST STM32F303xC</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>GEndianModeBE</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OGBufferedTerminalOutput</name>
@@ -1066,7 +1066,7 @@
         </option>
         <option>
           <name>GenStdoutInterface</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>GeneralMisraRules98</name>
@@ -1084,21 +1084,21 @@
         </option>
         <option>
           <name>RTConfigPath2</name>
-          <state></state>
+          <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
         </option>
         <option>
           <name>GFPUCoreSlave</name>
           <version>21</version>
-          <state>1</state>
+          <state>40</state>
         </option>
         <option>
           <name>GBECoreSlave</name>
           <version>21</version>
-          <state>1</state>
+          <state>40</state>
         </option>
         <option>
           <name>OGUseCmsis</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OGUseCmsisDspLib</name>
@@ -1120,6 +1120,8 @@
         <option>
           <name>CCDefines</name>
           <state>NDEBUG</state>
+          <state>USE_STDPERIPH_DRIVER</state>
+          <state>STM32F30X</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -1232,7 +1234,7 @@
         </option>
         <option>
           <name>OutputFile</name>
-          <state></state>
+          <state>$FILE_BNAME$.o</state>
         </option>
         <option>
           <name>CCLibConfigHeader</name>
@@ -1248,7 +1250,10 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state></state>
+          <state>$PROJ_DIR$\inc</state>
+          <state>$PROJ_DIR$\CMSIS\Device\ST\STM32F30x\Include</state>
+          <state>$PROJ_DIR$\CMSIS\Include</state>
+          <state>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1277,7 +1282,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>1</state>
+          <state>3</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -1490,7 +1495,7 @@
         </option>
         <option>
           <name>AOutputFile</name>
-          <state></state>
+          <state>$FILE_BNAME$.o</state>
         </option>
         <option>
           <name>AMultibyteSupport</name>
@@ -1536,7 +1541,7 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>2</version>
-          <state>0</state>
+          <state>2</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
@@ -1544,7 +1549,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state></state>
+          <state>Adv-DMS-SE23-MCU.bin</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1552,7 +1557,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -1575,7 +1580,7 @@
       <archiveVersion>1</archiveVersion>
       <data>
         <prebuild></prebuild>
-        <postbuild></postbuild>
+        <postbuild>cmd /C $PROJ_DIR$\Release-Utility\release_batch.bat $PROJ_DIR$ $PROJ_FNAME$ $TARGET_DIR$</postbuild>
       </data>
     </settings>
     <settings>
@@ -1599,7 +1604,7 @@
         </option>
         <option>
           <name>IlinkOutputFile</name>
-          <state>###Unitialized###</state>
+          <state>Adv-DMS-SE23-MCU.out</state>
         </option>
         <option>
           <name>IlinkDebugInfoEnable</name>
@@ -1659,11 +1664,11 @@
         </option>
         <option>
           <name>IlinkIcfOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>lnk0t.icf</state>
+          <state>$PROJ_DIR$\BOOT\stm32f30x_flash-release.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -1723,7 +1728,7 @@
         </option>
         <option>
           <name>IlinkProgramEntryLabel</name>
-          <state></state>
+          <state>__iar_program_start</state>
         </option>
         <option>
           <name>DoFill</name>
@@ -1964,81 +1969,6 @@
     </file>
   </group>
   <group>
-    <name>INCLUDE</name>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_adc.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_can.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_comp.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_crc.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_dac.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_dbgmcu.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_dma.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_exti.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_flash.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_fmc.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_gpio.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_hrtim.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_i2c.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_iwdg.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_misc.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_opamp.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_pwr.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_rcc.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_rtc.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_spi.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_syscfg.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_tim.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_usart.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\inc\stm32f30x_wwdg.h</name>
-    </file>
-  </group>
-  <group>
     <name>SRC</name>
     <file>
       <name>$PROJ_DIR$\Src\battery_info.c</name>
@@ -2083,31 +2013,10 @@
   <group>
     <name>STD_LIB</name>
     <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_adc.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_can.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_comp.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_crc.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_dac.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_dbgmcu.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_dma.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_exti.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_flash.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_gpio.c</name>
@@ -2116,13 +2025,7 @@
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_i2c.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_iwdg.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_misc.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_opamp.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_pwr.c</name>
@@ -2131,22 +2034,7 @@
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_rcc.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_rtc.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_spi.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_syscfg.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_tim.c</name>
-    </file>
-    <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_usart.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_wwdg.c</name>
     </file>
   </group>
   <group>
@@ -2159,6 +2047,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-03.txt</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-04.txt</name>
     </file>
   </group>
 </project>
