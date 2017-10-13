@@ -25,7 +25,7 @@ if not "%1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "D:\Work\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.general.xcl" --backend -f "D:\Work\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.general.xcl" --backend -f "D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "D:\Work\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.general.xcl" "--debug_file=%1" --backend -f "D:\Work\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.general.xcl" "--debug_file=%1" --backend -f "D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\settings\Adv-DMS-SE23-MCU.Debug.driver.xcl" 
 
 @echo off 
 :end

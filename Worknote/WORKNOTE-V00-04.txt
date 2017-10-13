@@ -5,8 +5,13 @@
    b. Get VPM bootloader version.
    c. Enter firmware download mode.
 2. Add GPIO BLK_EN to sense CPU status.
+3. Fix EEPROM initial fail.
    
 ---------------------------
+2017-10-13 BACKUP 009 V04
+-------------------------
+1. Fix EEPROM initial fail.
+
 2017-10-11 BACKUP 008 V04
 -------------------------
 1. Add I2C command:
