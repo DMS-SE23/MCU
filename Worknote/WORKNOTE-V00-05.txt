@@ -1,16 +1,14 @@
 [V000.05 Release Note Summary]
 ------------------------------
-1. Modify I2C slave address from 0xF0 to 0xD0.
-2. Clear battery information when battery does not exist.
-3. Add interrupt when AC plug-in and plug-out.
-4. Add interrupt when battery attached and disattached.
-5. Fix no interrupt occurred bug.
+1. Clear battery information when battery does not exist.
+2. Add interrupt when AC plug-in and plug-out.
+3. Add interrupt when battery attached and disattached.
+4. Fix no interrupt occurred bug.
    
 ---------------------------
 2017-11-20 BACKUP 009 V04
 -------------------------
-1. Modify I2C slave address from 0xF0 to 0xD0.
-2. Clear battery information when battery does not exist.
-3. Add interrupt when AC plug-in and plug-out.
-4. Add interrupt when battery attached and disattached.
-5. Fix no interrupt occurred bug.
+1. Clear battery information when battery does not exist.
+2. Add interrupt when AC plug-in and plug-out.
+3. Add interrupt when battery attached and disattached.
+4. Fix no interrupt occurred bug.

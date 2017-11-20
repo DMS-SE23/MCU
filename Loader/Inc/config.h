@@ -34,7 +34,7 @@ Info Data	2k
 #define FLASH_SIZE				(0x40000)
 
 #define BSL_FW_VERSION_MAJOR				0
-#define BSL_FW_VERSION_MINOR				2
+#define BSL_FW_VERSION_MINOR				1
 #define PRODUCT_ID				"DMS-SE23-MCU"
 
 #define __DEF_PROJECT_NAME_STRING_SIZE 12

@@ -8,7 +8,7 @@ typedef enum {NOEVENT = 0, EVENT_NOTYET_READ = 1,EVENT_READ =2} EventStatus;
 
 
 #define ClockSpeed			100000
-#define DEF_VPM_I2C_SLAVE_ADDRESS       0xD0
+#define DEF_VPM_I2C_SLAVE_ADDRESS       0xF0
 #define __DEF_EVENT_QUEUE_SIZE          64
 
 /* I2C SPE mask */
