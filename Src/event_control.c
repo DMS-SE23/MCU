@@ -65,6 +65,7 @@ void DC_IN(void)
 {
   DEBUG_PRINT("@@: DC IN\r\n");
   CAR_POWER_EXIST = 1;
+  EVENTQUEUE_INSERT_TO_QUEUE(0x02, 0x00);
 }
 
 //DC Out
@@ -72,6 +73,7 @@ void DC_OUT(void)
 {
   DEBUG_PRINT("@@: DC OUT\r\n");
   CAR_POWER_EXIST = 0;
+  EVENTQUEUE_INSERT_TO_QUEUE(0x02, 0x01);
 }
 
 //Battery Attached
@@ -79,6 +81,7 @@ void BATTERY_ATTACHED(void)
 {
   DEBUG_PRINT("@@: Battery Attached\r\n");
   VAR_BATTERY_EXIST = 1;
+  EVENTQUEUE_INSERT_TO_QUEUE(0x03, 0x00);
 }
 
 //Battery Disattached
@@ -86,6 +89,7 @@ void BATTERY_DISATTACHED(void)
 {
   DEBUG_PRINT("@@: Battery Disattached\r\n");
   VAR_BATTERY_EXIST = 0;
+  EVENTQUEUE_INSERT_TO_QUEUE(0x03, 0x01);
 }
 
 void NullEvent(void)

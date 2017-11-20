@@ -37,5 +37,6 @@ int I2C_BatteryRead2Byte (unsigned char ReadAddr, unsigned int *ReturndValue);
 void BATTERY_INFO_UPDATE(void);
 void SHOW_BATTERY_INFO(void);
 void TASK_BATTERY_CHARGE_CONTROL(void);
+void CLEAR_BATTERY_INFO(void);
 
 #endif

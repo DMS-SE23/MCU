@@ -45,6 +45,10 @@ void BATTERY_INFO_UPDATE()
 //    I2C_BatteryRead2Byte(BAT_OFFSET_ManufacturerDate, &BAT_INFO_ManufacturerDate);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_SerialNumber, &BAT_INFO_SerialNumber);
   }
+  else
+  {
+    CLEAR_BATTERY_INFO();
+  }
 }
 //-----------------------------------------------------------------------------
 
@@ -153,5 +157,16 @@ void TASK_BATTERY_CHARGE_CONTROL()
     VAR_BATTERY_STATE = 1;
     __OUT_C8_GPIO_OUT_BAT_CHARGER_EN_SET_HI;
   }
+}
+
+void CLEAR_BATTERY_INFO()
+{
+  BAT_INFO_Temperature = 0;
+  BAT_INFO_Voltage = 0;
+  BAT_INFO_AverageCurrent = 0;
+  BAT_INFO_RelativeStateOfCharge = 0;
+  BAT_INFO_AverageTimeToEmpty = 0;
+  BAT_INFO_AverageTimeToFull = 0;
+  BAT_INFO_BatteryStatus = 0;
 }
 //=============================================================================
