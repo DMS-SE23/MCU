@@ -2199,9 +2199,6 @@
     <file>
       <name>$PROJ_DIR$\Src\vpm_control.c</name>
     </file>
-    <file>
-      <name>$PROJ_DIR$\Src\watchdog.c</name>
-    </file>
   </group>
   <group>
     <name>STD_LIB</name>
@@ -2229,6 +2226,9 @@
     <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_usart.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\Src\watchdog.c</name>
+    </file>
   </group>
   <group>
     <name>WORKNOTE</name>
@@ -2246,6 +2246,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-05.txt</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-06.txt</name>
     </file>
   </group>
 </project>

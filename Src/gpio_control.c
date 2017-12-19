@@ -137,7 +137,7 @@ void FUNC_GPIO_INIT()
 
 void TASK_POWER_LED_CONTROL()
 {
-  if ((CAR_POWER_EXIST == 1) && (VAR_SYSTEM_POWER_SYSTEM_STATE == 1))   // DC in, and Boot-up system
+  if ((CAR_POWER_EXIST == 1))   // DC in
   {
     // Turn on power LED
     __OUT_E2_GPIO_OUT_LED_PWR_G_SET_LO;

@@ -6,7 +6,7 @@
 4. Fix no interrupt occurred bug.
    
 ---------------------------
-2017-11-20 BACKUP 009 V04
+2017-11-20 BACKUP 010 V05
 -------------------------
 1. Clear battery information when battery does not exist.
 2. Add interrupt when AC plug-in and plug-out.

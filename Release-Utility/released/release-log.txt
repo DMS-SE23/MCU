@@ -166,3 +166,27 @@
 [2017-11-20 17:14:43]origin data size is 29248
 [2017-11-20 17:14:44]file size is 37920
 [2017-11-20 17:14:44]Finish!!
+[2017-11-30 16:32:23]******************************************
+
+
+[2017-11-30 16:32:23]The original bin file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.006.bin
+[2017-11-30 16:32:23]The new EBF file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.006.EBF
+[2017-11-30 16:32:23]The firmware type is(0:VPM,1:CAN):  0
+[2017-11-30 16:32:23]The checksum tag is:  2
+[2017-11-30 16:32:23]The download channel is:  4
+[2017-11-30 16:32:23]Find platform name string from the bin file...
+[2017-11-30 16:32:27]Find firmware version string from the bin file...
+[2017-11-30 16:32:32]Generating the AES encrypted value for area 2.....
+[2017-11-30 16:32:36]loop 1827 times,file size is 29232(after padding 10 bytes)
+[2017-11-30 16:32:36]Finished to generate the AES encrypted value for area 2.
+[2017-11-30 16:32:36]Seeding the random number generator...
+[2017-11-30 16:32:36]Get the private key...
+[2017-11-30 16:32:36]Writing ebfformat into file
+[2017-11-30 16:32:36]file size is 32
+[2017-11-30 16:32:36]Generating the RSA encrypted value for area 1 and write into  file  
+[2017-11-30 16:32:36]origin data size is 224
+[2017-11-30 16:32:36]file size is 416
+[2017-11-30 16:32:36]Generating the RSA encrypted value for area 2 and write into file  
+[2017-11-30 16:32:36]origin data size is 29232
+[2017-11-30 16:32:37]file size is 37920
+[2017-11-30 16:32:37]Finish!!

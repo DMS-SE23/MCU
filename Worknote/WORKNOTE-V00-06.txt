@@ -1,0 +1,8 @@
+[V000.06 Release Note Summary]
+------------------------------
+1. Modify power LED behavior. (Turn ON power LED after AC plug-in; turn OFF power LED after AC plug-out)
+   
+---------------------------
+2017-12-19 BACKUP 011 V06
+-------------------------
+1. Modify power LED behavior. (Turn ON power LED after AC plug-in; turn OFF power LED after AC plug-out)
