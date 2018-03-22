@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<userOverrides>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Inc\adc_channel.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Inc\eeprom_control.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Inc\main.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Inc\project.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Loader\Inc\config.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Src\battery_info.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Src\eeprom_control.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Src\i2c_slave.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Src\main.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Src\vpm_control.c</path>
+    <encoding>System</encoding>
+  </override>
+</userOverrides>
+
+

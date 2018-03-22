@@ -120,6 +120,7 @@ void SHOW_BATTERY_INFO()
       {
         DEBUG_PRINT ("TimeToEmpty=%dmin; ",BAT_INFO_AverageTimeToEmpty);
       }
+
       DEBUG_PRINT ("\r\n");
       
       count = 0;

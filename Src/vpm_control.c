@@ -186,10 +186,35 @@ void TASK_VPM_CONTROL()
     case 3030:  // Do Power On Sequence 6
             __DEBUG_VPM_TRACE("@@: VPM (3030) Power On Sequence 6\r\n");
             __OUT_A7_GPIO_OUT_UP_CPU_RST_BAR_SET_HI;
+            var_VPM_Count_Down_by_10mS = 10;
             __MACRO_CHANGE_VPM_STATE_TO(3035);
             break;
     case 3035:  // Do Power On Sequence 7
             __DEBUG_VPM_TRACE("@@: VPM (3035) Power On Sequence 7\r\n");
+            if (var_VPM_Count_Down_by_10mS-- <= 0)
+            {
+              __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_HI;
+              var_VPM_Count_Down_by_10mS = 2;
+              __MACRO_CHANGE_VPM_STATE_TO(3040);
+              return;
+            }  
+            break;
+    case 3040:  // Do Power On Sequence 8
+            __DEBUG_VPM_TRACE("@@: VPM (3040) Power On Sequence 8\r\n");
+            if (var_VPM_Count_Down_by_10mS-- <= 0)
+            {
+              __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_HI;
+              __MACRO_CHANGE_VPM_STATE_TO(3045);
+              return;
+            }
+            break;
+    case 3045:  // Do Power On Sequence 9
+            __DEBUG_VPM_TRACE("@@: VPM (3045) Power On Sequence 9\r\n");
+            __OUT_E9_GPIO_OUT_AMP_MUTE_SET_LO;
+            __MACRO_CHANGE_VPM_STATE_TO(3050);
+            break;
+    case 3050:  // Do Power On Sequence 10
+            __DEBUG_VPM_TRACE("@@: VPM (3050) Power On Sequence 10\r\n");
             DEBUG_PRINT("@@: Hello DMS-SE23 MCU Power On\r\n");
             __MACRO_CHANGE_VPM_STATE_TO(3100);
             break;
@@ -247,7 +272,27 @@ void TASK_VPM_CONTROL()
             break;
     case 4850:  // Turn Off Backlight and Peripheral Powers
             __DEBUG_VPM_TRACE("@@: VPM (4850) Turn Off Backlight and Peripheral Powers\r\n");
-            __MACRO_CHANGE_VPM_STATE_TO(4500);
+            __MACRO_CHANGE_VPM_STATE_TO(4860);
+            break;
+    case 4860:  // Turn Off AMP_MUTE
+            __DEBUG_VPM_TRACE("@@: VPM (4860) Turn Off AMP_MUTE\r\n");
+            __OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI;
+            __MACRO_CHANGE_VPM_STATE_TO(4870);
+            break;
+    case 4870:  // Disable AMP
+            __DEBUG_VPM_TRACE("@@: VPM (4870) Disable AMP\r\n");
+            __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_LO;
+            var_VPM_Count_Down_by_10mS = 2;
+            __MACRO_CHANGE_VPM_STATE_TO(4880);
+            break;
+    case 4880:  // Disable AMP_12V
+            __DEBUG_VPM_TRACE("@@: VPM (4880) Disable AMP_12V\r\n");
+            if (var_VPM_Count_Down_by_10mS-- <= 0)
+            {
+              __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_LO;
+              __MACRO_CHANGE_VPM_STATE_TO(4500);
+              return;
+            }
             break;
     case 4500:  // Turn Off Power LED
             __DEBUG_VPM_TRACE("@@: VPM (4500) Turn Off Power LED\r\n");

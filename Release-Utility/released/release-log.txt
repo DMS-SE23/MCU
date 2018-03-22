@@ -190,3 +190,75 @@
 [2017-11-30 16:32:36]origin data size is 29232
 [2017-11-30 16:32:37]file size is 37920
 [2017-11-30 16:32:37]Finish!!
+[2018-3-21 19:12:17]******************************************
+
+
+[2018-3-21 19:12:17]The original bin file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.006.bin
+[2018-3-21 19:12:17]The new EBF file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.006.EBF
+[2018-3-21 19:12:17]The firmware type is(0:VPM,1:CAN):  0
+[2018-3-21 19:12:17]The checksum tag is:  2
+[2018-3-21 19:12:17]The download channel is:  4
+[2018-3-21 19:12:17]Find platform name string from the bin file...
+[2018-3-21 19:12:22]Find firmware version string from the bin file...
+[2018-3-21 19:12:28]Generating the AES encrypted value for area 2.....
+[2018-3-21 19:12:33]loop 1928 times,file size is 30848(after padding 6 bytes)
+[2018-3-21 19:12:33]Finished to generate the AES encrypted value for area 2.
+[2018-3-21 19:12:33]Seeding the random number generator...
+[2018-3-21 19:12:33]Get the private key...
+[2018-3-21 19:12:33]Writing ebfformat into file
+[2018-3-21 19:12:33]file size is 32
+[2018-3-21 19:12:33]Generating the RSA encrypted value for area 1 and write into  file  
+[2018-3-21 19:12:33]origin data size is 224
+[2018-3-21 19:12:33]file size is 416
+[2018-3-21 19:12:33]Generating the RSA encrypted value for area 2 and write into file  
+[2018-3-21 19:12:33]origin data size is 30848
+[2018-3-21 19:12:35]file size is 39968
+[2018-3-21 19:12:35]Finish!!
+[2018-3-22 9:44:30]******************************************
+
+
+[2018-3-22 9:44:30]The original bin file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.090.bin
+[2018-3-22 9:44:30]The new EBF file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.090.EBF
+[2018-3-22 9:44:30]The firmware type is(0:VPM,1:CAN):  0
+[2018-3-22 9:44:30]The checksum tag is:  2
+[2018-3-22 9:44:30]The download channel is:  4
+[2018-3-22 9:44:30]Find platform name string from the bin file...
+[2018-3-22 9:44:35]Find firmware version string from the bin file...
+[2018-3-22 9:44:41]Generating the AES encrypted value for area 2.....
+[2018-3-22 9:44:45]loop 1928 times,file size is 30848(after padding 6 bytes)
+[2018-3-22 9:44:45]Finished to generate the AES encrypted value for area 2.
+[2018-3-22 9:44:45]Seeding the random number generator...
+[2018-3-22 9:44:45]Get the private key...
+[2018-3-22 9:44:45]Writing ebfformat into file
+[2018-3-22 9:44:45]file size is 32
+[2018-3-22 9:44:45]Generating the RSA encrypted value for area 1 and write into  file  
+[2018-3-22 9:44:45]origin data size is 224
+[2018-3-22 9:44:45]file size is 416
+[2018-3-22 9:44:45]Generating the RSA encrypted value for area 2 and write into file  
+[2018-3-22 9:44:45]origin data size is 30848
+[2018-3-22 9:44:46]file size is 39968
+[2018-3-22 9:44:46]Finish!!
+[2018-3-22 9:54:32]******************************************
+
+
+[2018-3-22 9:54:32]The original bin file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.090.bin
+[2018-3-22 9:54:32]The new EBF file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.090.EBF
+[2018-3-22 9:54:32]The firmware type is(0:VPM,1:CAN):  0
+[2018-3-22 9:54:32]The checksum tag is:  2
+[2018-3-22 9:54:32]The download channel is:  4
+[2018-3-22 9:54:32]Find platform name string from the bin file...
+[2018-3-22 9:54:37]Find firmware version string from the bin file...
+[2018-3-22 9:54:42]Generating the AES encrypted value for area 2.....
+[2018-3-22 9:54:46]loop 1928 times,file size is 30848(after padding 6 bytes)
+[2018-3-22 9:54:46]Finished to generate the AES encrypted value for area 2.
+[2018-3-22 9:54:46]Seeding the random number generator...
+[2018-3-22 9:54:46]Get the private key...
+[2018-3-22 9:54:46]Writing ebfformat into file
+[2018-3-22 9:54:46]file size is 32
+[2018-3-22 9:54:46]Generating the RSA encrypted value for area 1 and write into  file  
+[2018-3-22 9:54:46]origin data size is 224
+[2018-3-22 9:54:46]file size is 416
+[2018-3-22 9:54:46]Generating the RSA encrypted value for area 2 and write into file  
+[2018-3-22 9:54:46]origin data size is 30848
+[2018-3-22 9:54:47]file size is 39968
+[2018-3-22 9:54:47]Finish!!

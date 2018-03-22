@@ -24,6 +24,9 @@ void GPIO_OUTPUT_STATUS_INIT()
   __OUT_E2_GPIO_OUT_LED_PWR_G_SET_HI;
   __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_HI;
   __OUT_E4_GPIO_OUT_LED_RED_SET_HI;
+  __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_LO;
+  __OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI;
+  __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_LO;
 }
 //-----------------------------------------------------------------------------
 
@@ -91,6 +94,14 @@ void FUNC_GPIO_INIT()
 
 /* GPIOC ============================================================> */
   // GPIO Group C
+    // ADC
+      // PC0  - V_CAR_BATT_DET
+  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_0 ;
+  GPIO_InitStructure.GPIO_Speed	=	GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode	=	GPIO_Mode_AN;						// GPIO Analog In/Out Mode
+  GPIO_InitStructure.GPIO_PuPd  =       GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  
     // Input - Floating
       // __IN_C13_GPIO_IN_VPM_PC13
   GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_13;
@@ -126,7 +137,11 @@ void FUNC_GPIO_INIT()
       // __OUT_E2_GPIO_OUT_LED_PWR_G
       // __OUT_E3_GPIO_OUT_LED_BAT_GREEN
       // __OUT_E4_GPIO_OUT_LED_RED
-  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 ;
+      // __OUT_E8_GPIO_OUT_AMP_DISABLE
+      // __OUT_E9_GPIO_OUT_AMP_MUTE
+      // __OUT_E10_GPIO_OUT_AMP_12V_EN
+  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 |
+                                        GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10;
   GPIO_InitStructure.GPIO_Speed	=	GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode	=	GPIO_Mode_OUT;
   GPIO_InitStructure.GPIO_OType	=	GPIO_OType_PP;

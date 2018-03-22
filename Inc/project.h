@@ -3,7 +3,7 @@
 // 主版本, 0~255
 #define __DEF_PROJECT_MAIN_VERSION   0
 // 次版本, 0~255
-#define __DEF_PROJECT_MINER_VERSION  6
+#define __DEF_PROJECT_MINER_VERSION  90
 
 #define __DEF_PROJECT_NAME_STRING_SIZE 12
 // 平台名稱, 12個字元組 (12 Bytes)
@@ -19,7 +19,7 @@
 #define __DEF_PROJECT_NAME_9 '-'
 #define __DEF_PROJECT_NAME_10 'A'
 #define __DEF_PROJECT_NAME_11 '0'
-#define __DEF_PROJECT_NAME_12 '1'
+#define __DEF_PROJECT_NAME_12 '2'
 
 // VPM EVENT TIMEOUT DELAY MAX
 #define __DEF_WDG_COUNTDOWN_TIMER_MIN         1
@@ -135,6 +135,12 @@
 #define	__OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_LO	                GPIOE->BRR=0x00000001<<3
 #define	__OUT_E4_GPIO_OUT_LED_RED_SET_HI                        GPIOE->BSRR=0x00000001<<4
 #define	__OUT_E4_GPIO_OUT_LED_RED_SET_LO	                GPIOE->BRR=0x00000001<<4
+#define	__OUT_E8_GPIO_OUT_AMP_DISABLE_SET_HI			GPIOE->BSRR=0x00000001<<8
+#define	__OUT_E8_GPIO_OUT_AMP_DISABLE_SET_LO			GPIOE->BRR=0x00000001<<8
+#define	__OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI                       GPIOE->BSRR=0x00000001<<9
+#define	__OUT_E9_GPIO_OUT_AMP_MUTE_SET_LO	                GPIOE->BRR=0x00000001<<9
+#define	__OUT_E10_GPIO_OUT_AMP_12V_EN_SET_HI                    GPIOE->BSRR=0x00000001<<10
+#define	__OUT_E10_GPIO_OUT_AMP_12V_EN_SET_LO	                GPIOE->BRR=0x00000001<<10
 
 // 定義CPU Serial Number位址 =================================================================
 #define DevID_SNo0     *((u32 *)0x1FFFF7AC);

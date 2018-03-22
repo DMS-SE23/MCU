@@ -13,17 +13,6 @@
 #ifndef MAIN_C
 #define MAIN_C
 
-#include "stm32f30x_syscfg.h"
-#include "stm32f30x_exti.h"
-#include "stm32f30x_conf.h"
-#include "stm32f30x_dbgmcu.h"
-#include "project.h"
-#include "eeprom_control.h"
-#include "debug_port.h"
-#include <stdarg.h>
-#include <stdio.h>        // for printf
-#include <stdlib.h>
-
 // Variable for 100uS Tick Event, indicates the event occurse
 // This variable is rise high in time tick interrupt
 
@@ -53,6 +42,9 @@ extern u8 DEBUG_TxBuffer[TxBufferSize];
 extern u8 DEBUG_RxBuffer[RxBufferSize];
 extern u16 DEBUG_TxS, DEBUG_TxE; // Tx Start, End Ptr
 extern u16 DEBUG_RxS, DEBUG_RxE; // Rx Start, End Ptr
+
+// 目前所偵測到之Current
+extern volatile unsigned int VAR_CURRENT_SENSE_VALUE;
 
 extern unsigned char VAR_BATTERY_EXIST; // Battery是否存在，預設不存在
 extern unsigned char CAR_POWER_EXIST;   // Car Power是否存在，預設不存在

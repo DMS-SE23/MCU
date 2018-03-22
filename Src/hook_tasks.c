@@ -26,6 +26,7 @@ void TASK_Hook_25mS()
 void TASK_Hook_100mS()
 {
   TASK_BATTERY_CHARGE_CONTROL();
+  TASK_UPDATE_DETECTED_ADC_VALUE();
 }
 
 // 1S Hook¥D¨ç¦¡
@@ -40,4 +41,5 @@ void TASK_Hook_1S()
 
 /*** For DEBUG only ***/
   SHOW_BATTERY_INFO();
+  SHOW_ADC_INFO();
 }

@@ -1,0 +1,10 @@
+[V000.90 Release Note Summary]
+------------------------------
+1. Modify power sequence to fix POP noise.
+2. Add ADC sense backlight current.
+   
+---------------------------
+2018-03-21 BACKUP 012 V07
+-------------------------
+1. Modify power sequence to fix POP noise.
+2. Add ADC sense backlight current.

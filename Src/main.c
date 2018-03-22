@@ -60,6 +60,9 @@ u8 DEBUG_RxBuffer[RxBufferSize];
 u16 DEBUG_TxS=0, DEBUG_TxE=0; // Tx Start, End Ptr
 u16 DEBUG_RxS=0, DEBUG_RxE=0; // Rx Start, End Ptr
 
+// 目前所偵測到之Current
+volatile unsigned int VAR_CURRENT_SENSE_VALUE = 0;
+
 unsigned char VAR_BATTERY_EXIST = 0; // Battery是否存在，預設不存在
 unsigned char CAR_POWER_EXIST = 0;   // Car Power是否存在，預設不存在
 
@@ -324,6 +327,10 @@ int main(void)
   // 初始化GPIO
   FUNC_GPIO_INIT();
   DEBUG_PRINT("..: GPIO Init Complete\r\n");
+  
+  // 初始化ADC
+  ADC_Configuration();
+  DEBUG_PRINT("..: ADC Init Complete\r\n");
 
   //Initial I2C1 Master
   I2C1_Master_Init();
@@ -401,7 +408,7 @@ int main(void)
     if (VAR_POWER_BUTTON_OVERRIDE_EVENT == 1)
     {
       VAR_POWER_BUTTON_OVERRIDE_EVENT = 0;
-      VPM_STATE = 4500;
+      VPM_STATE = 4850;
     }
 //-------------------------------------- 
     if (VAR_SERIAL_NUMBER_CHG_EVENT == 1)

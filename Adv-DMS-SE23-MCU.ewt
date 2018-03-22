@@ -2116,6 +2116,9 @@
   <group>
     <name>INC</name>
     <file>
+      <name>$PROJ_DIR$\Inc\adc_channel.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\Inc\battery_info.h</name>
     </file>
     <file>
@@ -2164,6 +2167,9 @@
   <group>
     <name>SRC</name>
     <file>
+      <name>$PROJ_DIR$\Src\adc_channel.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\Src\battery_info.c</name>
     </file>
     <file>
@@ -2203,7 +2209,13 @@
   <group>
     <name>STD_LIB</name>
     <file>
+      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_adc.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_dbgmcu.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_dma.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\STM32F30x_StdPeriph_Driver\src\stm32f30x_exti.c</name>
@@ -2249,6 +2261,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-06.txt</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-90.txt</name>
     </file>
   </group>
 </project>
