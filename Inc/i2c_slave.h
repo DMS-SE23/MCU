@@ -11,7 +11,7 @@ typedef enum {NOEVENT = 0, EVENT_NOTYET_READ = 1,EVENT_READ =2} EventStatus;
 
 #define ClockSpeed			100000
 //#define SlaveAddr			0x30
-#define DEF_VPM_I2C_SLAVE_ADDRESS       0xF0
+#define DEF_VPM_I2C_SLAVE_ADDRESS       0xD0
 
 /* I2C SPE mask */
 #define CR1_PE_Set              ((uint16_t)0x0001)
@@ -38,6 +38,9 @@ extern uint8_t Buffer_Tx[MAX_I2C_TX_BUFFER];
 #define I2CCMD_SET_INTERRUPT_STATUS                         0x38
 #define I2CCMD_FORCE_VPM_ENTER_POWER_OFF_MODE               0x39
 #define I2CCMD_GET_LAST_WAKEUP_SYSTEM_TRIGGER_SOURCE        0x3A
+
+/* ADC Class : 0x40 ~ 0x4F */
+#define I2CCMD_GET_CURRENT_VALUE                            0x40
 
 /* Watchdog Class : 0x70 ~ 0x7F */
 #define I2CCMD_GET_WATCHDOG_STATUS                          0x70

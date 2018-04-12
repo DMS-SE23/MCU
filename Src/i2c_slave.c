@@ -127,6 +127,9 @@ void I2C_Slave_STOP_UserCallback()
     case I2CCMD_GET_INTERRUPT_STATUS:                       //0x37
     case I2CCMD_GET_LAST_WAKEUP_SYSTEM_TRIGGER_SOURCE:      //0x3A
       
+    /* ADC Class : 0x40 ~ 0x4F */
+    case I2CCMD_GET_CURRENT_VALUE:                          //0x40
+      
     /* Watchdog Class : 0x70 ~ 0x7F */
     case I2CCMD_GET_WATCHDOG_STATUS:                        //0x70
     case I2CCMD_GET_WATCHDOG_COUNT_DOWN_TIMER:              //0x72
@@ -205,6 +208,14 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       break;
     case I2CCMD_GET_LAST_WAKEUP_SYSTEM_TRIGGER_SOURCE:      //0x3A
       SET_TX_BUFFER(VAR_LAST_WAKEUP_EVENT_SOURCE_FROM_POWER_OFF & 0xFF);
+      CHK_TX_BUFFER();
+      break;
+      
+    /* ADC Class : 0x40 ~ 0x4F */
+    case I2CCMD_GET_CURRENT_VALUE:                          //0x40
+      ui16 = VAR_CURRENT_SENSE_VALUE;
+      SET_TX_BUFFER((ui16 >> 8) & 0xFF);
+      INS_TX_BUFFER(ui16 & 0xFF);
       CHK_TX_BUFFER();
       break;
       

@@ -1,0 +1,10 @@
+[V000.91 Release Note Summary]
+------------------------------
+1. Add ADC sense backlight current command.
+2. Modify I2C slave address.
+   
+---------------------------
+2018-04-12 BACKUP 013 V08
+-------------------------
+1. Add ADC sense backlight current command.
+2. Modify slave I2C address.

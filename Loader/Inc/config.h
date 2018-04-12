@@ -34,7 +34,7 @@ Info Data	2k
 #define FLASH_SIZE				(0x40000)
 
 #define BSL_FW_VERSION_MAJOR				0
-#define BSL_FW_VERSION_MINOR				1
+#define BSL_FW_VERSION_MINOR				2
 #define PRODUCT_ID				"DMS-SE23-MCU"
 
 #define __DEF_PROJECT_NAME_STRING_SIZE 12
@@ -51,7 +51,7 @@ Info Data	2k
 #define __DEF_PROJECT_NAME_9  '-'
 #define __DEF_PROJECT_NAME_10 'A'
 #define __DEF_PROJECT_NAME_11 '0'
-#define __DEF_PROJECT_NAME_12 '1'
+#define __DEF_PROJECT_NAME_12 '2'
 
 // 定義取得某一位數的值，並轉成ASC II Code
 // 取得百位數

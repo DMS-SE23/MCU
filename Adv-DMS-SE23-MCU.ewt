@@ -2265,6 +2265,9 @@
     <file>
       <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-90.txt</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\Worknote\WORKNOTE-V00-91.txt</name>
+    </file>
   </group>
 </project>
 
