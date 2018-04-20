@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-512906188
+Checksum=-351435584
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -52,6 +52,8 @@ ShowSource=1
 [Simulator]
 Freq=10000000
 MultiCoreRunAll=1
+[watch_formats]
+Fmt0={W}42:BAT_INFO_BatteryStatus	4	0
 [Trace2]
 Enabled=0
 ShowSource=0

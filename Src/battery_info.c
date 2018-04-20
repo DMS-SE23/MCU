@@ -4,6 +4,11 @@ int I2C_BatteryRead2Byte(unsigned char ReadAddr, unsigned int *ReturndValue)
 {
   return(I2C_READ_WORD(DEF_BQ40Z50_ADDRESS, ReadAddr, ReturndValue));
 }
+
+int I2C_BatteryReadNByte(unsigned char ReadAddr, unsigned int ReadSize, unsigned char *ReturndValue)
+{
+  return(I2C_READ_NBYTE(DEF_BQ40Z50_ADDRESS, ReadAddr, ReadSize, ReturndValue));
+}
 //-----------------------------------------------------------------------------
 
 // 更新Battery的資訊
@@ -27,8 +32,8 @@ void BATTERY_INFO_UPDATE()
 //    I2C_BatteryRead2Byte(BAT_OFFSET_MaxError, &BAT_INFO_MaxError);
     I2C_BatteryRead2Byte(BAT_OFFSET_RelativeStateOfCharge, &BAT_INFO_RelativeStateOfCharge);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_AbsoluteStateOfCharge, &BAT_INFO_AbsoluteStateOfCharge);
-//    I2C_BatteryRead2Byte(BAT_OFFSET_RemainingCapacity, &BAT_INFO_RemainingCapacity);
-//    I2C_BatteryRead2Byte(BAT_OFFSET_FullChargeCapacity, &BAT_INFO_FullChargeCapacity);
+    I2C_BatteryRead2Byte(BAT_OFFSET_RemainingCapacity, &BAT_INFO_RemainingCapacity);
+    I2C_BatteryRead2Byte(BAT_OFFSET_FullChargeCapacity, &BAT_INFO_FullChargeCapacity);
 
 //    I2C_BatteryRead2Byte(BAT_OFFSET_RunTimeToEmpty, &BAT_INFO_RunTimeToEmpty);
     I2C_BatteryRead2Byte(BAT_OFFSET_AverageTimeToEmpty, &BAT_INFO_AverageTimeToEmpty);
@@ -37,13 +42,17 @@ void BATTERY_INFO_UPDATE()
 //    I2C_BatteryRead2Byte(BAT_OFFSET_ChargingVoltage, &BAT_INFO_ChargingVoltage);
 
     I2C_BatteryRead2Byte(BAT_OFFSET_BatteryStatus, &BAT_INFO_BatteryStatus);
-//    I2C_BatteryRead2Byte(BAT_OFFSET_CycleCount, &BAT_INFO_CycleCount);
+    I2C_BatteryRead2Byte(BAT_OFFSET_CycleCount, &BAT_INFO_CycleCount);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_DesignCapacity, &BAT_INFO_DesignCapacity);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_DesignVoltage, &BAT_INFO_DesignVoltage);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_SpecificationInfo, &BAT_INFO_SpecificationInfo);
 //    
 //    I2C_BatteryRead2Byte(BAT_OFFSET_ManufacturerDate, &BAT_INFO_ManufacturerDate);
-//    I2C_BatteryRead2Byte(BAT_OFFSET_SerialNumber, &BAT_INFO_SerialNumber);
+    I2C_BatteryRead2Byte(BAT_OFFSET_SerialNumber, &BAT_INFO_SerialNumber);
+    
+    I2C_BatteryReadNByte(BAT_OFFSET_ManufacturerName, 21, BAT_INFO_ManufacturerName);
+    I2C_BatteryReadNByte(BAT_OFFSET_DeviceName, 21, BAT_INFO_DeviceName);
+    I2C_BatteryRead2Byte(BAT_OFFSET_StateOfHealth, &BAT_INFO_StateOfHealth);
   }
   else
   {
@@ -169,5 +178,12 @@ void CLEAR_BATTERY_INFO()
   BAT_INFO_AverageTimeToEmpty = 0;
   BAT_INFO_AverageTimeToFull = 0;
   BAT_INFO_BatteryStatus = 0;
+  BAT_INFO_RemainingCapacity = 0;
+  BAT_INFO_FullChargeCapacity = 0;
+  BAT_INFO_CycleCount = 0;
+  BAT_INFO_SerialNumber = 0;
+  memset(BAT_INFO_ManufacturerName, '\0', sizeof(BAT_INFO_ManufacturerName));
+  memset(BAT_INFO_DeviceName, '\0', sizeof(BAT_INFO_DeviceName));
+  BAT_INFO_StateOfHealth = 0;
 }
 //=============================================================================

@@ -95,6 +95,9 @@ unsigned int BAT_INFO_DesignVoltage = 0;              // 0x19
 unsigned int BAT_INFO_SpecificationInfo = 0;          // 0x1A
 unsigned int BAT_INFO_ManufacturerDate = 0;           // 0x1B
 unsigned int BAT_INFO_SerialNumber = 0;               // 0x1C
+unsigned char BAT_INFO_ManufacturerName[21];          // 0x20
+unsigned char BAT_INFO_DeviceName[21];                // 0x21
+unsigned int BAT_INFO_StateOfHealth = 0;              // 0x4F
 
 // WATCHDOG TIMER
 volatile unsigned char VAR_WATCHDOG_STATUS                  = 0;    // Watchdog¶}±Ò©ÎÃö³¬

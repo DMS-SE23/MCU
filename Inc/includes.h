@@ -1,6 +1,7 @@
 #include <stdio.h>        				            // for printf
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "stm32f30x_conf.h"
 #include "stm32f30x_dbgmcu.h"

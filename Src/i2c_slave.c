@@ -143,6 +143,13 @@ void I2C_Slave_STOP_UserCallback()
     case I2CCMD_GET_BATTERY_PACK_VOLTAGE:                   //0x94
     case I2CCMD_GET_BATTERY_PACK_AVERAGE_CURRENT:           //0x95
     case I2CCMD_GET_BATTERY_PACK_TIME_TO_FULL:              //0x96
+    case I2CCMD_GET_BATTERY_PACK_STATE_OF_HEALTH:           //0x97
+    case I2CCMD_GET_BATTERY_PACK_REMAINING_CAPACITY:        //0x98
+    case I2CCMD_GET_BATTERY_PACK_FULL_CHARGE_CAPACITY:      //0x99
+    case I2CCMD_GET_BATTERY_PACK_DEVICE_NAME:               //0x9A
+    case I2CCMD_GET_BATTERY_PACK_SERIAL_NUMBER:             //0x9B
+    case I2CCMD_GET_BATTERY_PACK_MANUFACTURER_NAME:         //0x9C
+    case I2CCMD_GET_BATTERY_PACK_CYCLE_COUNT:               //0x9D
     case I2CCMD_GET_BATTERY_PACK_STATE:                     //0x9F
       
     /* External EEPROM Access Class : 0xA0 ~ 0xAF */
@@ -307,6 +314,47 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
     case I2CCMD_GET_BATTERY_PACK_TIME_TO_FULL:              //0x96
       SET_TX_BUFFER((BAT_INFO_AverageTimeToFull >> 8) & 0xFF);
       INS_TX_BUFFER(BAT_INFO_AverageTimeToFull);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_STATE_OF_HEALTH:           //0x97
+      SET_TX_BUFFER((BAT_INFO_StateOfHealth >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_StateOfHealth);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_REMAINING_CAPACITY:        //0x98
+      SET_TX_BUFFER((BAT_INFO_RemainingCapacity >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_RemainingCapacity);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_FULL_CHARGE_CAPACITY:      //0x99
+      SET_TX_BUFFER((BAT_INFO_FullChargeCapacity >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_FullChargeCapacity);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_DEVICE_NAME:               //0x9A
+      SET_TX_BUFFER(BAT_INFO_DeviceName[0]);
+      for (int i = 1 ; i < 21 ; i++)
+      {
+        INS_TX_BUFFER(BAT_INFO_DeviceName[i]);
+      }
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_SERIAL_NUMBER:             //0x9B
+      SET_TX_BUFFER((BAT_INFO_SerialNumber >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_SerialNumber);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_MANUFACTURER_NAME:         //0x9C
+      SET_TX_BUFFER(BAT_INFO_ManufacturerName[0]);
+      for (int i = 1 ; i < 21 ; i++)
+      {
+        INS_TX_BUFFER(BAT_INFO_ManufacturerName[i]);
+      }
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_CYCLE_COUNT:               //0x9D
+      SET_TX_BUFFER((BAT_INFO_CycleCount >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_CycleCount);
       CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_STATE:                     //0x9F

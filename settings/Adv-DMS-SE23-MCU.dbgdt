@@ -8,11 +8,11 @@
         
       <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1857</ColumnWidth1></Debug-Log>
       <Build>
-        <ColumnWidth0>20</ColumnWidth0>
-        <ColumnWidth1>1392</ColumnWidth1>
-        <ColumnWidth2>371</ColumnWidth2>
-        <ColumnWidth3>92</ColumnWidth3>
-      </Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1392</ColumnWidth1><ColumnWidth2>371</ColumnWidth2><ColumnWidth3>92</ColumnWidth3></Build>
       <Workspace>
         <ColumnWidths>
           
@@ -34,12 +34,12 @@
         
         
       <ShowCodeCoverage>1</ShowCodeCoverage><ShowInstrProfiling>1</ShowInstrProfiling></Disassembly>
-    <Find-in-Files><ColumnWidth0>569</ColumnWidth0><ColumnWidth1>94</ColumnWidth1><ColumnWidth2>854</ColumnWidth2><ColumnWidth3>379</ColumnWidth3></Find-in-Files><StaticWatch><expressions><item>BAT_INFO_Temperature</item><item>BAT_INFO_Voltage</item><item>BAT_INFO_AverageCurrent</item><item>BAT_INFO_RelativeStateOfCharge</item><item>BAT_INFO_AverageTimeToEmpty</item><item>BAT_INFO_AverageTimeToFull</item><item>BAT_INFO_BatteryStatus</item><item>VAR_BATTERY_STATE</item><item>VAR_EVENT_SIZE</item><item>VAR_CURRENT_SENSE_VALUE</item><item/></expressions><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>289</item><item>150</item><item>100</item><item>100</item></col-widths></StaticWatch></Static>
+    <Find-in-Files><ColumnWidth0>569</ColumnWidth0><ColumnWidth1>94</ColumnWidth1><ColumnWidth2>854</ColumnWidth2><ColumnWidth3>379</ColumnWidth3></Find-in-Files><StaticWatch><expressions><item>BAT_INFO_Temperature</item><item>BAT_INFO_Voltage</item><item>BAT_INFO_AverageCurrent</item><item>BAT_INFO_RelativeStateOfCharge</item><item>BAT_INFO_AverageTimeToEmpty</item><item>BAT_INFO_AverageTimeToFull</item><item>BAT_INFO_BatteryStatus</item><item>VAR_BATTERY_STATE</item><item>VAR_EVENT_SIZE</item><item>VAR_CURRENT_SENSE_VALUE</item><item>BAT_INFO_StateOfHealth</item><item>BAT_INFO_CycleCount</item><item>BAT_INFO_SerialNumber</item><item>BAT_INFO_ManufacturerName</item><item>BAT_INFO_DeviceName</item><item>BAT_INFO_RemainingCapacity</item><item>BAT_INFO_FullChargeCapacity</item><item/></expressions><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>289</item><item>150</item><item>100</item><item>100</item></col-widths></StaticWatch></Static>
     <Windows>
       
       
       
-    <Wnd4>
+    <Wnd0>
         <Tabs>
           <Tab>
             <Identity>TabID-11305-31838</Identity>
@@ -55,7 +55,7 @@
           </Tab>
         <Tab><Identity>TabID-21497-24832</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab></Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd4><Wnd5>
+      <SelectedTab>0</SelectedTab></Wnd0><Wnd1>
         <Tabs>
           <Tab>
             <Identity>TabID-22053-31841</Identity>
@@ -67,7 +67,7 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd5><Wnd6>
+      <SelectedTab>0</SelectedTab></Wnd1><Wnd2>
         <Tabs>
           <Tab>
             <Identity>TabID-34-31844</Identity>
@@ -77,20 +77,20 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd6><Wnd7><Tabs><Tab><Identity>TabID-28526-7079</Identity><TabName>Live Watch</TabName><Factory>StaticWatch</Factory></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd7></Windows>
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3><Tabs><Tab><Identity>TabID-28526-7079</Identity><TabName>Live Watch</TabName><Factory>StaticWatch</Factory></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd3></Windows>
     <Editor>
       
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Worknote\WORKNOTE-V00-06.txt</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>0</SelStart2><SelEnd2>364</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\battery_info.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>140</YPos2><SelStart2>6131</SelStart2><SelEnd2>6131</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\vpm_control.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>263</YPos2><SelStart2>12576</SelStart2><SelEnd2>12576</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\includes.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>540</SelStart2><SelEnd2>540</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\adc_channel.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>54</YPos2><SelStart2>3811</SelStart2><SelEnd2>3834</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\adc_channel.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>203</SelStart2><SelEnd2>203</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\battery_info.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>0</SelStart2><SelEnd2>0</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\main.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>24</YPos2><SelStart2>1401</SelStart2><SelEnd2>1422</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\hook_tasks.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>12</YPos2><SelStart2>277</SelStart2><SelEnd2>277</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\gpio_control.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>9</YPos2><SelStart2>893</SelStart2><SelEnd2>929</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\project.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>120</YPos2><SelStart2>153</SelStart2><SelEnd2>153</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\event_control.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>36</YPos2><SelStart2>1927</SelStart2><SelEnd2>1958</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Worknote\WORKNOTE-V00-90.txt</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>177</SelStart2><SelEnd2>177</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\i2c_slave.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>27</YPos2><SelStart2>1472</SelStart2><SelEnd2>1496</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\i2c_slave.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>208</YPos2><SelStart2>8181</SelStart2><SelEnd2>8181</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>258</YPos2><SelStart2>11725</SelStart2><SelEnd2>11725</SelEnd2></Tab><ActiveTab>15</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Worknote\WORKNOTE-V00-91.txt</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>302</SelStart2><SelEnd2>302</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\battery_info.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>156</YPos2><SelStart2>7756</SelStart2><SelEnd2>7756</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\hook_tasks.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>12</YPos2><SelStart2>621</SelStart2><SelEnd2>621</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\battery_info.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>10</YPos2><SelStart2>1710</SelStart2><SelEnd2>1723</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\main.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>63</YPos2><SelStart2>4122</SelStart2><SelEnd2>4144</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\i2c_slave.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>377</YPos2><SelStart2>13629</SelStart2><SelEnd2>13629</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\i2c_master.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>22</YPos2><SelStart2>1684</SelStart2><SelEnd2>1697</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\i2c_master.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>616</YPos2><SelStart2>21199</SelStart2><SelEnd2>21207</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\i2c_slave.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>45</YPos2><SelStart2>2891</SelStart2><SelEnd2>2926</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\includes.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>115</SelStart2><SelEnd2>115</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Inc\project.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>153</SelStart2><SelEnd2>153</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Src\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>264</YPos2><SelStart2>11914</SelStart2><SelEnd2>11914</SelEnd2></Tab><ActiveTab>11</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-00970D80><key>iaridepm.enu1</key></Toolbar-00970D80></Sizes></Row0><Row1><Sizes><Toolbar-1654C920><key>debuggergui.enu1</key></Toolbar-1654C920></Sizes></Row1><Row2><Sizes><Toolbar-1654C3A8><key>armjlink.enu1</key></Toolbar-1654C3A8></Sizes></Row2></Top><Left><Row0><Sizes><Wnd5><Rect><Top>-2</Top><Left>-2</Left><Bottom>673</Bottom><Right>253</Right><x>-2</x><y>-2</y><xscreen>98</xscreen><yscreen>98</yscreen><sizeHorzCX>51042</sizeHorzCX><sizeHorzCY>100000</sizeHorzCY><sizeVertCX>132813</sizeVertCX><sizeVertCY>688776</sizeVertCY></Rect></Wnd5></Sizes></Row0></Left><Right><Row0><Sizes><Wnd6><Rect><Top>-2</Top><Left>-2</Left><Bottom>673</Bottom><Right>171</Right><x>-2</x><y>-2</y><xscreen>98</xscreen><yscreen>98</yscreen><sizeHorzCX>51042</sizeHorzCX><sizeHorzCY>100000</sizeHorzCY><sizeVertCX>90104</sizeVertCX><sizeVertCY>688776</sizeVertCY></Rect></Wnd6></Sizes></Row0><Row1><Sizes><Wnd7><Rect><Top>-2</Top><Left>169</Left><Bottom>673</Bottom><Right>552</Right><x>169</x><y>-2</y><xscreen>98</xscreen><yscreen>98</yscreen><sizeHorzCX>51042</sizeHorzCX><sizeHorzCY>100000</sizeHorzCY><sizeVertCX>199479</sizeVertCX><sizeVertCY>688776</sizeVertCY></Rect></Wnd7></Sizes></Row1></Right><Bottom><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>211</Bottom><Right>1922</Right><x>-2</x><y>-2</y><xscreen>1924</xscreen><yscreen>213</yscreen><sizeHorzCX>1002083</sizeHorzCX><sizeHorzCY>217347</sizeHorzCY><sizeVertCX>51042</sizeVertCX><sizeVertCY>100000</sizeVertCY></Rect></Wnd4></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-00970D80><key>iaridepm.enu1</key></Toolbar-00970D80></Sizes></Row0><Row1><Sizes><Toolbar-2EBE6E88><key>debuggergui.enu1</key></Toolbar-2EBE6E88></Sizes></Row1><Row2><Sizes><Toolbar-2EBED800><key>armjlink.enu1</key></Toolbar-2EBED800></Sizes></Row2></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>175</Bottom><Right>253</Right><x>-2</x><y>-2</y><xscreen>98</xscreen><yscreen>98</yscreen><sizeHorzCX>104034</sizeHorzCX><sizeHorzCY>203320</sizeHorzCY><sizeVertCX>270701</sizeVertCX><sizeVertCY>367220</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>175</Bottom><Right>171</Right><x>-2</x><y>-2</y><xscreen>98</xscreen><yscreen>98</yscreen><sizeHorzCX>104034</sizeHorzCX><sizeHorzCY>203320</sizeHorzCY><sizeVertCX>183652</sizeVertCX><sizeVertCY>367220</sizeVertCY></Rect></Wnd2></Sizes></Row0><Row1><Sizes><Wnd3><Rect><Top>-2</Top><Left>169</Left><Bottom>175</Bottom><Right>552</Right><x>169</x><y>-2</y><xscreen>98</xscreen><yscreen>98</yscreen><sizeHorzCX>104034</sizeHorzCX><sizeHorzCY>203320</sizeHorzCY><sizeVertCX>406582</sizeVertCX><sizeVertCY>367220</sizeVertCY></Rect></Wnd3></Sizes></Row1></Right><Bottom><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>211</Bottom><Right>944</Right><x>-2</x><y>-2</y><xscreen>946</xscreen><yscreen>213</yscreen><sizeHorzCX>1004246</sizeHorzCX><sizeHorzCY>441909</sizeHorzCY><sizeVertCX>104034</sizeVertCX><sizeVertCY>203320</sizeVertCY></Rect></Wnd0></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Project>
 

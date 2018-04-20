@@ -88,6 +88,9 @@ extern unsigned int BAT_INFO_DesignVoltage;               // 0x19
 extern unsigned int BAT_INFO_SpecificationInfo;           // 0x1A
 extern unsigned int BAT_INFO_ManufacturerDate;            // 0x1B
 extern unsigned int BAT_INFO_SerialNumber;                // 0x1C
+extern unsigned char BAT_INFO_ManufacturerName[21];       // 0x20
+extern unsigned char BAT_INFO_DeviceName[21];             // 0x21
+extern unsigned int BAT_INFO_StateOfHealth;               // 0x4F
 
 extern volatile int VAR_TRACE_VPM_STATE;
 

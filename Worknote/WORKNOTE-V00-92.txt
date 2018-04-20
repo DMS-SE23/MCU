@@ -1,0 +1,8 @@
+[V000.92 Release Note Summary]
+------------------------------
+1. Add battery command.
+   
+---------------------------
+2018-04-20 BACKUP 014 V09
+-------------------------
+1. Add battery command.

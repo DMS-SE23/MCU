@@ -30,6 +30,9 @@
 #define BAT_OFFSET_SpecificationInfo            0x1A
 #define BAT_OFFSET_ManufacturerDate             0x1B
 #define BAT_OFFSET_SerialNumber                 0x1C
+#define BAT_OFFSET_ManufacturerName             0x20
+#define BAT_OFFSET_DeviceName                   0x21
+#define BAT_OFFSET_StateOfHealth                0x4F
 
 // Function Prototype
 int I2C_BatteryRead2Byte (unsigned char ReadAddr, unsigned int *ReturndValue);
