@@ -307,8 +307,8 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_AVERAGE_CURRENT:           //0x95
-      SET_TX_BUFFER((BAT_INFO_AverageCurrent >> 8) & 0xFF);
-      INS_TX_BUFFER(BAT_INFO_AverageCurrent);
+      SET_TX_BUFFER((BAT_INFO_Current >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_Current);
       CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_TIME_TO_FULL:              //0x96

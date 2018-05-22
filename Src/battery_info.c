@@ -26,8 +26,8 @@ void BATTERY_INFO_UPDATE()
 //    I2C_BatteryRead2Byte(BAT_OFFSET_AtRateOK, &BAT_INFO_AtRateOK);
     I2C_BatteryRead2Byte(BAT_OFFSET_Temperature, &BAT_INFO_Temperature);
     I2C_BatteryRead2Byte(BAT_OFFSET_Voltage, &BAT_INFO_Voltage);
-//    I2C_BatteryRead2Byte(BAT_OFFSET_Current, &BAT_INFO_Current);
-    I2C_BatteryRead2Byte(BAT_OFFSET_AverageCurrent, &BAT_INFO_AverageCurrent);
+    I2C_BatteryRead2Byte(BAT_OFFSET_Current, &BAT_INFO_Current);
+//    I2C_BatteryRead2Byte(BAT_OFFSET_AverageCurrent, &BAT_INFO_AverageCurrent);
 
 //    I2C_BatteryRead2Byte(BAT_OFFSET_MaxError, &BAT_INFO_MaxError);
     I2C_BatteryRead2Byte(BAT_OFFSET_RelativeStateOfCharge, &BAT_INFO_RelativeStateOfCharge);
@@ -105,7 +105,7 @@ void SHOW_BATTERY_INFO()
 
     if (count++ > 10) {
       float bat_temperature_C = ((float)BAT_INFO_Temperature / 10) - 273.15;
-      int bat_current = BAT_INFO_AverageCurrent;
+      int bat_current = BAT_INFO_Current;
     
       if ((bat_current & 0x8000) == 0x8000)
       {
@@ -173,7 +173,7 @@ void CLEAR_BATTERY_INFO()
 {
   BAT_INFO_Temperature = 0;
   BAT_INFO_Voltage = 0;
-  BAT_INFO_AverageCurrent = 0;
+  BAT_INFO_Current = 0;
   BAT_INFO_RelativeStateOfCharge = 0;
   BAT_INFO_AverageTimeToEmpty = 0;
   BAT_INFO_AverageTimeToFull = 0;

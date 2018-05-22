@@ -14,7 +14,7 @@
 :: %2		=> $PROJ_FNAME$
 :: %3		=> $TARGET_DIR$
 :: ============================================================================
-set mnver=V0.092
+set mnver=V0.093
 set blver=V0.002
 set blimg=%2-BL
 set mergout=%2-%mnver%-BL-%blver%.bin
