@@ -3,7 +3,7 @@
 // 主版本, 0~255
 #define __DEF_PROJECT_MAIN_VERSION   0
 // 次版本, 0~255
-#define __DEF_PROJECT_MINER_VERSION  93
+#define __DEF_PROJECT_MINER_VERSION  94
 
 #define __DEF_PROJECT_NAME_STRING_SIZE 12
 // 平台名稱, 12個字元組 (12 Bytes)

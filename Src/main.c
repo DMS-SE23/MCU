@@ -99,6 +99,9 @@ unsigned char BAT_INFO_ManufacturerName[21];          // 0x20
 unsigned char BAT_INFO_DeviceName[21];                // 0x21
 unsigned int BAT_INFO_StateOfHealth = 0;              // 0x4F
 
+// AMP Mute Status
+unsigned char VAR_AMP_MUTE_STATUS = 0;
+
 // WATCHDOG TIMER
 volatile unsigned char VAR_WATCHDOG_STATUS                  = 0;    // Watchdog開啟或關閉
 volatile int VAR_WATCHDOG_COUNTER                           = 0;    // Watchdog倒數計時器

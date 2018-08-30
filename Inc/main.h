@@ -99,6 +99,8 @@ extern unsigned int VAR_IMM_CHANGE_WORKING_MODE_EVENT; // 設定系統立即進入狀態事
               // = 1, Enter Power-Off Flow Immediately
               // = 2, Enter Suspend Flow Immediately
               // 前提是系統在開機時此命令才有效
+// AMP Mute Status
+extern unsigned char VAR_AMP_MUTE_STATUS;
 
 // WATCHDOG TIMER
 extern volatile unsigned char VAR_WATCHDOG_STATUS;      // Watchdog開啟或關閉

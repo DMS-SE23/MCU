@@ -26,6 +26,7 @@ void GPIO_OUTPUT_STATUS_INIT()
   __OUT_E4_GPIO_OUT_LED_RED_SET_HI;
   __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_LO;
   __OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI;
+  VAR_AMP_MUTE_STATUS = 1;
   __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_LO;
 }
 //-----------------------------------------------------------------------------

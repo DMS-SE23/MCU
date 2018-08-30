@@ -130,6 +130,9 @@ void I2C_Slave_STOP_UserCallback()
     /* ADC Class : 0x40 ~ 0x4F */
     case I2CCMD_GET_CURRENT_VALUE:                          //0x40
       
+    /* DIO Class : 0x50 ~ 0x5F */
+    case I2CCMD_GET_AMP_MUTE_STATUS:                        //0x50
+      
     /* Watchdog Class : 0x70 ~ 0x7F */
     case I2CCMD_GET_WATCHDOG_STATUS:                        //0x70
     case I2CCMD_GET_WATCHDOG_COUNT_DOWN_TIMER:              //0x72
@@ -225,7 +228,26 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       INS_TX_BUFFER(ui16 & 0xFF);
       CHK_TX_BUFFER();
       break;
-      
+    
+    /* ADC Class : 0x50 ~ 0x5F */
+    case I2CCMD_GET_AMP_MUTE_STATUS:                        //0x50
+      ui8 = VAR_AMP_MUTE_STATUS;
+      SET_TX_BUFFER(ui8 & 0xFF);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_SET_AMP_MUTE_STATUS:                        //0x51
+      if (Buffer_Rx[1] == 0)
+      {
+         __OUT_E9_GPIO_OUT_AMP_MUTE_SET_LO;
+         VAR_AMP_MUTE_STATUS = 0;
+      }
+      else if (Buffer_Rx[1] == 1)
+      {
+         __OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI;
+         VAR_AMP_MUTE_STATUS = 1;
+      }
+      break;
+    
     /* Watchdog Class : 0x70 ~ 0x7F */
     case I2CCMD_GET_WATCHDOG_STATUS:                        //0x70
       ui8 = VAR_WATCHDOG_STATUS;

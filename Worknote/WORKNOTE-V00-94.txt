@@ -1,0 +1,8 @@
+[V000.94 Release Note Summary]
+------------------------------
+1. Add I2C command to control AMP mute.
+   
+---------------------------
+2018-08-30 BACKUP 016 V11
+-------------------------
+1. Add I2C command to control AMP mute.
