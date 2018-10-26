@@ -54,7 +54,10 @@ extern uint8_t Buffer_Tx[MAX_I2C_TX_BUFFER];
 #define I2CCMD_GET_WATCHDOG_CURRENT_COUNTER                 0x74
 #define I2CCMD_RESET_WATCHDOG_CURRENT_COUNTER               0x75
 
-/* Battery Control and Information Class : 0x90 ~ 0x9F */
+/* Battery Control and Information Class : 0x80 ~ 0x9F */
+#define I2CCMD_GET_BATTERY_PACK_ATRATE                      0x80
+#define I2CCMD_SET_BATTERY_PACK_ATRATE                      0x81
+#define I2CCMD_GET_BATTERY_PACK_ATRATE_TIME_TO_EMPTY        0x82
 #define I2CCMD_GET_BATTERY_PACK_STATE_OF_CHARGE             0x90
 #define I2CCMD_GET_BATTERY_PACK_TIME_TO_EMPTY               0x91
 #define I2CCMD_GET_BATTERY_PACK_FLAGS                       0x92

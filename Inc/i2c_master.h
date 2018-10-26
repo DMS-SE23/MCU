@@ -49,6 +49,10 @@ int I2C_READ_WORD(unsigned char SlaveAddress,
                   unsigned char CommandCode,
                   unsigned int *ReturndValue);
 
+int I2C_WRITE_WORD(unsigned char SlaveAddress,
+                   unsigned char CommandCode,
+                   unsigned int WriteData);
+
 int I2C_READ_NBYTE(unsigned char SlaveAddress,
                    unsigned char CommandCode,
                    unsigned char ByteCount,

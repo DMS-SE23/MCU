@@ -40,6 +40,6 @@ void TASK_Hook_1S()
   TASK_COUNTING_POWER_ON_MINUTES();
 
 /*** For DEBUG only ***/
-  SHOW_BATTERY_INFO();
-  SHOW_ADC_INFO();
+//  SHOW_BATTERY_INFO();
+//  SHOW_ADC_INFO();
 }

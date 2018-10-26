@@ -5,6 +5,11 @@ int I2C_BatteryRead2Byte(unsigned char ReadAddr, unsigned int *ReturndValue)
   return(I2C_READ_WORD(DEF_BQ40Z50_ADDRESS, ReadAddr, ReturndValue));
 }
 
+int I2C_BatteryWrite2Byte(unsigned char WriteAddr, unsigned int SettingValue)
+{
+  return(I2C_WRITE_WORD(DEF_BQ40Z50_ADDRESS, WriteAddr, SettingValue));
+}
+
 int I2C_BatteryReadNByte(unsigned char ReadAddr, unsigned int ReadSize, unsigned char *ReturndValue)
 {
   return(I2C_READ_NBYTE(DEF_BQ40Z50_ADDRESS, ReadAddr, ReadSize, ReturndValue));
@@ -19,10 +24,10 @@ void BATTERY_INFO_UPDATE()
 //    I2C_BatteryRead2Byte(BAT_OFFSET_RemainingCapacityAlarm, &BAT_INFO_RemainingCapacityAlarm);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_RemainingTimeAlarm, &BAT_INFO_RemainingTimeAlarm);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_BatteryMode, &BAT_INFO_BatteryMode);
-//    I2C_BatteryRead2Byte(BAT_OFFSET_AtRate, &BAT_INFO_AtRate);
+    I2C_BatteryRead2Byte(BAT_OFFSET_AtRate, &BAT_INFO_AtRate);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_AtRateTimeToFull, &BAT_INFO_AtRateTimeToFull);
 //
-//    I2C_BatteryRead2Byte(BAT_OFFSET_AtRateTimeToEmpty, &BAT_INFO_AtRateTimeToEmpty);
+    I2C_BatteryRead2Byte(BAT_OFFSET_AtRateTimeToEmpty, &BAT_INFO_AtRateTimeToEmpty);
 //    I2C_BatteryRead2Byte(BAT_OFFSET_AtRateOK, &BAT_INFO_AtRateOK);
     I2C_BatteryRead2Byte(BAT_OFFSET_Temperature, &BAT_INFO_Temperature);
     I2C_BatteryRead2Byte(BAT_OFFSET_Voltage, &BAT_INFO_Voltage);
@@ -101,39 +106,39 @@ void SHOW_BATTERY_INFO()
 //
 //    DEBUG_PRINT ("\r\n");
     
-    static int count = 0;
+//    static int count = 0;
 
-    if (count++ > 10) {
-      float bat_temperature_C = ((float)BAT_INFO_Temperature / 10) - 273.15;
-      int bat_current = BAT_INFO_Current;
-    
-      if ((bat_current & 0x8000) == 0x8000)
-      {
-        bat_current -= 0xFFFF;
-      }
-    
-      DEBUG_PRINT ("Bat Info: ");
-      DEBUG_PRINT ("StateOfCharge=%d%; ",BAT_INFO_RelativeStateOfCharge);
-      DEBUG_PRINT ("Temp=%.1fC; ",bat_temperature_C);
-      DEBUG_PRINT ("Volt=%dmV; ",BAT_INFO_Voltage);
-      DEBUG_PRINT ("Curr=%dmA; ",bat_current);
-      
-      if (VAR_BATTERY_STATE == 1)
-      {
-        DEBUG_PRINT ("TimeToFull=%dmin; ",BAT_INFO_AverageTimeToFull);
-      }
-      else if (VAR_BATTERY_STATE == 2)
-      {
-      }
-      else if (VAR_BATTERY_STATE == 3)
-      {
-        DEBUG_PRINT ("TimeToEmpty=%dmin; ",BAT_INFO_AverageTimeToEmpty);
-      }
-
-      DEBUG_PRINT ("\r\n");
-      
-      count = 0;
-    }
+//    if (count++ > 10) {
+//      float bat_temperature_C = ((float)BAT_INFO_Temperature / 10) - 273.15;
+//      int bat_current = BAT_INFO_Current;
+//    
+//      if ((bat_current & 0x8000) == 0x8000)
+//      {
+//        bat_current -= 0xFFFF;
+//      }
+//    
+//      DEBUG_PRINT ("Bat Info: ");
+//      DEBUG_PRINT ("StateOfCharge=%d%; ",BAT_INFO_RelativeStateOfCharge);
+//      DEBUG_PRINT ("Temp=%.1fC; ",bat_temperature_C);
+//      DEBUG_PRINT ("Volt=%dmV; ",BAT_INFO_Voltage);
+//      DEBUG_PRINT ("Curr=%dmA; ",bat_current);
+//      
+//      if (VAR_BATTERY_STATE == 1)
+//      {
+//        DEBUG_PRINT ("TimeToFull=%dmin; ",BAT_INFO_AverageTimeToFull);
+//      }
+//      else if (VAR_BATTERY_STATE == 2)
+//      {
+//      }
+//      else if (VAR_BATTERY_STATE == 3)
+//      {
+//        DEBUG_PRINT ("TimeToEmpty=%dmin; ",BAT_INFO_AverageTimeToEmpty);
+//      }
+//
+//      DEBUG_PRINT ("\r\n");
+//      
+//      count = 0;
+//    }
   }
 }
 

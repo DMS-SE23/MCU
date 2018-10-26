@@ -493,7 +493,6 @@ int I2C_WRITE_BYTE(unsigned char SlaveAddress,
 }
 //-----------------------------------------------------------------------------
 
-
 int I2C_READ_WORD(unsigned char SlaveAddress,
                   unsigned char CommandCode,
                   unsigned int *ReturndValue)
@@ -568,8 +567,81 @@ int I2C_READ_WORD(unsigned char SlaveAddress,
   /* If all operations OK */
   return (__RETURN_SUCCESS);
 }
+
 //=============================================================================
 
+int I2C_WRITE_WORD(unsigned char SlaveAddress,
+                   unsigned char CommandCode,
+                   unsigned int WriteData)
+{
+  /* Test on BUSY Flag */
+  uint32_t timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY) != RESET)
+  {
+    if((timeout--) == 0) return I2C_BUSBUSY_UserCallback((unsigned char)I2C_WRITE_BYTE_DBG);
+  }
+  //--------------------------
+
+  /* Configure (i2c peripheral, slave address, Number_Bytes, ReloadEndMode, StartStopMode) */
+  I2C_TransferHandling(I2C1, SlaveAddress, 1, I2C_Reload_Mode, I2C_Generate_Start_Write);
+  /* Wait until TXIS flag is set */
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TXIS) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_BYTE_DBG+1));
+  }
+  //--------------------------
+
+  /* Send Register address */
+  I2C_SendData(I2C1, (uint8_t)CommandCode);
+  /* Wait until TCR flag is set */
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TCR) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_BYTE_DBG+2));
+  }
+  //--------------------------
+
+  /* Configure (i2c peripheral, slave address, Number_Bytes, ReloadEndMode, StartStopMode) */
+
+  I2C_TransferHandling(I2C1, SlaveAddress, 2, I2C_AutoEnd_Mode, I2C_No_StartStop);
+
+  /* Wait until TXIS flag is set */
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TXIS) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_BYTE_DBG+3));
+  }
+  //--------------------------
+
+  /* Write data1 to TXDR */
+  I2C_SendData(I2C1, WriteData & 0xFF);
+
+  /* Wait until STOPF flag is set */
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TXIS) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_BYTE_DBG+4));
+  }
+  //--------------------------
+  
+  /* Write data2 to TXDR */
+  I2C_SendData(I2C1, (WriteData >> 8) & 0xFF);
+
+  /* Wait until STOPF flag is set */
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_STOPF) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_BYTE_DBG+4));
+  }
+  //--------------------------
+
+  /* Clear STOPF flag */
+  I2C_ClearFlag(I2C1, I2C_ICR_STOPCF);
+
+  return (__RETURN_SUCCESS);
+}
+//-----------------------------------------------------------------------------
 
 int I2C_READ_NBYTE(unsigned char SlaveAddress,
                    unsigned char CommandCode,

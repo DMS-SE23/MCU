@@ -26,6 +26,10 @@
     <encoding>System</encoding>
   </override>
   <override>
+    <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Src\debug_port.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
     <path>D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Src\eeprom_control.c</path>
     <encoding>System</encoding>
   </override>

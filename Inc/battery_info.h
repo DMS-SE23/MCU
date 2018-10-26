@@ -36,6 +36,8 @@
 
 // Function Prototype
 int I2C_BatteryRead2Byte (unsigned char ReadAddr, unsigned int *ReturndValue);
+int I2C_BatteryWrite2Byte(unsigned char WriteAddr, unsigned int SettingValue);
+int I2C_BatteryReadNByte(unsigned char ReadAddr, unsigned int ReadSize, unsigned char *ReturndValue);
 
 void BATTERY_INFO_UPDATE(void);
 void SHOW_BATTERY_INFO(void);

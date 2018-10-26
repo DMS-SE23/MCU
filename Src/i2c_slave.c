@@ -138,7 +138,9 @@ void I2C_Slave_STOP_UserCallback()
     case I2CCMD_GET_WATCHDOG_COUNT_DOWN_TIMER:              //0x72
     case I2CCMD_GET_WATCHDOG_CURRENT_COUNTER:               //0x74
       
-    /* Battery Control and Information Class : 0x90 ~ 0x9F */
+    /* Battery Control and Information Class : 0x80 ~ 0x9F */
+    case I2CCMD_GET_BATTERY_PACK_ATRATE:                    //0x80
+    case I2CCMD_GET_BATTERY_PACK_ATRATE_TIME_TO_EMPTY:      //0x82
     case I2CCMD_GET_BATTERY_PACK_STATE_OF_CHARGE:           //0x90
     case I2CCMD_GET_BATTERY_PACK_TIME_TO_EMPTY:             //0x91
     case I2CCMD_GET_BATTERY_PACK_FLAGS:                     //0x92
@@ -302,7 +304,21 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       VAR_WATCHDOG_COUNTER = VAR_WATCHDOG_RESET_VALUE;
       break;
       
-    /* Battery Control and Information Class : 0x90 ~ 0x9F */
+    /* Battery Control and Information Class : 0x80 ~ 0x9F */
+    case I2CCMD_GET_BATTERY_PACK_ATRATE:                    //0x80
+      SET_TX_BUFFER((BAT_INFO_AtRate >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_AtRate);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_SET_BATTERY_PACK_ATRATE:                    //0x81
+      ui16 = ((Buffer_Rx[1] << 8) | Buffer_Rx[2]);
+      I2C_BatteryWrite2Byte(BAT_OFFSET_AtRate, ui16);
+      break;
+    case I2CCMD_GET_BATTERY_PACK_ATRATE_TIME_TO_EMPTY:      //0x82
+      SET_TX_BUFFER((BAT_INFO_AtRateTimeToEmpty >> 8) & 0xFF);
+      INS_TX_BUFFER(BAT_INFO_AtRateTimeToEmpty);
+      CHK_TX_BUFFER();
+      break;
     case I2CCMD_GET_BATTERY_PACK_STATE_OF_CHARGE:           //0x90
       SET_TX_BUFFER((BAT_INFO_RelativeStateOfCharge >> 8) & 0xFF);
       INS_TX_BUFFER(BAT_INFO_RelativeStateOfCharge);

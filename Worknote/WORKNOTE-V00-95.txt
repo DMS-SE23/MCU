@@ -1,0 +1,8 @@
+[V000.95 Release Note Summary]
+------------------------------
+1. Add I2C command to set ATRate and get ATRate time to empty.
+   
+---------------------------
+2018-10-26 BACKUP 017 V12
+-------------------------
+1. Add I2C command to set ATRate and get ATRate time to empty.
