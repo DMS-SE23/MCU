@@ -98,6 +98,7 @@ unsigned int BAT_INFO_SerialNumber = 0;               // 0x1C
 unsigned char BAT_INFO_ManufacturerName[21];          // 0x20
 unsigned char BAT_INFO_DeviceName[21];                // 0x21
 unsigned int BAT_INFO_StateOfHealth = 0;              // 0x4F
+unsigned char BAT_INFO_FullSerialNumber[10] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF}; // 0x00 0x70 0x00             
 
 // AMP Mute Status
 unsigned char VAR_AMP_MUTE_STATUS = 0;

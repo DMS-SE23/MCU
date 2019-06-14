@@ -5,6 +5,12 @@ uint16_t ADC1_values[ADC1_SIZE];
 
 uint16_t CalibrationValue_1;
 
+#define ADC_BUFFER_SIZE     50
+uint16_t ADC_History[ADC_BUFFER_SIZE];
+uint16_t ADC_Sort[ADC_BUFFER_SIZE];
+uint8_t ADC_first;
+
+
 void ADC_Configuration(void)
 {
   ADC_InitTypeDef       ADC_InitStructure;
@@ -84,14 +90,84 @@ void ADC_Configuration(void)
   
   /* Start ADC1 Software Conversion */
   ADC_StartConversion(ADC1);
+  
+  ADC_first= 1;  
 }
 //-----------------------------------------------------------------------------
+int qsp(uint16_t n[], int left, int right) { 
+    int i = left - 1; 
+    int j, k;
+    for(j = left; j < right; j++) { 
+        if(n[j] <= n[right]) { 
+            i++; 
+            k = n[i];
+            n[i] = n[j];
+            n[j] = k;
+        } 
+    } 
+    k = n[i+1];
+    n[i+1] = n[right];
+    n[right] = k;
+    return i+1; 
+} 
 
+void qs(uint16_t n[], int left, int right) { 
+    if(left < right) { 
+        int q = qsp(n, left, right); 
+        qs(n, left, q-1); 
+        qs(n, q+1, right); 
+    } 
+} 
+
+//#define USE_MIDDLE_MEAN
 
 // §ó·s¥Ø«e¤§ADC
 void TASK_UPDATE_DETECTED_ADC_VALUE()
 {
-  VAR_CURRENT_SENSE_VALUE    = ADC1_values[0];
+#ifdef USE_MIDDLE_MEAN    //  ä¸­ä½æ•¸
+    
+    // check first time update
+    if(ADC_first) 
+    {
+        ADC_first = 0;
+        for(int i=0;i<ADC_BUFFER_SIZE;i++)
+            ADC_History[i] = ADC1_values[0];
+        
+        VAR_CURRENT_SENSE_VALUE    = ADC1_values[0];
+    } 
+    else 
+    {
+        for(int i=1;i<ADC_BUFFER_SIZE;i++) {
+            ADC_Sort[i-1] = ADC_History[i-1] = ADC_History[i];            
+        }
+        ADC_Sort[ADC_BUFFER_SIZE-1] = ADC_History[ADC_BUFFER_SIZE-1] = ADC1_values[0];
+        
+        qs(ADC_Sort, 0, ADC_BUFFER_SIZE-1);
+        
+        VAR_CURRENT_SENSE_VALUE = (ADC_Sort[ADC_BUFFER_SIZE/2-1]+ADC_Sort[ADC_BUFFER_SIZE/2])/2;
+    }
+    
+#else // average
+    
+    // check first time update
+    if(ADC_first) {
+        ADC_first = 0;
+        for(int i=0;i<ADC_BUFFER_SIZE;i++)
+            ADC_History[i] = ADC1_values[0];
+        
+        VAR_CURRENT_SENSE_VALUE    = ADC1_values[0];
+    } else {
+        uint32_t total = ADC1_values[0];
+        
+        for(int i=1;i<ADC_BUFFER_SIZE;i++) {
+            ADC_History[i-1] = ADC_History[i];
+            total += ADC_History[i];
+        }
+        ADC_History[ADC_BUFFER_SIZE-1] = ADC1_values[0];
+        
+        VAR_CURRENT_SENSE_VALUE = total/ADC_BUFFER_SIZE;
+    }    
+#endif
 }
 
 //-----------------------------------------------------------------------------

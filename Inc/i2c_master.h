@@ -62,5 +62,10 @@ int I2C_WRITE_NBYTE(unsigned char SlaveAddress,
                     unsigned char CommandCode,
                     unsigned char ByteCount,
                     unsigned char *WriteData);
+
+int I2C_SEND_NBYTE(unsigned char SlaveAddress,
+                    unsigned char ByteCount,
+                    unsigned char *WriteData);
+
 #endif
 //=============================================================================

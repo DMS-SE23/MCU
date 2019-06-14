@@ -785,4 +785,73 @@ int I2C_WRITE_NBYTE(unsigned char SlaveAddress,
 
   return (__RETURN_SUCCESS);
 }
+
+int I2C_SEND_NBYTE(unsigned char SlaveAddress,
+                    unsigned char ByteCount,
+                    unsigned char *WriteData)
+{
+
+  uint8_t tmpindex = 0;
+
+  /* Test on BUSY Flag */
+  uint32_t timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY) != RESET)
+  {
+    if((timeout--) == 0) return I2C_BUSBUSY_UserCallback((unsigned char)I2C_WRITE_NBYTE_DBG);
+  }
+  //--------------------------
+
+  //Step1 : Send slave address
+  /* Configure (i2c peripheral, slave address, Number_Bytes, ReloadEndMode, StartStopMode) */
+  I2C_TransferHandling(I2C1, SlaveAddress, 1, I2C_Reload_Mode, I2C_Generate_Start_Write);
+  /* Wait until TXIS flag is set */
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TXIS) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)I2C_WRITE_NBYTE_DBG);
+  }
+  //--------------------------
+
+  //Step2 : Send command
+  /* Send Register CommandCode */
+//  I2C_SendData(I2C1, (uint8_t)CommandCode);
+//  /* Wait until TXIS flag is set */
+//  timeout = I2C_TIMEOUT;
+//  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TCR) == RESET)
+//  {
+//    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_NBYTE_DBG+1));
+//  }
+  //--------------------------
+
+  //Step3 : Write data
+  /* Configure (i2c peripheral, slave address, Number_Bytes, ReloadEndMode, StartStopMode) */
+  I2C_TransferHandling(I2C1, SlaveAddress, ByteCount, I2C_AutoEnd_Mode, I2C_No_StartStop);
+
+  /* Wait until RXNE flag is set */
+  tmpindex = 0;
+  while(tmpindex != ByteCount)
+  {
+    timeout = I2C_TIMEOUT;
+    while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TXIS) == RESET)
+    {
+      if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_NBYTE_DBG+2));
+    }
+
+    /* Write data to TXDR */
+    I2C_SendData(I2C1, *(WriteData+tmpindex));
+    tmpindex++;
+  }
+
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_STOPF) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_NBYTE_DBG+3));
+  }
+  //--------------------------
+
+  /* Clear STOPF flag */
+  I2C_ClearFlag(I2C1, I2C_ICR_STOPCF);
+
+  return (__RETURN_SUCCESS);
+}
 //=============================================================================

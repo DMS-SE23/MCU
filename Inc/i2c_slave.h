@@ -72,6 +72,7 @@ extern uint8_t Buffer_Tx[MAX_I2C_TX_BUFFER];
 #define I2CCMD_GET_BATTERY_PACK_SERIAL_NUMBER               0x9B
 #define I2CCMD_GET_BATTERY_PACK_MANUFACTURER_NAME           0x9C
 #define I2CCMD_GET_BATTERY_PACK_CYCLE_COUNT                 0x9D
+#define I2CCMD_GET_BATTERY_PACK_FULL_SERIAL_NUMBER          0x9E
 #define I2CCMD_GET_BATTERY_PACK_STATE                       0x9F
 
 /* External EEPROM Access Class : 0xA0 ~ 0xAF */

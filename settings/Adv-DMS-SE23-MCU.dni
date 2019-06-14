@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-1182079645
+Checksum=1767469639
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -21,13 +21,16 @@ ShowArgs=0
 MixedMode=1
 [JLinkDriver]
 CStepIntDis=_ 0
+TraceBufferSize=0x00010000
+TraceStallIfFIFOFull=0x00000000
+TracePortSize=0x00000004
 [SWOTraceHWSettings]
 OverrideDefaultClocks=0
 CpuClock=72000000
-ClockAutoDetect=1
-ClockWanted=6000000
-JtagSpeed=6000000
-Prescaler=12
+ClockAutoDetect=0
+ClockWanted=2000000
+JtagSpeed=2000000
+Prescaler=36
 TimeStampPrescIndex=0
 TimeStampPrescData=0
 PcSampCYCTAP=1
@@ -46,15 +49,15 @@ Manual=0
 Ddf=1
 TypeViol=0
 Stop=1
-[Trace1]
-Enabled=0
-ShowSource=1
 [Simulator]
 Freq=10000000
 MultiCoreRunAll=1
 [watch_formats]
 Fmt0={W}42:BAT_INFO_AtRate	4	0
 Fmt1={W}42:BAT_INFO_BatteryStatus	4	0
+[Trace1]
+Enabled=0
+ShowSource=1
 [Trace2]
 Enabled=0
 ShowSource=0

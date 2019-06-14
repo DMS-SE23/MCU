@@ -155,6 +155,7 @@ void I2C_Slave_STOP_UserCallback()
     case I2CCMD_GET_BATTERY_PACK_SERIAL_NUMBER:             //0x9B
     case I2CCMD_GET_BATTERY_PACK_MANUFACTURER_NAME:         //0x9C
     case I2CCMD_GET_BATTERY_PACK_CYCLE_COUNT:               //0x9D
+    case I2CCMD_GET_BATTERY_PACK_FULL_SERIAL_NUMBER:        //0x9E
     case I2CCMD_GET_BATTERY_PACK_STATE:                     //0x9F
       
     /* External EEPROM Access Class : 0xA0 ~ 0xAF */
@@ -393,6 +394,19 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
     case I2CCMD_GET_BATTERY_PACK_CYCLE_COUNT:               //0x9D
       SET_TX_BUFFER((BAT_INFO_CycleCount >> 8) & 0xFF);
       INS_TX_BUFFER(BAT_INFO_CycleCount);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_GET_BATTERY_PACK_FULL_SERIAL_NUMBER:        //0x9E
+      SET_TX_BUFFER(BAT_INFO_FullSerialNumber[0]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[1]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[2]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[3]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[4]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[5]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[6]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[7]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[8]);
+      INS_TX_BUFFER(BAT_INFO_FullSerialNumber[9]);
       CHK_TX_BUFFER();
       break;
     case I2CCMD_GET_BATTERY_PACK_STATE:                     //0x9F

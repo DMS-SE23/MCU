@@ -14,6 +14,7 @@ void TASK_Hook_10mS()
 {
   GPI_EventManager();
   TASK_VPM_CONTROL();
+  TASK_UPDATE_DETECTED_ADC_VALUE();
 }
 
 // 25mS Hook主函式
@@ -26,7 +27,6 @@ void TASK_Hook_25mS()
 void TASK_Hook_100mS()
 {
   TASK_BATTERY_CHARGE_CONTROL();
-  TASK_UPDATE_DETECTED_ADC_VALUE();
 }
 
 // 1S Hook主函式
