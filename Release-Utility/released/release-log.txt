@@ -1174,3 +1174,315 @@
 [2019-6-3 9:43:50]origin data size is 32704
 [2019-6-3 9:43:51]file size is 42400
 [2019-6-3 9:43:51]Finish!!
+[2019-6-19 15:49:38]******************************************
+
+
+[2019-6-19 15:49:38]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 15:49:38]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 15:49:38]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 15:49:38]The checksum tag is:  2
+[2019-6-19 15:49:38]The download channel is:  4
+[2019-6-19 15:49:38]Find platform name string from the bin file...
+[2019-6-19 15:49:39]Find firmware version string from the bin file...
+[2019-6-19 15:49:41]Generating the AES encrypted value for area 2.....
+[2019-6-19 15:49:44]loop 2044 times,file size is 32704(after padding 12 bytes)
+[2019-6-19 15:49:44]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 15:49:44]Seeding the random number generator...
+[2019-6-19 15:49:44]Get the private key...
+[2019-6-19 15:49:44]Writing ebfformat into file
+[2019-6-19 15:49:44]file size is 32
+[2019-6-19 15:49:44]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 15:49:44]origin data size is 224
+[2019-6-19 15:49:44]file size is 416
+[2019-6-19 15:49:44]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 15:49:44]origin data size is 32704
+[2019-6-19 15:49:46]file size is 42400
+[2019-6-19 15:49:46]Finish!!
+[2019-6-19 15:53:16]******************************************
+
+
+[2019-6-19 15:53:16]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 15:53:16]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 15:53:16]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 15:53:16]The checksum tag is:  2
+[2019-6-19 15:53:16]The download channel is:  4
+[2019-6-19 15:53:16]Find platform name string from the bin file...
+[2019-6-19 15:53:17]Find firmware version string from the bin file...
+[2019-6-19 15:53:19]Generating the AES encrypted value for area 2.....
+[2019-6-19 15:53:22]loop 2044 times,file size is 32704(after padding 12 bytes)
+[2019-6-19 15:53:22]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 15:53:22]Seeding the random number generator...
+[2019-6-19 15:53:22]Get the private key...
+[2019-6-19 15:53:22]Writing ebfformat into file
+[2019-6-19 15:53:22]file size is 32
+[2019-6-19 15:53:22]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 15:53:22]origin data size is 224
+[2019-6-19 15:53:22]file size is 416
+[2019-6-19 15:53:22]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 15:53:22]origin data size is 32704
+[2019-6-19 15:53:24]file size is 42400
+[2019-6-19 15:53:24]Finish!!
+[2019-6-19 16:53:50]******************************************
+
+
+[2019-6-19 16:53:50]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 16:53:50]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 16:53:50]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 16:53:50]The checksum tag is:  2
+[2019-6-19 16:53:50]The download channel is:  4
+[2019-6-19 16:53:50]Find platform name string from the bin file...
+[2019-6-19 16:53:51]Find firmware version string from the bin file...
+[2019-6-19 16:53:53]Generating the AES encrypted value for area 2.....
+[2019-6-19 16:53:56]loop 2044 times,file size is 32704(after padding 13 bytes)
+[2019-6-19 16:53:56]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 16:53:56]Seeding the random number generator...
+[2019-6-19 16:53:56]Get the private key...
+[2019-6-19 16:53:56]Writing ebfformat into file
+[2019-6-19 16:53:56]file size is 32
+[2019-6-19 16:53:56]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 16:53:56]origin data size is 224
+[2019-6-19 16:53:56]file size is 416
+[2019-6-19 16:53:56]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 16:53:56]origin data size is 32704
+[2019-6-19 16:53:58]file size is 42400
+[2019-6-19 16:53:58]Finish!!
+[2019-6-19 16:55:49]******************************************
+
+
+[2019-6-19 16:55:49]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 16:55:49]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 16:55:49]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 16:55:49]The checksum tag is:  2
+[2019-6-19 16:55:49]The download channel is:  4
+[2019-6-19 16:55:49]Find platform name string from the bin file...
+[2019-6-19 16:55:50]Find firmware version string from the bin file...
+[2019-6-19 16:55:52]Generating the AES encrypted value for area 2.....
+[2019-6-19 16:55:55]loop 2044 times,file size is 32704(after padding 13 bytes)
+[2019-6-19 16:55:55]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 16:55:55]Seeding the random number generator...
+[2019-6-19 16:55:55]Get the private key...
+[2019-6-19 16:55:55]Writing ebfformat into file
+[2019-6-19 16:55:55]file size is 32
+[2019-6-19 16:55:55]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 16:55:55]origin data size is 224
+[2019-6-19 16:55:55]file size is 416
+[2019-6-19 16:55:55]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 16:55:55]origin data size is 32704
+[2019-6-19 16:55:57]file size is 42400
+[2019-6-19 16:55:57]Finish!!
+[2019-6-19 16:59:26]******************************************
+
+
+[2019-6-19 16:59:26]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 16:59:26]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 16:59:26]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 16:59:26]The checksum tag is:  2
+[2019-6-19 16:59:26]The download channel is:  4
+[2019-6-19 16:59:26]Find platform name string from the bin file...
+[2019-6-19 16:59:28]Find firmware version string from the bin file...
+[2019-6-19 16:59:29]Generating the AES encrypted value for area 2.....
+[2019-6-19 16:59:32]loop 2042 times,file size is 32672(after padding 9 bytes)
+[2019-6-19 16:59:32]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 16:59:32]Seeding the random number generator...
+[2019-6-19 16:59:32]Get the private key...
+[2019-6-19 16:59:32]Writing ebfformat into file
+[2019-6-19 16:59:32]file size is 32
+[2019-6-19 16:59:32]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 16:59:33]origin data size is 224
+[2019-6-19 16:59:33]file size is 416
+[2019-6-19 16:59:33]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 16:59:33]origin data size is 32672
+[2019-6-19 16:59:34]file size is 42272
+[2019-6-19 16:59:34]Finish!!
+[2019-6-19 17:3:44]******************************************
+
+
+[2019-6-19 17:3:44]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 17:3:44]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 17:3:44]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:3:44]The checksum tag is:  2
+[2019-6-19 17:3:44]The download channel is:  4
+[2019-6-19 17:3:44]Find platform name string from the bin file...
+[2019-6-19 17:3:46]Find firmware version string from the bin file...
+[2019-6-19 17:3:47]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:3:51]loop 2042 times,file size is 32672(after padding 9 bytes)
+[2019-6-19 17:3:51]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:3:51]Seeding the random number generator...
+[2019-6-19 17:3:51]Get the private key...
+[2019-6-19 17:3:51]Writing ebfformat into file
+[2019-6-19 17:3:51]file size is 32
+[2019-6-19 17:3:51]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:3:51]origin data size is 224
+[2019-6-19 17:3:51]file size is 416
+[2019-6-19 17:3:51]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:3:51]origin data size is 32672
+[2019-6-19 17:3:53]file size is 42272
+[2019-6-19 17:3:53]Finish!!
+[2019-6-19 17:20:49]******************************************
+
+
+[2019-6-19 17:20:49]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 17:20:49]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 17:20:49]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:20:49]The checksum tag is:  2
+[2019-6-19 17:20:49]The download channel is:  4
+[2019-6-19 17:20:49]Find platform name string from the bin file...
+[2019-6-19 17:20:51]Find firmware version string from the bin file...
+[2019-6-19 17:20:52]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:20:56]loop 2044 times,file size is 32704(after padding 5 bytes)
+[2019-6-19 17:20:56]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:20:56]Seeding the random number generator...
+[2019-6-19 17:20:56]Get the private key...
+[2019-6-19 17:20:56]Writing ebfformat into file
+[2019-6-19 17:20:56]file size is 32
+[2019-6-19 17:20:56]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:20:56]origin data size is 224
+[2019-6-19 17:20:56]file size is 416
+[2019-6-19 17:20:56]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:20:56]origin data size is 32704
+[2019-6-19 17:20:58]file size is 42400
+[2019-6-19 17:20:58]Finish!!
+[2019-6-19 17:22:24]******************************************
+
+
+[2019-6-19 17:22:24]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 17:22:24]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 17:22:24]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:22:24]The checksum tag is:  2
+[2019-6-19 17:22:24]The download channel is:  4
+[2019-6-19 17:22:24]Find platform name string from the bin file...
+[2019-6-19 17:22:25]Find firmware version string from the bin file...
+[2019-6-19 17:22:27]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:22:30]loop 2046 times,file size is 32736(after padding 9 bytes)
+[2019-6-19 17:22:30]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:22:30]Seeding the random number generator...
+[2019-6-19 17:22:30]Get the private key...
+[2019-6-19 17:22:30]Writing ebfformat into file
+[2019-6-19 17:22:30]file size is 32
+[2019-6-19 17:22:30]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:22:30]origin data size is 224
+[2019-6-19 17:22:30]file size is 416
+[2019-6-19 17:22:30]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:22:30]origin data size is 32736
+[2019-6-19 17:22:32]file size is 42400
+[2019-6-19 17:22:32]Finish!!
+[2019-6-19 17:28:9]******************************************
+
+
+[2019-6-19 17:28:9]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 17:28:9]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 17:28:9]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:28:9]The checksum tag is:  2
+[2019-6-19 17:28:9]The download channel is:  4
+[2019-6-19 17:28:9]Find platform name string from the bin file...
+[2019-6-19 17:28:11]Find firmware version string from the bin file...
+[2019-6-19 17:28:12]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:28:17]loop 2046 times,file size is 32736(after padding 9 bytes)
+[2019-6-19 17:28:17]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:28:17]Seeding the random number generator...
+[2019-6-19 17:28:17]Get the private key...
+[2019-6-19 17:28:17]Writing ebfformat into file
+[2019-6-19 17:28:17]file size is 32
+[2019-6-19 17:28:17]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:28:17]origin data size is 224
+[2019-6-19 17:28:17]file size is 416
+[2019-6-19 17:28:17]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:28:17]origin data size is 32736
+[2019-6-19 17:28:19]file size is 42400
+[2019-6-19 17:28:19]Finish!!
+[2019-6-19 17:32:33]******************************************
+
+
+[2019-6-19 17:32:33]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 17:32:33]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 17:32:33]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:32:33]The checksum tag is:  2
+[2019-6-19 17:32:33]The download channel is:  4
+[2019-6-19 17:32:33]Find platform name string from the bin file...
+[2019-6-19 17:32:35]Find firmware version string from the bin file...
+[2019-6-19 17:32:36]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:32:40]loop 2046 times,file size is 32736(after padding 8 bytes)
+[2019-6-19 17:32:40]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:32:40]Seeding the random number generator...
+[2019-6-19 17:32:40]Get the private key...
+[2019-6-19 17:32:40]Writing ebfformat into file
+[2019-6-19 17:32:40]file size is 32
+[2019-6-19 17:32:40]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:32:40]origin data size is 224
+[2019-6-19 17:32:40]file size is 416
+[2019-6-19 17:32:40]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:32:40]origin data size is 32736
+[2019-6-19 17:32:42]file size is 42400
+[2019-6-19 17:32:42]Finish!!
+[2019-6-19 17:35:54]******************************************
+
+
+[2019-6-19 17:35:54]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 17:35:54]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 17:35:54]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:35:54]The checksum tag is:  2
+[2019-6-19 17:35:54]The download channel is:  4
+[2019-6-19 17:35:54]Find platform name string from the bin file...
+[2019-6-19 17:35:55]Find firmware version string from the bin file...
+[2019-6-19 17:35:57]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:36:1]loop 2046 times,file size is 32736(after padding 4 bytes)
+[2019-6-19 17:36:1]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:36:1]Seeding the random number generator...
+[2019-6-19 17:36:1]Get the private key...
+[2019-6-19 17:36:1]Writing ebfformat into file
+[2019-6-19 17:36:1]file size is 32
+[2019-6-19 17:36:1]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:36:1]origin data size is 224
+[2019-6-19 17:36:1]file size is 416
+[2019-6-19 17:36:1]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:36:1]origin data size is 32736
+[2019-6-19 17:36:3]file size is 42400
+[2019-6-19 17:36:3]Finish!!
+[2019-6-19 17:37:34]******************************************
+
+
+[2019-6-19 17:37:34]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.bin
+[2019-6-19 17:37:34]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.102.EBF
+[2019-6-19 17:37:34]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:37:34]The checksum tag is:  2
+[2019-6-19 17:37:34]The download channel is:  4
+[2019-6-19 17:37:34]Find platform name string from the bin file...
+[2019-6-19 17:37:36]Find firmware version string from the bin file...
+[2019-6-19 17:37:37]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:37:42]loop 2046 times,file size is 32736(after padding 8 bytes)
+[2019-6-19 17:37:42]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:37:42]Seeding the random number generator...
+[2019-6-19 17:37:42]Get the private key...
+[2019-6-19 17:37:42]Writing ebfformat into file
+[2019-6-19 17:37:42]file size is 32
+[2019-6-19 17:37:42]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:37:42]origin data size is 224
+[2019-6-19 17:37:42]file size is 416
+[2019-6-19 17:37:42]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:37:42]origin data size is 32736
+[2019-6-19 17:37:44]file size is 42400
+[2019-6-19 17:37:44]Finish!!
+[2019-6-19 17:45:16]******************************************
+
+
+[2019-6-19 17:45:16]The original bin file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.103.bin
+[2019-6-19 17:45:16]The new EBF file path is:  D:\NProject\advantech\SVN\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.103.EBF
+[2019-6-19 17:45:16]The firmware type is(0:VPM,1:CAN):  0
+[2019-6-19 17:45:16]The checksum tag is:  2
+[2019-6-19 17:45:16]The download channel is:  4
+[2019-6-19 17:45:17]Find platform name string from the bin file...
+[2019-6-19 17:45:19]Find firmware version string from the bin file...
+[2019-6-19 17:45:20]Generating the AES encrypted value for area 2.....
+[2019-6-19 17:45:24]loop 2046 times,file size is 32736(after padding 8 bytes)
+[2019-6-19 17:45:24]Finished to generate the AES encrypted value for area 2.
+[2019-6-19 17:45:24]Seeding the random number generator...
+[2019-6-19 17:45:24]Get the private key...
+[2019-6-19 17:45:24]Writing ebfformat into file
+[2019-6-19 17:45:24]file size is 32
+[2019-6-19 17:45:24]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-6-19 17:45:24]origin data size is 224
+[2019-6-19 17:45:24]file size is 416
+[2019-6-19 17:45:24]Generating the RSA encrypted value for area 2 and write into file  
+[2019-6-19 17:45:24]origin data size is 32736
+[2019-6-19 17:45:27]file size is 42400
+[2019-6-19 17:45:27]Finish!!

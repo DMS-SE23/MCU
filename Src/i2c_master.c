@@ -786,7 +786,8 @@ int I2C_WRITE_NBYTE(unsigned char SlaveAddress,
   return (__RETURN_SUCCESS);
 }
 
-int I2C_SEND_NBYTE(unsigned char SlaveAddress,
+int I2C_BLOCK_SEND_NBYTE(unsigned char SlaveAddress,
+                   unsigned char CommandCode,
                     unsigned char ByteCount,
                     unsigned char *WriteData)
 {
@@ -814,15 +815,17 @@ int I2C_SEND_NBYTE(unsigned char SlaveAddress,
 
   //Step2 : Send command
   /* Send Register CommandCode */
-//  I2C_SendData(I2C1, (uint8_t)CommandCode);
-//  /* Wait until TXIS flag is set */
-//  timeout = I2C_TIMEOUT;
-//  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TCR) == RESET)
-//  {
-//    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_NBYTE_DBG+1));
-//  }
+  I2C_SendData(I2C1, (uint8_t)CommandCode);
+  /* Wait until TXIS flag is set */
+  timeout = I2C_TIMEOUT;
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_TCR) == RESET)
+  {
+    if((timeout--) == 0) return I2C_TIMEOUT_UserCallback((unsigned char)(I2C_WRITE_NBYTE_DBG+1));
+  }
   //--------------------------
 
+  
+  
   //Step3 : Write data
   /* Configure (i2c peripheral, slave address, Number_Bytes, ReloadEndMode, StartStopMode) */
   I2C_TransferHandling(I2C1, SlaveAddress, ByteCount, I2C_AutoEnd_Mode, I2C_No_StartStop);

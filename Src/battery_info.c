@@ -15,9 +15,9 @@ int I2C_BatteryReadNByte(unsigned char ReadAddr, unsigned int ReadSize, unsigned
   return(I2C_READ_NBYTE(DEF_BQ40Z50_ADDRESS, ReadAddr, ReadSize, ReturndValue));
 }
 
-int I2C_BatterySendNByte(unsigned int WriteAddr, unsigned int WriteSize, unsigned char *WriteData)
+int I2C_BatterySendNByte(unsigned int Command, unsigned int WriteSize, unsigned char *WriteData)
 {
-    return(I2C_SEND_NBYTE(DEF_BQ40Z50_ADDRESS, WriteSize, WriteData));
+    return(I2C_WRITE_NBYTE(DEF_BQ40Z50_ADDRESS, Command, WriteSize, WriteData));
 }
 
 //-----------------------------------------------------------------------------
@@ -65,16 +65,30 @@ void BATTERY_INFO_UPDATE()
     I2C_BatteryReadNByte(BAT_OFFSET_DeviceName, 21, BAT_INFO_DeviceName);
     I2C_BatteryRead2Byte(BAT_OFFSET_StateOfHealth, &BAT_INFO_StateOfHealth);
     
+// Use 0x00 ManufacturerAccess    
+//    static  uint8_t Battery_ManufacturerInfo_Command[3] = {0x00, 0x70, 0x00};
+//    static uint8_t FullSerialNumber[32];
+//    
+//    I2C_BatterySendNByte(0, 3, Battery_ManufacturerInfo_Command); // write word
+//    if (I2C_BatteryReadNByte(0x23, 11, FullSerialNumber)==__RETURN_SUCCESS)
+//    {
+//        for (uint8_t i = 1; i < 11; i++)
+//        {
+//          BAT_INFO_FullSerialNumber[i-1] = FullSerialNumber[i];
+//        }
+//    }
     
-    static  uint8_t Battery_ManufacturerInfo_Command[3] = {0x00, 0x70, 0x00};
-    static uint8_t FullSerialNumber[32];
+    static  uint8_t Battery_ManufacturerInfo_Command[3] = { 0x2/*len*/, 0x70, 0x00};
+    static uint8_t FullSerialNumber[32+2];
     
-    I2C_BatterySendNByte(0, 3, Battery_ManufacturerInfo_Command);
-    if (I2C_BatteryReadNByte(0x23, 11, FullSerialNumber)==__RETURN_SUCCESS)
+    // write block
+    I2C_BatterySendNByte(0x44, 3, Battery_ManufacturerInfo_Command);
+    if (I2C_BatteryReadNByte(0x44, 34, FullSerialNumber)==__RETURN_SUCCESS)
     {
-        for (uint8_t i = 1; i < 11; i++)
+        // skip len, 0x70, 0x00
+        for (uint8_t i = 3; i < 13; i++)
         {
-          BAT_INFO_FullSerialNumber[i-1] = FullSerialNumber[i];
+          BAT_INFO_FullSerialNumber[i-3] = FullSerialNumber[i];
         }
     }
   }
