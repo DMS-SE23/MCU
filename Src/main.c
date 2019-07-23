@@ -102,6 +102,8 @@ unsigned char BAT_INFO_FullSerialNumber[10] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xF
 
 // AMP Mute Status
 unsigned char VAR_AMP_MUTE_STATUS = 0;
+unsigned char VAR_AMP_12V_EN_STATUS = 0;
+unsigned char VAR_AMP_DISABLE_STATUS = 0;
 
 // WATCHDOG TIMER
 volatile unsigned char VAR_WATCHDOG_STATUS                  = 0;    // Watchdog¶}±Ò©ÎÃö³¬

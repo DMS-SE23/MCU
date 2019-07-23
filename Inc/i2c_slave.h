@@ -45,6 +45,10 @@ extern uint8_t Buffer_Tx[MAX_I2C_TX_BUFFER];
 /* DIO Class : 0x50 ~ 0x5F */
 #define I2CCMD_GET_AMP_MUTE_STATUS                          0x50
 #define I2CCMD_SET_AMP_MUTE_STATUS                          0x51
+#define I2CCMD_GET_AMP_12V_EN_STATUS                        0x52
+#define I2CCMD_SET_AMP_12V_EN_STATUS                        0x53
+#define I2CCMD_GET_AMP_DISABLE_STATUS                       0x54
+#define I2CCMD_SET_AMP_DISABLE_STATUS                       0x55
 
 /* Watchdog Class : 0x70 ~ 0x7F */
 #define I2CCMD_GET_WATCHDOG_STATUS                          0x70

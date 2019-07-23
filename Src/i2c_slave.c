@@ -132,6 +132,8 @@ void I2C_Slave_STOP_UserCallback()
       
     /* DIO Class : 0x50 ~ 0x5F */
     case I2CCMD_GET_AMP_MUTE_STATUS:                        //0x50
+    case I2CCMD_GET_AMP_12V_EN_STATUS:                      //0x52
+    case I2CCMD_GET_AMP_DISABLE_STATUS:                     //0x54
       
     /* Watchdog Class : 0x70 ~ 0x7F */
     case I2CCMD_GET_WATCHDOG_STATUS:                        //0x70
@@ -232,7 +234,7 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       CHK_TX_BUFFER();
       break;
     
-    /* ADC Class : 0x50 ~ 0x5F */
+    /* DIO Class : 0x50 ~ 0x5F */
     case I2CCMD_GET_AMP_MUTE_STATUS:                        //0x50
       ui8 = VAR_AMP_MUTE_STATUS;
       SET_TX_BUFFER(ui8 & 0xFF);
@@ -248,6 +250,40 @@ void I2C_Slave_Command_Processing(uint8_t cmd)
       {
          __OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI;
          VAR_AMP_MUTE_STATUS = 1;
+      }
+      break;
+    case I2CCMD_GET_AMP_12V_EN_STATUS:                      //0x52
+      ui8 = VAR_AMP_12V_EN_STATUS;
+      SET_TX_BUFFER(ui8 & 0xFF);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_SET_AMP_12V_EN_STATUS:                      //0x53
+      if (Buffer_Rx[1] == 0)
+      {
+         __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_LO;
+         VAR_AMP_12V_EN_STATUS = 0;
+      }
+      else if (Buffer_Rx[1] == 1)
+      {
+         __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_HI;
+         VAR_AMP_12V_EN_STATUS = 1;
+      }
+      break;
+    case I2CCMD_GET_AMP_DISABLE_STATUS:                     //0x54
+      ui8 = VAR_AMP_DISABLE_STATUS;
+      SET_TX_BUFFER(ui8 & 0xFF);
+      CHK_TX_BUFFER();
+      break;
+    case I2CCMD_SET_AMP_DISABLE_STATUS:                     //0x55
+      if (Buffer_Rx[1] == 0)
+      {
+         __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_LO;
+         VAR_AMP_DISABLE_STATUS = 0;
+      }
+      else if (Buffer_Rx[1] == 1)
+      {
+         __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_HI;
+         VAR_AMP_DISABLE_STATUS = 1;
       }
       break;
     

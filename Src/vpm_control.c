@@ -194,6 +194,7 @@ void TASK_VPM_CONTROL()
             if (var_VPM_Count_Down_by_10mS-- <= 0)
             {
               __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_HI;
+              VAR_AMP_12V_EN_STATUS = 1;
               var_VPM_Count_Down_by_10mS = 2;
               __MACRO_CHANGE_VPM_STATE_TO(3040);
               return;
@@ -204,6 +205,7 @@ void TASK_VPM_CONTROL()
             if (var_VPM_Count_Down_by_10mS-- <= 0)
             {
               __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_HI;
+              VAR_AMP_DISABLE_STATUS = 1;
               __MACRO_CHANGE_VPM_STATE_TO(3045);
               return;
             }
@@ -283,6 +285,7 @@ void TASK_VPM_CONTROL()
     case 4870:  // Disable AMP
             __DEBUG_VPM_TRACE("@@: VPM (4870) Disable AMP\r\n");
             __OUT_E8_GPIO_OUT_AMP_DISABLE_SET_LO;
+            VAR_AMP_DISABLE_STATUS = 0;
             var_VPM_Count_Down_by_10mS = 2;
             __MACRO_CHANGE_VPM_STATE_TO(4880);
             break;
@@ -291,6 +294,7 @@ void TASK_VPM_CONTROL()
             if (var_VPM_Count_Down_by_10mS-- <= 0)
             {
               __OUT_E10_GPIO_OUT_AMP_12V_EN_SET_LO;
+              VAR_AMP_12V_EN_STATUS = 0;
               __MACRO_CHANGE_VPM_STATE_TO(4500);
               return;
             }
