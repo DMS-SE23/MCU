@@ -1534,3 +1534,51 @@
 [2019-7-22 14:19:5]origin data size is 33024
 [2019-7-22 14:19:8]file size is 42784
 [2019-7-22 14:19:8]Finish!!
+[2019-8-16 14:21:44]******************************************
+
+
+[2019-8-16 14:21:44]The original bin file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.105.bin
+[2019-8-16 14:21:44]The new EBF file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.105.EBF
+[2019-8-16 14:21:44]The firmware type is(0:VPM,1:CAN):  0
+[2019-8-16 14:21:44]The checksum tag is:  2
+[2019-8-16 14:21:44]The download channel is:  4
+[2019-8-16 14:21:44]Find platform name string from the bin file...
+[2019-8-16 14:21:53]Find firmware version string from the bin file...
+[2019-8-16 14:22:1]Generating the AES encrypted value for area 2.....
+[2019-8-16 14:22:13]loop 2068 times,file size is 33088(after padding 0 bytes)
+[2019-8-16 14:22:13]Finished to generate the AES encrypted value for area 2.
+[2019-8-16 14:22:13]Seeding the random number generator...
+[2019-8-16 14:22:13]Get the private key...
+[2019-8-16 14:22:13]Writing ebfformat into file
+[2019-8-16 14:22:13]file size is 32
+[2019-8-16 14:22:13]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-8-16 14:22:13]origin data size is 224
+[2019-8-16 14:22:13]file size is 416
+[2019-8-16 14:22:13]Generating the RSA encrypted value for area 2 and write into file  
+[2019-8-16 14:22:13]origin data size is 33088
+[2019-8-16 14:22:16]file size is 42784
+[2019-8-16 14:22:16]Finish!!
+[2019-8-16 14:29:48]******************************************
+
+
+[2019-8-16 14:29:49]The original bin file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.105.bin
+[2019-8-16 14:29:49]The new EBF file path is:  D:\WORK\EWARM\Adv-DMS-SE23-MCU-Source\Release-Utility\released\Adv-DMS-SE23-MCU-V0.105.EBF
+[2019-8-16 14:29:49]The firmware type is(0:VPM,1:CAN):  0
+[2019-8-16 14:29:49]The checksum tag is:  2
+[2019-8-16 14:29:49]The download channel is:  4
+[2019-8-16 14:29:49]Find platform name string from the bin file...
+[2019-8-16 14:29:57]Find firmware version string from the bin file...
+[2019-8-16 14:30:6]Generating the AES encrypted value for area 2.....
+[2019-8-16 14:30:18]loop 2068 times,file size is 33088(after padding 0 bytes)
+[2019-8-16 14:30:18]Finished to generate the AES encrypted value for area 2.
+[2019-8-16 14:30:18]Seeding the random number generator...
+[2019-8-16 14:30:18]Get the private key...
+[2019-8-16 14:30:18]Writing ebfformat into file
+[2019-8-16 14:30:18]file size is 32
+[2019-8-16 14:30:18]Generating the RSA encrypted value for area 1 and write into  file  
+[2019-8-16 14:30:18]origin data size is 224
+[2019-8-16 14:30:18]file size is 416
+[2019-8-16 14:30:18]Generating the RSA encrypted value for area 2 and write into file  
+[2019-8-16 14:30:18]origin data size is 33088
+[2019-8-16 14:30:21]file size is 42784
+[2019-8-16 14:30:21]Finish!!

@@ -15,6 +15,7 @@ void TASK_Hook_10mS()
   GPI_EventManager();
   TASK_VPM_CONTROL();
   TASK_UPDATE_DETECTED_ADC_VALUE();
+  TASK_PANEL_STATUS_DETECTION();
 }
 
 // 25mS Hook¥D¨ç¦¡

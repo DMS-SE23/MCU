@@ -105,6 +105,8 @@ extern unsigned char VAR_AMP_MUTE_STATUS;
 extern unsigned char VAR_AMP_12V_EN_STATUS;
 extern unsigned char VAR_AMP_DISABLE_STATUS;
 
+extern unsigned char VAR_PANEL_STATUS_DETECTION;
+
 // WATCHDOG TIMER
 extern volatile unsigned char VAR_WATCHDOG_STATUS;      // Watchdog開啟或關閉
 extern volatile int VAR_WATCHDOG_COUNTER;     // Watchdog倒數計時器

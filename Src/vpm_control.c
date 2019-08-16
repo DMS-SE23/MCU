@@ -213,6 +213,7 @@ void TASK_VPM_CONTROL()
     case 3045:  // Do Power On Sequence 9
             __DEBUG_VPM_TRACE("@@: VPM (3045) Power On Sequence 9\r\n");
 //            __OUT_E9_GPIO_OUT_AMP_MUTE_SET_LO;
+            VAR_PANEL_STATUS_DETECTION = 1;
             __MACRO_CHANGE_VPM_STATE_TO(3050);
             break;
     case 3050:  // Do Power On Sequence 10
@@ -280,6 +281,7 @@ void TASK_VPM_CONTROL()
             __DEBUG_VPM_TRACE("@@: VPM (4860) Turn Off AMP_MUTE\r\n");
             __OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI;
             VAR_AMP_MUTE_STATUS = 1;
+            VAR_PANEL_STATUS_DETECTION = 0;
             __MACRO_CHANGE_VPM_STATE_TO(4870);
             break;
     case 4870:  // Disable AMP

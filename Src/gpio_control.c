@@ -75,12 +75,13 @@ void FUNC_GPIO_INIT()
 /* GPIOB ============================================================> */
   // GPIO Group B
     // Input - Floating
+      // __IN_B0_GPIO_IN_UP_PANEL_STATUS
       // __IN_B1_GPIO_IN_DC_IN_DETECT
       // __IN_B2_GPIO_IN_PG_VCC_3V3
       // __IN_B12_GPIO_IN_BAT_PRES
       // __IN_B14_GPIO_IN_UP_BLK_EN
-  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_12|
-                                        GPIO_Pin_14;
+  GPIO_InitStructure.GPIO_Pin	=	GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 |
+                                        GPIO_Pin_12| GPIO_Pin_14;
   GPIO_InitStructure.GPIO_Speed	=	GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode	=	GPIO_Mode_IN;
   GPIO_InitStructure.GPIO_PuPd	=	GPIO_PuPd_NOPULL;
@@ -198,6 +199,18 @@ void TASK_BATTERY_LED_CONTROL()
   {
     // Turn off battery LED
     __OUT_E3_GPIO_OUT_LED_BAT_GREEN_SET_HI;
+  }
+}
+
+void TASK_PANEL_STATUS_DETECTION()
+{
+  if (VAR_PANEL_STATUS_DETECTION == 0) return;
+  
+  // SW Watchdog Happened
+  if (__IN_B0_GPIO_IN_UP_PANEL_STATUS_TEST_HI)
+  {
+    __OUT_E9_GPIO_OUT_AMP_MUTE_SET_HI;
+    VAR_AMP_MUTE_STATUS = 1;
   }
 }
 
